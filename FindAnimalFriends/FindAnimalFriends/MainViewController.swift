@@ -12,6 +12,10 @@ extension CGFloat {
     static let screenH = UIScreen.main.bounds.height
 }
 
+extension CGRect {
+    static let defaultRect = CGRect(x: 0, y: 0, width: .screenW, height: .screenH)
+}
+
 class MainViewController: UIViewController {
     
     private let backImageView: UIImageView = {
@@ -33,6 +37,6 @@ class MainViewController: UIViewController {
 private extension MainViewController {
     func addSubviewsWithFrame() {
         view.addSubview(backImageView)
-        backImageView.frame = CGRect(x: 0, y: 0, width: .screenW, height: .screenH)
+        backImageView.frame = .defaultRect
     }
 }
