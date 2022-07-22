@@ -18,6 +18,14 @@ class MainViewController: UIViewController {
         CGPoint(x: .screenW / 1.8, y: .screenH / 1.4),
     ]
     
+    private let memosAnimal = [
+        "tigerMemo",
+        "elephantMemo",
+        "pandaMemo",
+        "dolphinMemo",
+        "polarbearMemo"
+    ]
+    
     private let backImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "mainBackground")
@@ -39,15 +47,15 @@ private extension MainViewController {
         view.addSubview(backImageView)
         backImageView.frame = .fullFrame
         
-        for origin in memosOrigin {
-            let button = memoButton(origin)
+        for i in 0...4 {
+            let button = memoButton(memosOrigin[i], imageName: memosAnimal[i])
             view.addSubview(button)
         }
     }
     
-    func memoButton(_ origin: CGPoint) -> UIButton {
+    func memoButton(_ origin: CGPoint, imageName: String) -> UIButton {
         let button = UIButton(frame: CGRect(origin: origin, size: .memoSize))
-        button.setImage(UIImage(named: "memo"), for: .normal)
+        button.setImage(UIImage(named: imageName), for: .normal)
         return button
     }
 }
@@ -63,4 +71,5 @@ extension CGRect {
 
 extension CGSize {
     static let memoSize = CGSize(width: .screenW / 2.5, height: .screenW / 2.9)
+    static let animalSize = CGSize(width: .screenW / 3, height: .screenH / 3)
 }
