@@ -13,7 +13,11 @@ extension CGFloat {
 }
 
 extension CGRect {
-    static let defaultRect = CGRect(x: 0, y: 0, width: .screenW, height: .screenH)
+    static let fullFrame = CGRect(x: 0, y: 0, width: .screenW, height: .screenH)
+}
+
+extension CGSize {
+    static let memoSize = CGSize(width: .screenW / 3, height: .screenW / 3)
 }
 
 class MainViewController: UIViewController {
@@ -37,6 +41,12 @@ class MainViewController: UIViewController {
 private extension MainViewController {
     func addSubviewsWithFrame() {
         view.addSubview(backImageView)
-        backImageView.frame = .defaultRect
+        backImageView.frame = .fullFrame
+    }
+    
+    func memoButton(_ origin: CGPoint) -> UIButton {
+        let button = UIButton(frame: CGRect(origin: origin, size: .memoSize))
+        
+        return button
     }
 }
