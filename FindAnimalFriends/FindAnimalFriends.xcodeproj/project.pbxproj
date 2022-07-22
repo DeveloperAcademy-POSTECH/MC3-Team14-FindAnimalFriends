@@ -9,8 +9,7 @@
 /* Begin PBXBuildFile section */
 		9678A711288AC3E600678BDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678A710288AC3E600678BDF /* AppDelegate.swift */; };
 		9678A713288AC3E600678BDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678A712288AC3E600678BDF /* SceneDelegate.swift */; };
-		9678A715288AC3E600678BDF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678A714288AC3E600678BDF /* ViewController.swift */; };
-		9678A718288AC3E600678BDF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9678A716288AC3E600678BDF /* Main.storyboard */; };
+		9678A715288AC3E600678BDF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678A714288AC3E600678BDF /* MainViewController.swift */; };
 		9678A71A288AC3E700678BDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9678A719288AC3E700678BDF /* Assets.xcassets */; };
 		9678A71D288AC3E700678BDF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9678A71B288AC3E700678BDF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -19,8 +18,7 @@
 		9678A70D288AC3E600678BDF /* FindAnimalFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindAnimalFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9678A710288AC3E600678BDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9678A712288AC3E600678BDF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9678A714288AC3E600678BDF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		9678A717288AC3E600678BDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9678A714288AC3E600678BDF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9678A719288AC3E700678BDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9678A71C288AC3E700678BDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9678A71E288AC3E700678BDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -58,8 +56,7 @@
 			children = (
 				9678A710288AC3E600678BDF /* AppDelegate.swift */,
 				9678A712288AC3E600678BDF /* SceneDelegate.swift */,
-				9678A714288AC3E600678BDF /* ViewController.swift */,
-				9678A716288AC3E600678BDF /* Main.storyboard */,
+				9678A714288AC3E600678BDF /* MainViewController.swift */,
 				9678A719288AC3E700678BDF /* Assets.xcassets */,
 				9678A71B288AC3E700678BDF /* LaunchScreen.storyboard */,
 				9678A71E288AC3E700678BDF /* Info.plist */,
@@ -127,7 +124,6 @@
 			files = (
 				9678A71D288AC3E700678BDF /* LaunchScreen.storyboard in Resources */,
 				9678A71A288AC3E700678BDF /* Assets.xcassets in Resources */,
-				9678A718288AC3E600678BDF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +134,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9678A715288AC3E600678BDF /* ViewController.swift in Sources */,
+				9678A715288AC3E600678BDF /* MainViewController.swift in Sources */,
 				9678A711288AC3E600678BDF /* AppDelegate.swift in Sources */,
 				9678A713288AC3E600678BDF /* SceneDelegate.swift in Sources */,
 			);
@@ -147,14 +143,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		9678A716288AC3E600678BDF /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9678A717288AC3E600678BDF /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		9678A71B288AC3E700678BDF /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,9 +280,9 @@
 				INFOPLIST_FILE = FindAnimalFriends/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,7 +292,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -320,9 +308,9 @@
 				INFOPLIST_FILE = FindAnimalFriends/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -332,7 +320,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
