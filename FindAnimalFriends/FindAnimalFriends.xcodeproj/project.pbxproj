@@ -12,6 +12,7 @@
 		9678A715288AC3E600678BDF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678A714288AC3E600678BDF /* MainViewController.swift */; };
 		9678A71A288AC3E700678BDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9678A719288AC3E700678BDF /* Assets.xcassets */; };
 		9678A71D288AC3E700678BDF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9678A71B288AC3E700678BDF /* LaunchScreen.storyboard */; };
+		BA9D1EB6288BD2E30023C807 /* detectiveImage1.png in Resources */ = {isa = PBXBuildFile; fileRef = BA9D1EB5288BD2E30023C807 /* detectiveImage1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		9678A719288AC3E700678BDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9678A71C288AC3E700678BDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9678A71E288AC3E700678BDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA9D1EB5288BD2E30023C807 /* detectiveImage1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detectiveImage1.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				9678A710288AC3E600678BDF /* AppDelegate.swift */,
+				BA9D1EAD288BCBD70023C807 /* LaunchScreen */,
 				9678A712288AC3E600678BDF /* SceneDelegate.swift */,
 				9678A714288AC3E600678BDF /* MainViewController.swift */,
 				9678A719288AC3E700678BDF /* Assets.xcassets */,
@@ -62,6 +65,22 @@
 				9678A71E288AC3E700678BDF /* Info.plist */,
 			);
 			path = FindAnimalFriends;
+			sourceTree = "<group>";
+		};
+		BA9D1EAD288BCBD70023C807 /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				BA9D1EB4288BD0430023C807 /* LaunchImage */,
+			);
+			path = LaunchScreen;
+			sourceTree = "<group>";
+		};
+		BA9D1EB4288BD0430023C807 /* LaunchImage */ = {
+			isa = PBXGroup;
+			children = (
+				BA9D1EB5288BD2E30023C807 /* detectiveImage1.png */,
+			);
+			path = LaunchImage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,6 +143,7 @@
 			files = (
 				9678A71D288AC3E700678BDF /* LaunchScreen.storyboard in Resources */,
 				9678A71A288AC3E700678BDF /* Assets.xcassets in Resources */,
+				BA9D1EB6288BD2E30023C807 /* detectiveImage1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
