@@ -13,7 +13,7 @@ class MainViewController: UIViewController {
     // MARK: Properties
     
     // 각 animal memo의 위치 비율.
-    // 화면 크기가 정비율로 커진다면 해당 정비율에 맞게 비율을 잡을 수 있도록 하기 위함.
+    // 배경화면 크기가 정비율을 지키며 2배가 될 때, 해당 정비율에 맞게 비율을 잡을 수 있도록 하기 위함.
     private let memosRatio: [[CGFloat]] = [
         [8, 6], //tiger
         [1.8, 5.5], //elephant
@@ -22,7 +22,7 @@ class MainViewController: UIViewController {
         [1.8, 1.5] //polarbear
     ]
     
-    // 각 animal memo의 Asset image 이름.
+    // 각 animal memo의 Asset image 이름. 위의 memosRatio와 index순서 같게 함.
     private let memosAnimal = [
         "tigerMemo",
         "elephantMemo",
@@ -79,25 +79,32 @@ private extension MainViewController {
         backImageView.frame = view.bounds
         view.addSubview(backImageView)
         
+        // corkboard배경에 animal memo 버튼들 .addSubview로 추가
         for i in 0...4 {
             let ratio = memosRatio[i]
             let button = memoButton(CGPoint(x: .screenW / ratio[0], y: .screenH / ratio[1]), imageName: memosAnimal[i])
             button.tag = i
-            button.addTarget(self, action: #selector(zoomInMemo(_:)), for: .touchUpInside)
+            button.addTarget(self, action: #selector(zoomInAction(_:)), for: .touchUpInside)
             backImageView.addSubview(button)
-            memoButtons.append(button)
+            memoButtons.append(button) // 빈 배열에 버튼들 추가. 줌 축소 확대 시 .map 사용하여 전체 핸들링을 위함
         }
     }
     
-    @objc func zoomInMemo(_ sender: UIButton) {
-        let ratio = memosRatio[sender.tag]
+    @objc func zoomInAction(_ sender: UIButton) {
+        let ratio = memosRatio[sender.tag] // 뒷 배경이미지의 origin을 잡기 위해 클릭된 버튼의 ratio를 받음.
+        
         UIView.animate(withDuration: 1.5, delay: 0, options: .curveEaseInOut) { [weak self] in
             guard let self = self else { return }
-            self.backImageView.frame.size = .backDoubleSize
+            
+            self.backImageView.frame.size = .backDoubleSize // corkboard 배경늘리기. 너비, 높이 * 2 (면적으로는 4배)
+            
+            // frame을 한 번에 CGRect로 잡지않고, CGPoint&CGSize로 나누어 잡은 이유
+            // -> 커진 back을 기준으로 ratio를 잡아야하기에 먼저 사이즈를 키우고, 커진 사이즈와 ratio를 통해 origin을 잡은 것.
             self.backImageView.frame.origin = CGPoint(
-                x: -self.backImageView.frame.width / ratio[0] + .screenW/4.2,
+                x: -self.backImageView.frame.width / ratio[0] + .screenW/5,
                 y: -self.backImageView.frame.height / ratio[1] + .screenH/3
             )
+            // sender를 통해선 클릭된 버튼만 전달되지만, 실제 메인에선 하나의 버튼이 커질 때 나머지들도 함께 커져야한다. 그래서 배열을 만들고 map 고차함수를 이용하여 모두의 frame을 잡아준다.
             let _ = self.memoButtons.map { button in
                 let tag = button.tag
                 button.frame = CGRect(
@@ -109,13 +116,13 @@ private extension MainViewController {
                 )
             }
         }
-        sender.isUserInteractionEnabled = false
+        sender.isUserInteractionEnabled = false // zoom in 후에 터치 잠기도록.
     }
     
     @objc func zoomOutAction() {
         UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut) { [weak self] in
             guard let self = self else { return }
-            self.backImageView.frame = self.view.bounds
+            self.backImageView.frame = self.view.bounds // 원래 크기인 view.bounds로 회귀.
             let _ = self.memoButtons.map { button in
                 let tag = button.tag
                 button.frame = CGRect(
@@ -125,31 +132,8 @@ private extension MainViewController {
                         ),
                     size: .memoSize
                     )
-                button.isUserInteractionEnabled = true
+                button.isUserInteractionEnabled = true // 추후 핸들링 예정
             }
         }
     }
-}
-
-extension CGFloat {
-    
-    static let screenW = UIScreen.main.bounds.width
-    
-    static let screenH = UIScreen.main.bounds.height
-    
-    static let hund = UIScreen.main.bounds.width / 3.9 //iPhone 13기준 100
-    
-    static let ten = UIScreen.main.bounds.width / 39 //iPhone 13기준 10
-}
-
-extension CGSize {
-    
-    static let memoSize = CGSize(width: .screenW / 3, height: .screenW / 3.2)
-    
-    static let memoDoubleSize = CGSize(width: .screenW / 1.5, height: .screenW / 1.6)
-    
-    static let animalSize = CGSize(width: .screenW / 3, height: .screenH / 3)
-    
-    static let backDoubleSize = CGSize(width: .screenW * 2, height: .screenH * 2)
-    
 }
