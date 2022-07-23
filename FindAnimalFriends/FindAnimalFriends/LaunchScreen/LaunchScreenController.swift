@@ -8,7 +8,7 @@
 import UIKit
 
 class LaunchScreenController: UIViewController, UIScrollViewDelegate {
-    @Published var timeValue: Int = 0
+    var timeValue: Int = 0
     // MARK: 시간경과에 따른 애니메이션 함수
     func timeCount() {
         //0.5 마다 1씩 증가하는 함수.
