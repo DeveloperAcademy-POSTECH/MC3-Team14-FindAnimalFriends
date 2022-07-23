@@ -11,39 +11,19 @@ class LaunchScreenController: UIViewController, UIScrollViewDelegate {
     var timeValue: Int = 0
     // MARK: 시간경과에 따른 애니메이션 함수
     func timeCount() {
-        //0.5 마다 1씩 증가하는 함수.
-        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [self] timer in
-            self.timeValue += 1
-            if self.timeValue == 1 {
-                view.addSubview(self.findLabel)
-                let animaxtor = UIViewPropertyAnimator(duration:0.5, curve: .linear) {
-                    self.findLabel.layer.opacity = 1
-                }
-                animaxtor.startAnimation()
-            }
-            else if self.timeValue == 2 {
-                view.addSubview(animalLabel)
-                let animaxtor = UIViewPropertyAnimator(duration:0.5, curve: .linear) {
-                    self.animalLabel.layer.opacity = 1
-                }
-                animaxtor.startAnimation()
-            }
-            else if self.timeValue == 3 {
-                view.addSubview(friendsLabel)
-                let animaxtor = UIViewPropertyAnimator(duration:0.5, curve: .linear) {
+            (withDuration: 0.5, delay: 0.5) { [self] in
+            self.findLabel.layer.opacity = 1
+        } completion: { _ in
+            UIView.animate(withDuration: 0.5) {
+                self.animalLabel.layer.opacity = 1
+            } completion: { _ in
+                UIView.animate(withDuration: 0.5) {
                     self.friendsLabel.layer.opacity = 1
+                } completion: { _ in
+                    UIView.animate(withDuration: 0.5) {
+                        self.view.layer.opacity = 0
+                    }
                 }
-                animaxtor.startAnimation()
-            }
-            else if self.timeValue == 4 {
-                let animaxtor = UIViewPropertyAnimator(duration:1, curve: .linear) {
-                    self.view.layer.opacity = 0
-                }
-                animaxtor.startAnimation()
-            }
-            else if self.timeValue == 6{
-                timer.invalidate() // 타이머 종료
-                return
             }
         }
     }
@@ -86,9 +66,11 @@ class LaunchScreenController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        timeCount()
+        view.addSubview(findLabel)
+        view.addSubview(animalLabel)
+        view.addSubview(friendsLabel)
         view.addSubview(detectiveImage)
-        
+        timeCount()
     }
 }
 
