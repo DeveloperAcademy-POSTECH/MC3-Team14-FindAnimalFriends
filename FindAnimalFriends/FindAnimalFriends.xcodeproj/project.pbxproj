@@ -14,6 +14,7 @@
 		9678A71D288AC3E700678BDF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9678A71B288AC3E700678BDF /* LaunchScreen.storyboard */; };
 		96DBD9B9288BB9E6006B2767 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DBD9B8288BB9E6006B2767 /* Extension.swift */; };
 		BA9D1EB6288BD2E30023C807 /* detectiveImage1.png in Resources */ = {isa = PBXBuildFile; fileRef = BA9D1EB5288BD2E30023C807 /* detectiveImage1.png */; };
+		BAA5DF4B288BFC2D001931FE /* LaunchScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA5DF4A288BFC2D001931FE /* LaunchScreenController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		9678A71E288AC3E700678BDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96DBD9B8288BB9E6006B2767 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		BA9D1EB5288BD2E30023C807 /* detectiveImage1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detectiveImage1.png; sourceTree = "<group>"; };
+		BAA5DF4A288BFC2D001931FE /* LaunchScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenController.swift; sourceTree = "<group>"; };
+		BAA5DF4D288BFFDB001931FE /* KOTRA HOPE.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KOTRA HOPE.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				9678A710288AC3E600678BDF /* AppDelegate.swift */,
+				BAA5DF4C288BFFD1001931FE /* Font */,
 				BA9D1EAD288BCBD70023C807 /* LaunchScreen */,
 				9678A712288AC3E600678BDF /* SceneDelegate.swift */,
 				9678A714288AC3E600678BDF /* MainViewController.swift */,
@@ -81,9 +85,18 @@
 		BA9D1EB4288BD0430023C807 /* LaunchImage */ = {
 			isa = PBXGroup;
 			children = (
+				BAA5DF4A288BFC2D001931FE /* LaunchScreenController.swift */,
 				BA9D1EB5288BD2E30023C807 /* detectiveImage1.png */,
 			);
 			path = LaunchImage;
+			sourceTree = "<group>";
+		};
+		BAA5DF4C288BFFD1001931FE /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				BAA5DF4D288BFFDB001931FE /* KOTRA HOPE.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,6 +170,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAA5DF4B288BFC2D001931FE /* LaunchScreenController.swift in Sources */,
 				9678A715288AC3E600678BDF /* MainViewController.swift in Sources */,
 				9678A711288AC3E600678BDF /* AppDelegate.swift in Sources */,
 				9678A713288AC3E600678BDF /* SceneDelegate.swift in Sources */,
