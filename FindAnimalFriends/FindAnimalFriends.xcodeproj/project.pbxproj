@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42F30F23288C03A900F772C6 /* QuizResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F30F22288C03A900F772C6 /* QuizResultViewController.swift */; };
 		9678A711288AC3E600678BDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678A710288AC3E600678BDF /* AppDelegate.swift */; };
 		9678A713288AC3E600678BDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678A712288AC3E600678BDF /* SceneDelegate.swift */; };
 		9678A715288AC3E600678BDF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678A714288AC3E600678BDF /* MainViewController.swift */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		42F30F22288C03A900F772C6 /* QuizResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultViewController.swift; sourceTree = "<group>"; };
 		9678A70D288AC3E600678BDF /* FindAnimalFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindAnimalFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9678A710288AC3E600678BDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9678A712288AC3E600678BDF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +40,7 @@
 		9678A704288AC3E600678BDF = {
 			isa = PBXGroup;
 			children = (
+				42F30F22288C03A900F772C6 /* QuizResultViewController.swift */,
 				9678A70F288AC3E600678BDF /* FindAnimalFriends */,
 				9678A70E288AC3E600678BDF /* Products */,
 			);
@@ -134,6 +137,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42F30F23288C03A900F772C6 /* QuizResultViewController.swift in Sources */,
 				9678A715288AC3E600678BDF /* MainViewController.swift in Sources */,
 				9678A711288AC3E600678BDF /* AppDelegate.swift in Sources */,
 				9678A713288AC3E600678BDF /* SceneDelegate.swift in Sources */,
