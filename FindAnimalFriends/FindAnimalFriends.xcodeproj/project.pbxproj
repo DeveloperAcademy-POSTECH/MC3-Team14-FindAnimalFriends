@@ -13,6 +13,7 @@
 		9678A71A288AC3E700678BDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9678A719288AC3E700678BDF /* Assets.xcassets */; };
 		9678A71D288AC3E700678BDF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9678A71B288AC3E700678BDF /* LaunchScreen.storyboard */; };
 		96DBD9B9288BB9E6006B2767 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DBD9B8288BB9E6006B2767 /* Extension.swift */; };
+		96DBD9BB288BC9FF006B2767 /* ClearTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DBD9BA288BC9FF006B2767 /* ClearTestViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		9678A71C288AC3E700678BDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9678A71E288AC3E700678BDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96DBD9B8288BB9E6006B2767 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		96DBD9BA288BC9FF006B2767 /* ClearTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearTestViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				9678A710288AC3E600678BDF /* AppDelegate.swift */,
 				9678A712288AC3E600678BDF /* SceneDelegate.swift */,
 				9678A714288AC3E600678BDF /* MainViewController.swift */,
+				96DBD9BA288BC9FF006B2767 /* ClearTestViewController.swift */,
 				96DBD9B8288BB9E6006B2767 /* Extension.swift */,
 				9678A719288AC3E700678BDF /* Assets.xcassets */,
 				9678A71B288AC3E700678BDF /* LaunchScreen.storyboard */,
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9678A715288AC3E600678BDF /* MainViewController.swift in Sources */,
+				96DBD9BB288BC9FF006B2767 /* ClearTestViewController.swift in Sources */,
 				9678A711288AC3E600678BDF /* AppDelegate.swift in Sources */,
 				9678A713288AC3E600678BDF /* SceneDelegate.swift in Sources */,
 				96DBD9B9288BB9E6006B2767 /* Extension.swift in Sources */,
