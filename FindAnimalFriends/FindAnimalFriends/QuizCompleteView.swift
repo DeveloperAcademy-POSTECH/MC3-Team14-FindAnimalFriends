@@ -39,7 +39,7 @@ class QuizCompleteView: UIView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "assistant2")
+        imageView.image = UIImage(named: "assistantImage2")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -49,7 +49,7 @@ class QuizCompleteView: UIView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "detective3")
+        imageView.image = UIImage(named: "detectiveImage3")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
