@@ -79,10 +79,10 @@
 				9678A714288AC3E600678BDF /* MainViewController.swift */,
 				42F30F22288C03A900F772C6 /* QuizCompleteViewController.swift */,
 				96DBD9B8288BB9E6006B2767 /* Extension.swift */,
+				42E8B23E288C0E210097D909 /* QuizCompleteView.swift */,
 				9678A719288AC3E700678BDF /* Assets.xcassets */,
 				9678A71B288AC3E700678BDF /* LaunchScreen.storyboard */,
 				9678A71E288AC3E700678BDF /* Info.plist */,
-				42E8B23E288C0E210097D909 /* QuizCompleteView.swift */,
 			);
 			path = FindAnimalFriends;
 			sourceTree = "<group>";

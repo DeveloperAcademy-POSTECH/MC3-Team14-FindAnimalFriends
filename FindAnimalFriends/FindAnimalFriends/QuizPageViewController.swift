@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+// TODO: - PageView를 넘기는 기능 때문에 PageViewController에 버튼이 따로 빠져있습니다. UIPageViewController에서 다음 페이지로 넘어가는 기능을 다른 뷰에 뺄 수 있는지 알아봐야합니다.
 class QuizPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     required override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
@@ -47,10 +49,11 @@ class QuizPageViewController: UIPageViewController, UIPageViewControllerDataSour
         return nil
     }
     
-    
-    var pages = [UIViewController]()
-    var pageIndex = 0
-    var answerButtons:[UIButton] = {
+    // PageViewContoll에서 띄울 화면에 대한 변수
+    private var pages = [UIViewController]()
+    // 현재 페이지를 나타내는 변수 (버튼 구현 용)
+    private var pageIndex = 0
+    private var answerButtons:[UIButton] = {
         var answerButtons:[UIButton] = []
         for i in 0...(sampleAnswer.count-1) {
             let answerButton = UIButton()
@@ -58,6 +61,8 @@ class QuizPageViewController: UIPageViewController, UIPageViewControllerDataSour
         }
         return answerButtons
     }()
+    
+    private var quizCompleteView : QuizCompleteView?
     
     override func viewDidLoad() {
         
@@ -75,6 +80,14 @@ class QuizPageViewController: UIPageViewController, UIPageViewControllerDataSour
         
         self.dataSource = self
         self.delegate = self
+        
+        setQuizPages()
+        drawCharacterImage()
+        drawButton()
+    }
+    
+    // quizPage 설정
+    func setQuizPages() {
         let initialPage = 0
         pageIndex = initialPage
         
@@ -85,11 +98,9 @@ class QuizPageViewController: UIPageViewController, UIPageViewControllerDataSour
         }
         
         setViewControllers([pages[initialPage]], direction: .forward, animated: true)
-        
-        drawCharacterImage()
-        drawButton()
     }
     
+    // 맨 위 버튼에 그려지는 이미지 그리기
     func drawCharacterImage() {
         let characterImage = UIImageView(image: UIImage(named: "detectiveImage1"))
         self.view.addSubview(characterImage)
@@ -100,7 +111,7 @@ class QuizPageViewController: UIPageViewController, UIPageViewControllerDataSour
         characterImage.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -220).isActive = true
     }
     
-    // 버튼 그리기
+    // 퀴즈 버튼 그리기
     func drawButton() {
         
         for i in (0...(sampleAnswer[pageIndex].count - 1)).reversed() {
@@ -127,12 +138,30 @@ class QuizPageViewController: UIPageViewController, UIPageViewControllerDataSour
     func updateButton() {
         for i in 0...(sampleAnswer[pageIndex].count-1) {
             answerButtons[i].setTitle("\(sampleAnswer[pageIndex][i])", for: .normal)
+            if pageIndex == sampleQuiz.count - 1 {
+                answerButtons[i].addTarget(self, action: #selector(self.addCompleteView), for: .touchUpInside)
+            } else {
+                answerButtons[i].addTarget(self, action: #selector(self.goToNextPage), for: .touchUpInside)
+            }
         }
+    }
+    
+    // quizCompleteView 닫기
+    @objc func closeCompleteView(){
+        quizCompleteView!.removeFromSuperview()
+    }
+    
+    // quizCompleteView 띄우기
+    @objc func addCompleteView(){
+        quizCompleteView = QuizCompleteView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), animalName: "polarbear")
+        quizCompleteView!.completeButton.addTarget(self, action: #selector(closeCompleteView), for: .touchUpInside)
+        view.addSubview(quizCompleteView!)
     }
 }
 
 extension UIPageViewController {
     
+    // 다음 페이지로 가는 기능
     @objc func goToNextPage() {
         if let currentViewController = viewControllers?[0] {
             if let nextPage = dataSource?.pageViewController(self, viewControllerAfter: currentViewController) {
@@ -140,7 +169,8 @@ extension UIPageViewController {
             }
         }
     }
-
+    
+    // 이전 페이지로 가는 기능 (사용하지 않음)
     func goToPreviousPage(animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
         if let currentViewController = viewControllers?[0] {
             if let previousPage = dataSource?.pageViewController(self, viewControllerBefore: currentViewController){
