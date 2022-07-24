@@ -52,7 +52,7 @@ class MainViewController: UIViewController {
     private lazy var xButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 200, width: 100, height: 100))
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
-        button.addTarget(self, action: #selector(zoomOutAction), for: .touchUpInside)
+//        button.addTarget(self, action: #selector(zoomOutAction), for: .touchUpInside)
         return button
     }()
     
@@ -63,8 +63,6 @@ class MainViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         
-        addSubviewsWithFrame()
-        
         view.addSubview(xButton)
     }
     
@@ -73,120 +71,11 @@ class MainViewController: UIViewController {
         
         //index를 통한 handling 예정.
         currentAnimalIndex = UserDefaults.standard.integer(forKey: "clear")
-        
-        setMemoButtonsStatus()
     }
 }
 
 // MARK: Private Extension
 
 private extension MainViewController {
-    func addSubviewsWithFrame() {
-        backImageView.frame = view.bounds
-        view.addSubview(backImageView)
-        
-        // corkboard배경에 animal memo 버튼들 .addSubview로 추가
-        for i in 0...4 {
-            let ratio = memosRatio[i]
-            let button = memoButton(CGPoint(x: .screenW / ratio[0], y: .screenH / ratio[1]), imageName: memosAnimal[i])
-            button.tag = i
-            button.addTarget(self, action: #selector(zoomInAction(_:)), for: .touchUpInside)
-            backImageView.addSubview(button)
-            memoButtons.append(button) // 빈 배열에 버튼들 추가. 줌 축소 확대 시 .map 사용하여 전체 핸들링을 위함
-        }
-    }
     
-    // clearIndex를 확인하고 memo버튼의 상태를 결정하는 함수.
-    func setMemoButtonsStatus() {
-        let _ = memoButtons.map { button in
-            if button.tag < currentAnimalIndex {
-                button.isUserInteractionEnabled = false
-            } else if button.tag == currentAnimalIndex {
-                button.isUserInteractionEnabled = true
-            }
-        }
-    }
-    
-    @objc func zoomInAction(_ sender: UIButton) {
-        let ratio = memosRatio[sender.tag] // 뒷 배경이미지의 origin을 잡기 위해 클릭된 버튼의 ratio를 받음.
-        
-        UIView.animate(withDuration: 1.5, delay: 0, options: .curveEaseInOut) { [weak self] in
-            guard let self = self else { return }
-    
-            self.backImageView.frame.size = .backDoubleSize // corkboard 배경늘리기. 너비, 높이 * 2 (면적으로는 4배)
-            
-            // frame을 한 번에 CGRect로 잡지않고, CGPoint&CGSize로 나누어 잡은 이유
-            // -> 커진 back을 기준으로 ratio를 잡아야하기에 먼저 사이즈를 키우고, 커진 사이즈와 ratio를 통해 origin을 잡은 것.
-            self.backImageView.frame.origin = CGPoint(
-                x: -self.backImageView.frame.width / ratio[0] + .screenW/5,
-                y: -self.backImageView.frame.height / ratio[1] + .screenH/3
-            )
-            // sender를 통해선 클릭된 버튼만 전달되지만, 실제 메인에선 하나의 버튼이 커질 때 나머지들도 함께 커져야한다. 그래서 배열을 만들고 map 고차함수를 이용하여 모두의 frame을 잡아준다.
-            let _ = self.memoButtons.map { button in
-                let tag = button.tag
-                button.frame = CGRect(
-                    origin: CGPoint(
-                        x: self.backImageView.frame.width / self.memosRatio[tag][0],
-                        y: self.backImageView.frame.height / self.memosRatio[tag][1]
-                    ),
-                    size: .memoDoubleSize
-                )
-            }
-        }
-        sender.isUserInteractionEnabled = false // zoom in 후에 터치 잠기도록.
-    }
-    
-    @objc func zoomOutAction() {
-        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut) { [weak self] in
-            guard let self = self else { return }
-            self.backImageView.frame = self.view.bounds // 원래 크기인 view.bounds로 회귀.
-            let _ = self.memoButtons.map { button in
-                let tag = button.tag
-                button.frame = CGRect(
-                    origin: CGPoint(
-                        x: .screenW / self.memosRatio[tag][0],
-                        y: .screenH / self.memosRatio[tag][1]
-                        ),
-                    size: .memoSize
-                    )
-                // button의 tag를 판단하여 액션처리
-                if button.tag == self.currentAnimalIndex {
-                    button.isUserInteractionEnabled = true
-                }
-            }
-        }
-    }
-    
-    // mask circle 배열에 추가하는 함수
-    func addMaskCircle(frame: CGRect) {
-        let path = UIBezierPath(ovalIn: CGRect(origin: frame.origin, size: frame.size))
-        maskCircles.append(path)
-    }
-    
-    // maskCircles에 저장된 마스크들을 그려내는 함수 (black 배경과 함께)
-    func makeLightMask(origin: CGPoint, size: CGSize) {
-        let blackView = UIView(frame: view.bounds)
-        blackView.backgroundColor = UIColor.black.withAlphaComponent(0.8)
-        
-        let maskLayer = CAShapeLayer()
-        let path = UIBezierPath(rect: view.bounds)
-        
-        for (idx, i) in maskCircles.enumerated() {
-            if idx == maskCircles.count-1 {
-                //animation 할 수 있으면...
-                path.append(i)
-            } else {
-                path.append(i)
-            }
-        }
-        
-        path.append(UIBezierPath(ovalIn: CGRect(origin: origin, size: size)))
-
-        maskLayer.path = path.cgPath
-        maskLayer.fillRule = .evenOdd
-
-        blackView.layer.mask = maskLayer
-
-        view.addSubview(blackView)
-    }
 }
