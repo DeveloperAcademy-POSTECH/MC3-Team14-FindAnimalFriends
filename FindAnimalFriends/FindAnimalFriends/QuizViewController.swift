@@ -12,6 +12,7 @@ class QuizViewController: UIViewController {
     var index: Int?
     let quizIndicatorLabel = UILabel()
     let quizLabel = UILabel()
+    let backImgView = UIImageView(image: UIImage(named: "memoSpring"))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,15 +36,11 @@ class QuizViewController: UIViewController {
     }
     
     func drawBackground() {
-        /*
-        let backImgView = UIImageView(image: UIImage(named: "QuizBackground"))
         self.view.addSubview(backImgView)
+        backImgView.translatesAutoresizingMaskIntoConstraints = false
         backImgView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
-        backImgView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        backImgView.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor).isActive = true
-        backImgView.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor).isActive = true
-         */
-        self.view.backgroundColor = .systemGray3
+        backImgView.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor).isActive = true
+        self.view.backgroundColor = UIColor.appColor(AssetsColor.memoWhite)
     }
     
     func drawIndicateLable() {
@@ -51,8 +48,8 @@ class QuizViewController: UIViewController {
         quizIndicatorLabel.translatesAutoresizingMaskIntoConstraints = false
         quizIndicatorLabel.text = "\((index ?? 0)+1)/\(sampleQuiz.count)"
         quizIndicatorLabel.font = UIFont(name: "KOTRA HOPE", size: 36)
-        quizIndicatorLabel.textColor = .white
-        quizIndicatorLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        quizIndicatorLabel.textColor = .black
+        quizIndicatorLabel.topAnchor.constraint(equalTo: backImgView.bottomAnchor).isActive = true
         quizIndicatorLabel.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: 20).isActive = true
         quizIndicatorLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         quizIndicatorLabel.widthAnchor.constraint(equalToConstant: 70).isActive = true
