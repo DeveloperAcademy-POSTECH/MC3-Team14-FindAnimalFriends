@@ -13,9 +13,9 @@
 		9678A71A288AC3E700678BDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9678A719288AC3E700678BDF /* Assets.xcassets */; };
 		9678A71D288AC3E700678BDF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9678A71B288AC3E700678BDF /* LaunchScreen.storyboard */; };
 		96DBD9B9288BB9E6006B2767 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DBD9B8288BB9E6006B2767 /* Extension.swift */; };
-		BA9D1EB6288BD2E30023C807 /* detectiveImage1.png in Resources */ = {isa = PBXBuildFile; fileRef = BA9D1EB5288BD2E30023C807 /* detectiveImage1.png */; };
 		BAA5DF4F288C03F1001931FE /* LaunchScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA5DF4E288C03F1001931FE /* LaunchScreenController.swift */; };
 		BAA5DF51288C0594001931FE /* KOTRA HOPE.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAA5DF50288C0594001931FE /* KOTRA HOPE.ttf */; };
+		BAA5DF5F288D30B9001931FE /* LaunchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = BAA5DF5E288D30B9001931FE /* LaunchImage.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,9 +27,9 @@
 		9678A71C288AC3E700678BDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9678A71E288AC3E700678BDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96DBD9B8288BB9E6006B2767 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
-		BA9D1EB5288BD2E30023C807 /* detectiveImage1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detectiveImage1.png; sourceTree = "<group>"; };
 		BAA5DF4E288C03F1001931FE /* LaunchScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenController.swift; sourceTree = "<group>"; };
 		BAA5DF50288C0594001931FE /* KOTRA HOPE.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KOTRA HOPE.ttf"; sourceTree = "<group>"; };
+		BAA5DF5E288D30B9001931FE /* LaunchImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchImage.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +87,7 @@
 		BA9D1EB4288BD0430023C807 /* LaunchImage */ = {
 			isa = PBXGroup;
 			children = (
-				BA9D1EB5288BD2E30023C807 /* detectiveImage1.png */,
+				BAA5DF5E288D30B9001931FE /* LaunchImage.png */,
 			);
 			path = LaunchImage;
 			sourceTree = "<group>";
@@ -158,9 +158,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAA5DF5F288D30B9001931FE /* LaunchImage.png in Resources */,
 				9678A71D288AC3E700678BDF /* LaunchScreen.storyboard in Resources */,
 				9678A71A288AC3E700678BDF /* Assets.xcassets in Resources */,
-				BA9D1EB6288BD2E30023C807 /* detectiveImage1.png in Resources */,
 				BAA5DF51288C0594001931FE /* KOTRA HOPE.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
