@@ -9,8 +9,6 @@ import UIKit
 
 class EntranceView: UIView {
     
-    var animal: String?
-
     lazy var cancelButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
@@ -22,7 +20,7 @@ class EntranceView: UIView {
         return button
     }()
     
-    private lazy var pushButton: UIButton = {
+    lazy var pushButton: UIButton = { //FIXME: Sub UIView 자체에서 navigation push 하는 법?이 있나? 없을듯
         let button = UIButton()
         button.setTitle("퀴즈풀기", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .black)
@@ -57,3 +55,4 @@ class EntranceView: UIView {
 }
 
 // TODO: convenience init, required init, override init
+// to mizz - 오늘 말해준 required 꼭 필요하진않을지도?

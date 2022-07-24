@@ -67,7 +67,7 @@ class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         
         //index를 통한 handling 예정.
-        currentIndex = UserDefaults.standard.integer(forKey: "clear")
+        currentIndex = UserDefaults.standard.integer(forKey: "clear") >= 5 ? 4 : UserDefaults.standard.integer(forKey: "clear")
         
         setupLights()
     }
@@ -82,7 +82,7 @@ private extension MainViewController {
         for (idx, i) in memos.enumerated().reversed() { // .enumeratad.reversed 순서 중요.
             let button = memoButton(i)
             button.tag = idx // tag는 순서대로 잘 달린다. cause reversed()
-            button.addTarget(self, action: #selector(zoomAction(_:)), for: .touchUpInside)
+            button.addTarget(self, action: #selector(animate(_:)), for: .touchUpInside)
             memoButtons.append(button)
             backImageView.addSubview(button)
         }
@@ -99,13 +99,17 @@ private extension MainViewController {
         backImageView.insertSubview(blackView, at: memos.count - currentIndex - 1) // 중복x. 기존 위치에서 새로운 위치로 업데이트된다.
     }
     
-    @objc func zoomAction(_ sender: UIButton) {
+    @objc func animate(_ sender: UIButton) {
+        zoomAction(tag: sender.tag)
+    }
+    
+    func zoomAction(tag: Int) {
         UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut) { [weak self] in
             guard let self = self else { return }
             
             Zoom.status = (Zoom.status == .zoomIn ? .zoomOut : .zoomIn) // toggle
 
-            self.backImageView.frame = self.memos[sender.tag].backImageFrame //
+            self.backImageView.frame = self.memos[tag].backImageFrame //
             self.blackView.frame = self.backImageView.bounds // frame -> bounds로 수정 (fix)
 
             let _ = self.memoButtons.map { button in
@@ -116,7 +120,7 @@ private extension MainViewController {
         
         maskLayerAnimation() // light(조명) 확대, 축소
         
-        showEntranceView(tag: sender.tag)
+        showEntranceView(tag: tag)
     }
     
     func maskLayerAnimation() {
@@ -146,12 +150,24 @@ private extension MainViewController {
     
     func showEntranceView(tag: Int) {
         if Zoom.status == .zoomIn {
-            entranceView.frame = view.bounds
-            entranceView.animal = memos[tag].memoAnimal
-            entranceView.cancelButton.addTarget(self, action: #selector(zoomAction(_:)), for: .touchUpInside)
-            view.addSubview(entranceView)
+            DispatchQueue.main.asyncAfter(deadline: .now()+1.0) { [weak self] in
+                guard let self = self else { return }
+                self.entranceView.frame = self.view.bounds
+                self.entranceView.cancelButton.addTarget(self, action: #selector(self.animate(_:)), for: .touchUpInside)
+                self.entranceView.pushButton.addTarget(self, action: #selector(self.pushToQuiz), for: .touchUpInside)
+                self.view.addSubview(self.entranceView)
+            }
         } else {
             entranceView.removeFromSuperview()
+        }
+    }
+    
+    @objc func pushToQuiz() {
+        let vc = ClearTestViewController()
+        vc.contentIndex = currentIndex // 추후 로직 수정 예정
+        navigationController?.pushViewController(vc, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5) { [weak self] in
+            self?.zoomAction(tag: 0)
         }
     }
 }
