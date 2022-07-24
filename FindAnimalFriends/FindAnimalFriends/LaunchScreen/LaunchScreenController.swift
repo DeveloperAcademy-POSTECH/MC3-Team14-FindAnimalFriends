@@ -17,7 +17,7 @@ class LaunchScreenController: UIViewController, UIScrollViewDelegate {
         button.setTitle("시작하기", for: .normal)
         button.titleLabel?.font = UIFont(name: "KOTRA HOPE", size: .screenW*0.06)
         button.clipsToBounds = true
-        button.backgroundColor = .brown
+        button.backgroundColor = UIColor.appColor(.primaryBrown)
         button.layer.cornerRadius = 10.0
         button.addTarget(self, action: #selector(onClickMyButton(_:)), for: .touchUpInside)
         button.layer.opacity = 0
@@ -125,7 +125,7 @@ class LaunchScreenController: UIViewController, UIScrollViewDelegate {
     lazy var animalLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: .screenW*0.4, y: .screenH*0.26, width: .screenW, height: .screenH*0.07))
         label.text = "동물"
-        label.textColor = .green
+        label.textColor = UIColor.appColor(.primaryGreen)
         label.font = UIFont(name: "KOTRA HOPE", size: .screenH*0.06)
         label.layer.opacity = 0
         return label
@@ -150,7 +150,7 @@ class LaunchScreenController: UIViewController, UIScrollViewDelegate {
         let label = UILabel(frame: CGRect(x: (.screenW*0.6)/2, y: .screenH*0.07, width: .screenW, height: .screenH*0.06))
         label.text = "동물 친구들이"
         label.layer.opacity = 0
-        label.textColor = .green
+        label.textColor = UIColor.appColor(.primaryGreen)
         label.font = UIFont(name: "KOTRA HOPE", size: .screenH*0.05)
         let fullText = label.text ?? ""
         let attribtuedString = NSMutableAttributedString(string: fullText)
@@ -191,7 +191,7 @@ class LaunchScreenController: UIViewController, UIScrollViewDelegate {
     lazy var ofAnimalFriendsLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: (.screenW*0.6)/2, y: .screenH*0.07, width: .screenW, height: .screenH*0.06))
         label.text = "동물 친구들의"
-        label.textColor = .green
+        label.textColor =  UIColor.appColor(.primaryGreen)
         label.font = UIFont(name: "KOTRA HOPE", size: .screenH*0.05)
         label.layer.opacity = 0
         return label
@@ -200,7 +200,7 @@ class LaunchScreenController: UIViewController, UIScrollViewDelegate {
         let label = UILabel(frame: CGRect(x: (.screenW*0.8)/2, y: .screenH*0.14, width: .screenW, height: .screenH*0.06))
         label.text = "특징을"
         label.font = UIFont(name: "KOTRA HOPE", size: .screenH*0.05)
-        label.textColor = .green
+        label.textColor =  UIColor.appColor(.primaryGreen)
         let fullText = label.text ?? ""
         let attribtuedString = NSMutableAttributedString(string: fullText)
         let range = (fullText as NSString).range(of: "을")
@@ -227,7 +227,7 @@ class LaunchScreenController: UIViewController, UIScrollViewDelegate {
         let label = UILabel(frame: CGRect(x: (.screenW*0.4)/2, y: 0, width: .screenW, height: .screenH*0.06))
         label.text = "동물친구들의 특징을"
         label.font = UIFont(name: "KOTRA HOPE", size: .screenW*0.1)
-        label.textColor = .green
+        label.textColor =  UIColor.appColor(.primaryGreen)
         let fullText = label.text ?? ""
         let attribtuedString = NSMutableAttributedString(string: fullText)
         let range = (fullText as NSString).range(of: "을")
