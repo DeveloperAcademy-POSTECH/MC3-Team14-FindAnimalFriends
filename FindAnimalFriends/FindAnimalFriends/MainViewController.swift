@@ -12,6 +12,10 @@ class MainViewController: UIViewController {
     
     // MARK: Properties
     
+    private var currentAnimalIndex: Int = 0
+    
+    private var maskCircles: [UIBezierPath] = []
+    
     // 각 animal memo의 위치 비율.
     // 배경화면 크기가 정비율을 지키며 2배가 될 때, 해당 정비율에 맞게 비율을 잡을 수 있도록 하기 위함.
     private let memosRatio: [[CGFloat]] = [
@@ -40,6 +44,7 @@ class MainViewController: UIViewController {
     func memoButton(_ origin: CGPoint, imageName: String) -> UIButton {
         let button = UIButton(frame: CGRect(origin: origin, size: .memoSize))
         button.setImage(UIImage(named: imageName), for: .normal)
+        button.isUserInteractionEnabled = false //초기엔 모두 인터렉션mode false
         return button
     }
     
@@ -70,6 +75,15 @@ class MainViewController: UIViewController {
         
         view.addSubview(xButton)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //index를 통한 handling 예정.
+        currentAnimalIndex = UserDefaults.standard.integer(forKey: "clear")
+        
+        setMemoButtonsStatus()
+    }
 }
 
 // MARK: Private Extension
@@ -90,12 +104,23 @@ private extension MainViewController {
         }
     }
     
+    // clearIndex를 확인하고 memo버튼의 상태를 결정하는 함수.
+    func setMemoButtonsStatus() {
+        let _ = memoButtons.map { button in
+            if button.tag < currentAnimalIndex {
+                button.isUserInteractionEnabled = false
+            } else if button.tag == currentAnimalIndex {
+                button.isUserInteractionEnabled = true
+            }
+        }
+    }
+    
     @objc func zoomInAction(_ sender: UIButton) {
         let ratio = memosRatio[sender.tag] // 뒷 배경이미지의 origin을 잡기 위해 클릭된 버튼의 ratio를 받음.
         
         UIView.animate(withDuration: 1.5, delay: 0, options: .curveEaseInOut) { [weak self] in
             guard let self = self else { return }
-            
+    
             self.backImageView.frame.size = .backDoubleSize // corkboard 배경늘리기. 너비, 높이 * 2 (면적으로는 4배)
             
             // frame을 한 번에 CGRect로 잡지않고, CGPoint&CGSize로 나누어 잡은 이유
@@ -132,8 +157,72 @@ private extension MainViewController {
                         ),
                     size: .memoSize
                     )
-                button.isUserInteractionEnabled = true // 추후 핸들링 예정
+                // button의 tag를 판단하여 액션처리
+                if button.tag == self.currentAnimalIndex {
+                    button.isUserInteractionEnabled = true
+                }
             }
         }
     }
+    
+    // mask circle 배열에 추가하는 함수
+    func addMaskCircle(frame: CGRect) {
+        let path = UIBezierPath(ovalIn: CGRect(origin: frame.origin, size: frame.size))
+        maskCircles.append(path)
+    }
+    
+    // maskCircles에 저장된 마스크들을 그려내는 함수 (black 배경과 함께)
+    func makeLightMask(origin: CGPoint, size: CGSize) {
+        let blackView = UIView(frame: view.bounds)
+        blackView.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        
+        let maskLayer = CAShapeLayer()
+        let path = UIBezierPath(rect: view.bounds)
+        
+        for (idx, i) in maskCircles.enumerated() {
+            if idx == maskCircles.count-1 {
+                //animation 할 수 있으면...
+                path.append(i)
+            } else {
+                path.append(i)
+            }
+        }
+        
+        path.append(UIBezierPath(ovalIn: CGRect(origin: origin, size: size)))
+
+        maskLayer.path = path.cgPath
+        maskLayer.fillRule = .evenOdd
+
+        blackView.layer.mask = maskLayer
+
+        view.addSubview(blackView)
+    }
+    
+//    func make(rect: CGRect) {
+//        let path = UIBezierPath(rect: view.bounds) //전체크기 할당
+//        path.append(UIBezierPath(ovalIn: rect)) //동그라미 path 추가
+//
+//        maskLayer.path = path.cgPath //만든 path를 maskLayer에 넘기기
+//        maskLayer.fillRule = .evenOdd //rule - evenOdd일 때는 겹친부분 반전됨. nonZero는 반전안됨.
+//
+//        blackView.layer.mask = maskLayer //black뷰의 layer 마스크로 만든 layer 지정
+//        view.addSubview(blackView)
+//    }
+//
+//    @objc func animate(_ sender: UIButton) {
+//        let path = UIBezierPath(rect: view.bounds)
+//        if sender.tag == 0 {
+//            path.append(UIBezierPath(ovalIn: CGRect(x: 200, y: 400, width: 400, height: 400)))
+//        }
+//        let animation = CABasicAnimation(keyPath: "path")
+//        animation.fromValue = maskLayer.path
+//        animation.toValue = path.cgPath
+//        animation.duration = 1
+//        animation.timingFunction = CAMediaTimingFunction(name: .linear)
+//
+//        maskLayer.add(animation, forKey: nil)
+//        DispatchQueue.main.async {
+//            self.maskLayer.path = path.cgPath
+//        }
+//    }
 }
