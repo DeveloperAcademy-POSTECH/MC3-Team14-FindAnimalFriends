@@ -47,7 +47,7 @@ class MainViewController: UIViewController {
     
     private let blackView: UIView = { // 어두운 방 느낌을 내기위한 뷰. mask당하는 뷰.
         let uiView = UIView(frame: UIScreen.main.bounds)
-        uiView.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        uiView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
         return uiView
     }()
     

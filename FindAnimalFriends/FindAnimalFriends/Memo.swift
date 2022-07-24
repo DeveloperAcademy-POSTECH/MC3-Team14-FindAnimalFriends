@@ -55,8 +55,8 @@ struct Memo {
         return UIBezierPath(
             ovalIn: CGRect(
                 origin: CGPoint(
-                    x: .screenW / memoRatio[0] - 25,
-                    y: .screenH / memoRatio[1] - 25
+                    x: .screenW / memoRatio[0] - .screenW/10,
+                    y: .screenH / memoRatio[1] - .screenW/10
                 ),
                 size: .maskSize
             )
@@ -67,8 +67,8 @@ struct Memo {
         return UIBezierPath(
             ovalIn: CGRect(
                 origin: CGPoint(
-                    x: .screenW * 2 / memoRatio[0] - 50,
-                    y: .screenH * 2 / memoRatio[1] - 50
+                    x: .screenW * 2 / memoRatio[0] - .screenW/5,
+                    y: .screenH * 2 / memoRatio[1] - .screenW/5
                 ),
                 size: .maskDoubleSize
             )

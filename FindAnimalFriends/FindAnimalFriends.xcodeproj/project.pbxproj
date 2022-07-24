@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		964E45C8288D8F33004A43D4 /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964E45C7288D8F33004A43D4 /* Memo.swift */; };
+		964E45CA288DB69C004A43D4 /* EntranceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964E45C9288DB69C004A43D4 /* EntranceView.swift */; };
 		9678A711288AC3E600678BDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678A710288AC3E600678BDF /* AppDelegate.swift */; };
 		9678A713288AC3E600678BDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678A712288AC3E600678BDF /* SceneDelegate.swift */; };
 		9678A715288AC3E600678BDF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678A714288AC3E600678BDF /* MainViewController.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		964E45C7288D8F33004A43D4 /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
+		964E45C9288DB69C004A43D4 /* EntranceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntranceView.swift; sourceTree = "<group>"; };
 		9678A70D288AC3E600678BDF /* FindAnimalFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindAnimalFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9678A710288AC3E600678BDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9678A712288AC3E600678BDF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				9678A710288AC3E600678BDF /* AppDelegate.swift */,
 				9678A712288AC3E600678BDF /* SceneDelegate.swift */,
 				9678A714288AC3E600678BDF /* MainViewController.swift */,
+				964E45C9288DB69C004A43D4 /* EntranceView.swift */,
 				96DBD9BA288BC9FF006B2767 /* ClearTestViewController.swift */,
 				96DBD9B8288BB9E6006B2767 /* Extension.swift */,
 				964E45C7288D8F33004A43D4 /* Memo.swift */,
@@ -145,6 +148,7 @@
 			files = (
 				9678A715288AC3E600678BDF /* MainViewController.swift in Sources */,
 				96DBD9BB288BC9FF006B2767 /* ClearTestViewController.swift in Sources */,
+				964E45CA288DB69C004A43D4 /* EntranceView.swift in Sources */,
 				9678A711288AC3E600678BDF /* AppDelegate.swift in Sources */,
 				964E45C8288D8F33004A43D4 /* Memo.swift in Sources */,
 				9678A713288AC3E600678BDF /* SceneDelegate.swift in Sources */,
