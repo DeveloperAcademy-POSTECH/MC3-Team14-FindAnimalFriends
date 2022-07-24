@@ -12,27 +12,19 @@ class MainViewController: UIViewController {
     
     // MARK: Properties
     
+    // 현재 오픈되어있는 Animal 컨텐츠 중 마지막 index.
     private var currentAnimalIndex: Int = 0
     
-    private var maskCircles: [UIBezierPath] = []
+    // Mask Circle path(경로)를 총괄하는 layer
+    private let maskLayer = CAShapeLayer()
     
-    // 각 animal memo의 위치 비율.
-    // 배경화면 크기가 정비율을 지키며 2배가 될 때, 해당 정비율에 맞게 비율을 잡을 수 있도록 하기 위함.
-    private let memosRatio: [[CGFloat]] = [
-        [8, 6], //tiger
-        [1.8, 5.5], //elephant
-        [3, 2.5], //panda
-        [8, 1.6], //dolphin
-        [1.8, 1.5] //polarbear
-    ]
-    
-    // 각 animal memo의 Asset image 이름. 위의 memosRatio와 index순서 같게 함.
-    private let memosAnimal = [
-        "tigerMemo",
-        "elephantMemo",
-        "pandaMemo",
-        "dolphinMemo",
-        "polarbearMemo"
+    // Animal memo data
+    private var memos: [Memo] = [
+        Memo(memoRatio: [8, 6], memoAnimal: "tigerMemo"),
+        Memo(memoRatio: [1.8, 5.5], memoAnimal: "elephantMemo"),
+        Memo(memoRatio: [3, 2.5], memoAnimal: "pandaMemo"),
+        Memo(memoRatio: [8, 1.6], memoAnimal: "dolphinMemo"),
+        Memo(memoRatio: [1.8, 1.5], memoAnimal: "polarbearMemo")
     ]
     
     // 전체 크기변화 handling을 위한 버튼 배열.
