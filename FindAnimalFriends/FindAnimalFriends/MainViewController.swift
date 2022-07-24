@@ -51,13 +51,8 @@ class MainViewController: UIViewController {
         return uiView
     }()
     
-    private lazy var cancelButton: UIButton = { // 확대 -> 축소로 가는 버튼
-        let button = UIButton(frame: CGRect(x: 0, y: 200, width: 100, height: 100))
-        button.setImage(UIImage(systemName: "xmark"), for: .normal)
-        button.addTarget(self, action: #selector(zoomAction(_:)), for: .touchUpInside)
-        return button
-    }()
-    
+    private let entranceView = EntranceView(frame: .zero)
+
     // MARK: life cycle Method
 
     override func viewDidLoad() {
@@ -91,8 +86,6 @@ private extension MainViewController {
             memoButtons.append(button)
             backImageView.addSubview(button)
         }
-        
-        view.addSubview(cancelButton)
     }
     
     func setupLights() {
@@ -122,6 +115,8 @@ private extension MainViewController {
         }
         
         maskLayerAnimation() // light(조명) 확대, 축소
+        
+        showEntranceView(tag: sender.tag)
     }
     
     func maskLayerAnimation() {
@@ -146,6 +141,17 @@ private extension MainViewController {
         maskLayer.add(animation, forKey: nil)
         DispatchQueue.main.async {
             self.maskLayer.path = path.cgPath
+        }
+    }
+    
+    func showEntranceView(tag: Int) {
+        if Zoom.status == .zoomIn {
+            entranceView.frame = view.bounds
+            entranceView.animal = memos[tag].memoAnimal
+            entranceView.cancelButton.addTarget(self, action: #selector(zoomAction(_:)), for: .touchUpInside)
+            view.addSubview(entranceView)
+        } else {
+            entranceView.removeFromSuperview()
         }
     }
 }
