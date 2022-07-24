@@ -12,7 +12,7 @@ class MainViewController: UIViewController {
     
     // MARK: Properties
     
-    private var currentAnimalIndex: Int = 0 // 현재 오픈되어있는 Animal 컨텐츠 중 마지막 index.
+    private var currentIndex: Int = 0 // 현재 오픈되어있는 Animal 컨텐츠 중 마지막 index.
     
     private let memos: [Memo] = [ // Animal memo data
         Memo(memoRatio: [8, 6], memoAnimal: "tigerMemo"),
@@ -54,7 +54,7 @@ class MainViewController: UIViewController {
     private lazy var cancelButton: UIButton = { // 확대 -> 축소로 가는 버튼
         let button = UIButton(frame: CGRect(x: 0, y: 200, width: 100, height: 100))
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
-//        button.addTarget(self, action: #selector(zoomOutAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(zoomAction(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -66,15 +66,15 @@ class MainViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         configureSubviews()
-        
-//        setLights()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         //index를 통한 handling 예정.
-        currentAnimalIndex = UserDefaults.standard.integer(forKey: "clear")
+        currentIndex = UserDefaults.standard.integer(forKey: "clear")
+        
+        setupLights()
     }
 }
 
@@ -87,11 +87,65 @@ private extension MainViewController {
         for (idx, i) in memos.enumerated().reversed() { // .enumeratad.reversed 순서 중요.
             let button = memoButton(i)
             button.tag = idx // tag는 순서대로 잘 달린다. cause reversed()
-//            button.addTarget(self, action: #selector(zoomAction(_:)), for: .touchUpInside)
+            button.addTarget(self, action: #selector(zoomAction(_:)), for: .touchUpInside)
             memoButtons.append(button)
             backImageView.addSubview(button)
         }
         
         view.addSubview(cancelButton)
+    }
+    
+    func setupLights() {
+        let path = UIBezierPath(rect: view.bounds)
+        for memo in memos[0...currentIndex] {
+            path.append(memo.outMaskLayer)
+        }
+        maskLayer.path = path.cgPath
+        maskLayer.fillRule = .evenOdd
+        blackView.layer.mask = maskLayer
+        backImageView.insertSubview(blackView, at: memos.count - currentIndex - 1) // 중복x. 기존 위치에서 새로운 위치로 업데이트된다.
+    }
+    
+    @objc func zoomAction(_ sender: UIButton) {
+        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut) { [weak self] in
+            guard let self = self else { return }
+            
+            Zoom.status = (Zoom.status == .zoomIn ? .zoomOut : .zoomIn) // toggle
+
+            self.backImageView.frame = self.memos[sender.tag].backImageFrame //
+            self.blackView.frame = self.backImageView.bounds // frame -> bounds로 수정 (fix)
+
+            let _ = self.memoButtons.map { button in
+                button.frame = self.memos[button.tag].memoFrame
+                button.isUserInteractionEnabled = (Zoom.status == .zoomOut)
+            }
+        }
+        
+        maskLayerAnimation() // light(조명) 확대, 축소
+    }
+    
+    func maskLayerAnimation() {
+        var path = UIBezierPath()
+        if Zoom.status == .zoomIn {
+            path = UIBezierPath(rect: self.backImageView.bounds)
+            for memo in memos[0...currentIndex] {
+                path.append(memo.inMaskLayer)
+            }
+        } else {
+            path = UIBezierPath(rect: view.bounds)
+            for memo in memos[0...currentIndex] {
+                path.append(memo.outMaskLayer)
+            }
+        }
+        
+        let animation = CABasicAnimation(keyPath: "path")
+        animation.fromValue = self.maskLayer.path
+        animation.toValue = path.cgPath
+        animation.duration = 1.0
+        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        maskLayer.add(animation, forKey: nil)
+        DispatchQueue.main.async {
+            self.maskLayer.path = path.cgPath
+        }
     }
 }
