@@ -105,12 +105,12 @@ class QuizPageViewController: UIPageViewController, UIPageViewControllerDataSour
         
         for i in (0...(sampleAnswer[pageIndex].count - 1)).reversed() {
             self.view.addSubview(answerButtons[i])
+            answerButtons[i].translatesAutoresizingMaskIntoConstraints = false
             answerButtons[i].setTitle("\(sampleAnswer[pageIndex][i])", for: .normal)
-            answerButtons[i].layer.borderColor = UIColor.white.cgColor
-            answerButtons[i].layer.backgroundColor = UIColor.brown.cgColor
+            answerButtons[i].layer.borderColor = UIColor.appColor(AssetsColor.primaryWhite).cgColor
+            answerButtons[i].layer.backgroundColor = UIColor.appColor(AssetsColor.primaryBrown).cgColor
             answerButtons[i].layer.cornerRadius = 8
             answerButtons[i].titleLabel?.font = UIFont(name: "KOTRA HOPE", size: 30)
-            answerButtons[i].translatesAutoresizingMaskIntoConstraints = false
             answerButtons[i].centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
             if i==(sampleAnswer[pageIndex].count - 1) {
                 answerButtons[i].bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true

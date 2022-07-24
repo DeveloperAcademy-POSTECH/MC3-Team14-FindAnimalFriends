@@ -34,6 +34,7 @@ enum AssetsColor {
   case primaryBrown
   case primaryOrange
   case primaryWhite
+  case memoWhite
 }
 extension UIColor {
   static func appColor(_ name: AssetsColor) -> UIColor {
@@ -48,6 +49,8 @@ extension UIColor {
       return #colorLiteral(red: 0.9058823529, green: 0.6352941176, blue: 0.3294117647, alpha: 1)
     case .primaryWhite:
       return #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
+    case .memoWhite:
+      return #colorLiteral(red: 0.980392158, green: 0.980392158, blue: 0.980392158, alpha: 1)
     }
   }
 }
