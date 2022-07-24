@@ -26,4 +26,8 @@ extension CGSize {
     
     static let backDoubleSize = CGSize(width: .screenW * 2, height: .screenH * 2)
     
+    static let maskSize = CGSize(width: .screenW / 2, height: .screenW / 2)
+    
+    static let maskDoubleSize = CGSize(width: .screenW, height: .screenW)
+    
 }

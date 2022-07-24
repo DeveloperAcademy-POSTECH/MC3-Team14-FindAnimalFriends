@@ -197,32 +197,4 @@ private extension MainViewController {
 
         view.addSubview(blackView)
     }
-    
-//    func make(rect: CGRect) {
-//        let path = UIBezierPath(rect: view.bounds) //전체크기 할당
-//        path.append(UIBezierPath(ovalIn: rect)) //동그라미 path 추가
-//
-//        maskLayer.path = path.cgPath //만든 path를 maskLayer에 넘기기
-//        maskLayer.fillRule = .evenOdd //rule - evenOdd일 때는 겹친부분 반전됨. nonZero는 반전안됨.
-//
-//        blackView.layer.mask = maskLayer //black뷰의 layer 마스크로 만든 layer 지정
-//        view.addSubview(blackView)
-//    }
-//
-//    @objc func animate(_ sender: UIButton) {
-//        let path = UIBezierPath(rect: view.bounds)
-//        if sender.tag == 0 {
-//            path.append(UIBezierPath(ovalIn: CGRect(x: 200, y: 400, width: 400, height: 400)))
-//        }
-//        let animation = CABasicAnimation(keyPath: "path")
-//        animation.fromValue = maskLayer.path
-//        animation.toValue = path.cgPath
-//        animation.duration = 1
-//        animation.timingFunction = CAMediaTimingFunction(name: .linear)
-//
-//        maskLayer.add(animation, forKey: nil)
-//        DispatchQueue.main.async {
-//            self.maskLayer.path = path.cgPath
-//        }
-//    }
 }
