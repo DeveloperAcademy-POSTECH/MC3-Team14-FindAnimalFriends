@@ -14,6 +14,10 @@
 		9678A715288AC3E600678BDF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678A714288AC3E600678BDF /* MainViewController.swift */; };
 		9678A71A288AC3E700678BDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9678A719288AC3E700678BDF /* Assets.xcassets */; };
 		9678A71D288AC3E700678BDF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9678A71B288AC3E700678BDF /* LaunchScreen.storyboard */; };
+		96DBD9B9288BB9E6006B2767 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DBD9B8288BB9E6006B2767 /* Extension.swift */; };
+		BAA5DF4F288C03F1001931FE /* LaunchScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA5DF4E288C03F1001931FE /* LaunchScreenController.swift */; };
+		BAA5DF51288C0594001931FE /* KOTRA HOPE.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAA5DF50288C0594001931FE /* KOTRA HOPE.ttf */; };
+		BAA5DF5F288D30B9001931FE /* LaunchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = BAA5DF5E288D30B9001931FE /* LaunchImage.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,10 @@
 		9678A719288AC3E700678BDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9678A71C288AC3E700678BDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9678A71E288AC3E700678BDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		96DBD9B8288BB9E6006B2767 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		BAA5DF4E288C03F1001931FE /* LaunchScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenController.swift; sourceTree = "<group>"; };
+		BAA5DF50288C0594001931FE /* KOTRA HOPE.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KOTRA HOPE.ttf"; sourceTree = "<group>"; };
+		BAA5DF5E288D30B9001931FE /* LaunchImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchImage.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,16 +66,44 @@
 		9678A70F288AC3E600678BDF /* FindAnimalFriends */ = {
 			isa = PBXGroup;
 			children = (
+				BAA5DF4C288BFFD1001931FE /* Font */,
 				9678A710288AC3E600678BDF /* AppDelegate.swift */,
+				BA9D1EAD288BCBD70023C807 /* LaunchScreen */,
 				9678A712288AC3E600678BDF /* SceneDelegate.swift */,
 				9678A714288AC3E600678BDF /* MainViewController.swift */,
 				42F30F22288C03A900F772C6 /* QuizCompleteViewController.swift */,
+				96DBD9B8288BB9E6006B2767 /* Extension.swift */,
 				9678A719288AC3E700678BDF /* Assets.xcassets */,
 				9678A71B288AC3E700678BDF /* LaunchScreen.storyboard */,
 				9678A71E288AC3E700678BDF /* Info.plist */,
 				42E8B23E288C0E210097D909 /* QuizCompleteView.swift */,
 			);
 			path = FindAnimalFriends;
+			sourceTree = "<group>";
+		};
+		BA9D1EAD288BCBD70023C807 /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				BA9D1EB4288BD0430023C807 /* LaunchImage */,
+				BAA5DF4E288C03F1001931FE /* LaunchScreenController.swift */,
+			);
+			path = LaunchScreen;
+			sourceTree = "<group>";
+		};
+		BA9D1EB4288BD0430023C807 /* LaunchImage */ = {
+			isa = PBXGroup;
+			children = (
+				BAA5DF5E288D30B9001931FE /* LaunchImage.png */,
+			);
+			path = LaunchImage;
+			sourceTree = "<group>";
+		};
+		BAA5DF4C288BFFD1001931FE /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				BAA5DF50288C0594001931FE /* KOTRA HOPE.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -128,8 +164,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAA5DF5F288D30B9001931FE /* LaunchImage.png in Resources */,
 				9678A71D288AC3E700678BDF /* LaunchScreen.storyboard in Resources */,
 				9678A71A288AC3E700678BDF /* Assets.xcassets in Resources */,
+				BAA5DF51288C0594001931FE /* KOTRA HOPE.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,7 +182,9 @@
 				42F30F23288C03A900F772C6 /* QuizCompleteViewController.swift in Sources */,
 				9678A715288AC3E600678BDF /* MainViewController.swift in Sources */,
 				9678A711288AC3E600678BDF /* AppDelegate.swift in Sources */,
+				BAA5DF4F288C03F1001931FE /* LaunchScreenController.swift in Sources */,
 				9678A713288AC3E600678BDF /* SceneDelegate.swift in Sources */,
+				96DBD9B9288BB9E6006B2767 /* Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
