@@ -91,7 +91,9 @@ class LaunchScreenController: UIViewController, UIScrollViewDelegate {
     @objc internal func onClickMyButton(_ sender: Any) {
         if sender is UIButton {
             UIView.animate(withDuration: 0.1, delay: 0.1) {
-                self.playSound(sound: "gameStartSound")
+//                self.playSound(sound: "gameStartSound")
+                AVPlay.shared.playSound(sound: "gameStartSound")
+//                AVPlay().playSound(sound: "gameStartSound")
                 self.view.layer.opacity = 0
             } completion: { _ in
                 UIView.animate(withDuration: 0.1, delay: 0) {
@@ -554,6 +556,8 @@ private extension LaunchScreenController {
 }
 
 class AVPlay {
+    
+    static let shared = AVPlay()
     
     var player: AVAudioPlayer!
     
