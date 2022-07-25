@@ -51,7 +51,7 @@ class MainViewController: UIViewController {
         return uiView
     }()
     
-    private let entranceView = EntranceView(frame: .zero)
+    private var entranceView: EntranceView?
 
     // MARK: life cycle Method
 
@@ -120,7 +120,7 @@ private extension MainViewController {
         
         maskLayerAnimation() // light(조명) 확대, 축소
         
-        showEntranceView(tag: tag)
+        showEntranceView(animalName: memos[tag].memoAnimal.replacingOccurrences(of: "Memo", with: ""))
     }
     
     func maskLayerAnimation() {
@@ -148,16 +148,21 @@ private extension MainViewController {
         }
     }
     
-    func showEntranceView(tag: Int) {
+    func showEntranceView(animalName: String) {
         if Zoom.status == .zoomIn {
+            entranceView = EntranceView(frame: .zero)
+            guard let entranceView = entranceView else { return }
             DispatchQueue.main.asyncAfter(deadline: .now()+1.0) { [weak self] in
                 guard let self = self else { return }
-                self.entranceView.frame = self.view.bounds
-                self.entranceView.cancelButton.addTarget(self, action: #selector(self.animate(_:)), for: .touchUpInside)
-                self.entranceView.pushButton.addTarget(self, action: #selector(self.pushToQuiz), for: .touchUpInside)
-                self.view.addSubview(self.entranceView)
+                entranceView.frame = self.view.bounds
+                entranceView.cancelButton.addTarget(self, action: #selector(self.animate(_:)), for: .touchUpInside)
+                entranceView.pushButton.addTarget(self, action: #selector(self.pushToQuiz), for: .touchUpInside)
+                entranceView.animalName = animalName
+                entranceView.setupCodeName()
+                self.view.addSubview(entranceView)
             }
         } else {
+            guard let entranceView = entranceView else { return }
             entranceView.removeFromSuperview()
         }
     }

@@ -8,7 +8,10 @@
 import UIKit
 
 class EntranceView: UIView {
-//    button.titleLabel?.font = UIFont(name: "KOTRA HOPE", size: .screenW*0.06)
+    
+    var animalName: String?
+    
+    var animalDescription: String = ""
     
     lazy var cancelButton: UIButton = {
         let button = UIButton()
@@ -28,9 +31,22 @@ class EntranceView: UIView {
         return button
     }()
     
+    private let textLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.numberOfLines = 0
+        label.font = UIFont(name: "KOTRA HOPE", size: .ten*2)
+        label.textColor = .white
+        label.backgroundColor = .black.withAlphaComponent(0.8)
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(cancelButton)
+        addSubview(textLabel)
         addSubview(pushButton)
         configureConstraints()
     }
@@ -39,16 +55,46 @@ class EntranceView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setupCodeName() {
+        makeDescription()
+        DispatchQueue.main.async {
+            for i in self.animalDescription {
+                self.textLabel.text! += "\(i)"
+                RunLoop.current.run(until: Date() + 0.05)
+            }
+        }
+    }
+    
     private func configureConstraints() {
         NSLayoutConstraint.activate([
             cancelButton.topAnchor.constraint(equalTo: centerYAnchor, constant: -.screenH/5),
             cancelButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.screenW/5),
+            
+            textLabel.topAnchor.constraint(equalTo: centerYAnchor, constant: .screenW/6),
+            textLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             pushButton.topAnchor.constraint(equalTo: centerYAnchor, constant: .screenW/3),
             pushButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             pushButton.widthAnchor.constraint(equalToConstant: .hund*2.7),
             pushButton.heightAnchor.constraint(equalToConstant: .hund*0.7)
         ])
+    }
+    
+    private func makeDescription() {
+        switch animalName {
+        case "tiger":
+            animalDescription = "코드네임: 호랭이\n실종날짜: yy.MM.dd"
+        case "elephant":
+            animalDescription = "코드네임: 코봉이\n실종날짜: yy.MM.dd"
+        case "panda":
+            animalDescription = "코드네임: 쿵푸팬더\n실종날짜: yy.MM.dd"
+        case "dolphin":
+            animalDescription = "코드네임: 돌고래\n실종날짜: yy.MM.dd"
+        case "polarbear":
+            animalDescription = "코드네임: 북극이\n실종날짜: yy.MM.dd"
+        default:
+            break
+        }
     }
 }
 
