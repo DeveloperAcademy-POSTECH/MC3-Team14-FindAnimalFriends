@@ -18,6 +18,10 @@
 		BAA5DF4F288C03F1001931FE /* LaunchScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA5DF4E288C03F1001931FE /* LaunchScreenController.swift */; };
 		BAA5DF51288C0594001931FE /* KOTRA HOPE.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAA5DF50288C0594001931FE /* KOTRA HOPE.ttf */; };
 		BAA5DF5F288D30B9001931FE /* LaunchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = BAA5DF5E288D30B9001931FE /* LaunchImage.png */; };
+		FE5DCEEE288D57D900DBD272 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5DCEEC288D57D800DBD272 /* QuizViewController.swift */; };
+		FE5DCEEF288D57D900DBD272 /* QuizPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5DCEED288D57D800DBD272 /* QuizPageViewController.swift */; };
+		FE5DCEF4288E214900DBD272 /* quizzes.json in Resources */ = {isa = PBXBuildFile; fileRef = FE5DCEF2288E214900DBD272 /* quizzes.json */; };
+		FE5DCEF5288E214900DBD272 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5DCEF3288E214900DBD272 /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +38,10 @@
 		BAA5DF4E288C03F1001931FE /* LaunchScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenController.swift; sourceTree = "<group>"; };
 		BAA5DF50288C0594001931FE /* KOTRA HOPE.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KOTRA HOPE.ttf"; sourceTree = "<group>"; };
 		BAA5DF5E288D30B9001931FE /* LaunchImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchImage.png; sourceTree = "<group>"; };
+		FE5DCEEC288D57D800DBD272 /* QuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
+		FE5DCEED288D57D800DBD272 /* QuizPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizPageViewController.swift; sourceTree = "<group>"; };
+		FE5DCEF2288E214900DBD272 /* quizzes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = quizzes.json; sourceTree = "<group>"; };
+		FE5DCEF3288E214900DBD272 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,17 +74,20 @@
 		9678A70F288AC3E600678BDF /* FindAnimalFriends */ = {
 			isa = PBXGroup;
 			children = (
+				FE5DCEF1288E213200DBD272 /* Model */,
 				BAA5DF4C288BFFD1001931FE /* Font */,
 				9678A710288AC3E600678BDF /* AppDelegate.swift */,
 				BA9D1EAD288BCBD70023C807 /* LaunchScreen */,
 				9678A712288AC3E600678BDF /* SceneDelegate.swift */,
+				FE5DCEED288D57D800DBD272 /* QuizPageViewController.swift */,
+				FE5DCEEC288D57D800DBD272 /* QuizViewController.swift */,
 				9678A714288AC3E600678BDF /* MainViewController.swift */,
 				42F30F22288C03A900F772C6 /* QuizCompleteViewController.swift */,
 				96DBD9B8288BB9E6006B2767 /* Extension.swift */,
+				42E8B23E288C0E210097D909 /* QuizCompleteView.swift */,
 				9678A719288AC3E700678BDF /* Assets.xcassets */,
 				9678A71B288AC3E700678BDF /* LaunchScreen.storyboard */,
 				9678A71E288AC3E700678BDF /* Info.plist */,
-				42E8B23E288C0E210097D909 /* QuizCompleteView.swift */,
 			);
 			path = FindAnimalFriends;
 			sourceTree = "<group>";
@@ -104,6 +115,15 @@
 				BAA5DF50288C0594001931FE /* KOTRA HOPE.ttf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		FE5DCEF1288E213200DBD272 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FE5DCEF3288E214900DBD272 /* Data.swift */,
+				FE5DCEF2288E214900DBD272 /* quizzes.json */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +187,7 @@
 				BAA5DF5F288D30B9001931FE /* LaunchImage.png in Resources */,
 				9678A71D288AC3E700678BDF /* LaunchScreen.storyboard in Resources */,
 				9678A71A288AC3E700678BDF /* Assets.xcassets in Resources */,
+				FE5DCEF4288E214900DBD272 /* quizzes.json in Resources */,
 				BAA5DF51288C0594001931FE /* KOTRA HOPE.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -179,8 +200,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				42E8B23F288C0E210097D909 /* QuizCompleteView.swift in Sources */,
+				FE5DCEF5288E214900DBD272 /* Data.swift in Sources */,
 				42F30F23288C03A900F772C6 /* QuizCompleteViewController.swift in Sources */,
 				9678A715288AC3E600678BDF /* MainViewController.swift in Sources */,
+				FE5DCEEF288D57D900DBD272 /* QuizPageViewController.swift in Sources */,
+				FE5DCEEE288D57D900DBD272 /* QuizViewController.swift in Sources */,
 				9678A711288AC3E600678BDF /* AppDelegate.swift in Sources */,
 				BAA5DF4F288C03F1001931FE /* LaunchScreenController.swift in Sources */,
 				9678A713288AC3E600678BDF /* SceneDelegate.swift in Sources */,
