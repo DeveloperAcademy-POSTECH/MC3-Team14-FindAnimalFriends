@@ -21,13 +21,9 @@ class EntranceView: UIView {
         return button
     }()
     
-    lazy var pushButton: UIButton = { //FIXME: Sub UIView 자체에서 navigation push 하는 법?이 있나? 없을듯
+    lazy var pushButton: UIButton = { //FIXME: Sub UIView 자체에서 navigation push 하는 법?이 있나?
         let button = UIButton() //type: .system하면 기본 highlighted 효과 있음.
-        button.setTitle("퀴즈 풀기", for: .normal)
-        button.titleLabel?.font = UIFont(name: "KOTRA HOPE", size: .ten*2.4)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.backgroundColor = UIColor.appColor(.primaryBrown)
-        button.layer.cornerRadius = 10
+        button.custom("퀴즈 풀기", titleColor: .white, size: .ten*2.4, backColor: .appColor(.primaryBrown))
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()

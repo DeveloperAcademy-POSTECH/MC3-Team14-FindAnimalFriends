@@ -65,3 +65,17 @@ extension UIColor {
     }
 }
 
+extension UIButton {
+    func custom(_ title: String, titleColor: UIColor, size: CGFloat, backColor: UIColor) {
+        self.setTitle(title, for: .normal)
+        self.titleLabel?.font = UIFont(name: "KOTRA HOPE", size: size)
+        self.setTitleColor(titleColor, for: .normal)
+        self.backgroundColor = backColor
+        self.layer.cornerRadius = 8
+        
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 1.0, height: 4.0)
+        self.layer.shadowRadius = 2
+        self.layer.shadowOpacity = 0.4
+    }
+}
