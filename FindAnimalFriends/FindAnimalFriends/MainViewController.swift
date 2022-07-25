@@ -14,7 +14,7 @@ class MainViewController: UIViewController {
     
     private var currentIndex: Int = 0 // 현재 오픈되어있는 Animal 컨텐츠 중 마지막 index.
     
-    private let memos: [Memo] = [ // Animal memo data
+    private let memos = [ // Animal memo data
         Memo(memoRatio: [8, 6], memoAnimal: "tigerMemo"),
         Memo(memoRatio: [1.8, 5.5], memoAnimal: "elephantMemo"),
         Memo(memoRatio: [3, 2.5], memoAnimal: "pandaMemo"),
