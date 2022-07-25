@@ -16,8 +16,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = UINavigationController(rootViewController: LaunchScreenController())
-        window?.makeKeyAndVisible()
+        window?.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
+        DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+            self.window?.rootViewController = UINavigationController(rootViewController: LaunchScreenController())
+        }
+        //출처: https://hongssup.tistory.com/150
+        //근거 - sleep은 Thread를 멈춰서 앱 자체를 delay시키는 것이기에, DispatchQueue를 이용해서 비동기로 지연해주는 것이 좋다고 한다.
+        self.window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -50,7 +55,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func moveVC(nibName : String) {
         if nibName == "WebViewController" {
-            let webVC = MainViewController(nibName: nibName, bundle: nil)
+            let webVC = LaunchScreenController(nibName: nibName, bundle: nil)
             let navigationController = UINavigationController(rootViewController: webVC)
             navigationController.navigationBar.isHidden = true
             self.window?.rootViewController = navigationController
