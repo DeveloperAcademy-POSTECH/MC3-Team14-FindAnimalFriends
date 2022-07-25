@@ -14,6 +14,7 @@ class ReadyView: UIView {
     private let detectiveView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "detectiveImage3"))
         imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -27,6 +28,8 @@ class ReadyView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        addSubview(detectiveView)
+        addSubview(textLabel)
         makeConstraints()
         setupCodeName()
     }
@@ -47,11 +50,11 @@ class ReadyView: UIView {
     private func makeConstraints() {
         NSLayoutConstraint.activate([
             detectiveView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.screenH / 10),
-            detectiveView.rightAnchor.constraint(equalTo: rightAnchor, constant: -.screenW / 3),
+            detectiveView.leftAnchor.constraint(equalTo: rightAnchor, constant: -.screenW / 3),
             detectiveView.widthAnchor.constraint(equalToConstant: .screenW / 4),
             detectiveView.heightAnchor.constraint(equalToConstant: .screenW / 3),
             
-            textLabel.rightAnchor.constraint(equalTo: detectiveView.leftAnchor, constant: .hund / 2),
+            textLabel.rightAnchor.constraint(equalTo: detectiveView.leftAnchor, constant: -.hund / 2),
             textLabel.centerYAnchor.constraint(equalTo: detectiveView.centerYAnchor)
         ])
     }

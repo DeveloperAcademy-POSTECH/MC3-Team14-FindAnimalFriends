@@ -14,7 +14,11 @@ class MainViewController: UIViewController {
     
     private var currentAnimal: String = "tiger"
     
-    private var currentIndex: Int = -1 // 현재 오픈되어있는 Animal 컨텐츠 중 마지막 index.
+    private var currentIndex: Int = -1 { // 현재 오픈되어있는 Animal 컨텐츠 중 마지막 index.
+        didSet {
+            setupLights()
+        }
+    }
     
     private let memos = [ // Animal memo data
         Memo(memoRatio: [8, 6], memoAnimal: "tigerMemo"),
@@ -47,14 +51,14 @@ class MainViewController: UIViewController {
         return imageView
     }()
     
-    private let blackView: UIView = { // 어두운 방 느낌을 내기위한 뷰. mask당하는 뷰.
+    private lazy var blackView: UIView = { // 어두운 방 느낌을 내기위한 뷰. mask당하는 뷰.
         let uiView = UIView(frame: UIScreen.main.bounds)
         uiView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+        uiView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(getReady)))
         return uiView
     }()
     
-    // code review 이후 추가된 것들
-//    private var readyView = ReadyView()
+    private var readyView: ReadyView?
     
     private var entranceView: EntranceView?
 
@@ -76,13 +80,33 @@ class MainViewController: UIViewController {
             currentIndex = UserDefaults.standard.integer(forKey: "clear") >= 5 ? 4 : UserDefaults.standard.integer(forKey: "clear")
         }
         
-        setupLights()
+        if currentIndex == -1 {
+            setReady()
+        }
     }
 }
 
 // MARK: Private Extension
 
 private extension MainViewController {
+    func setReady() {
+        readyView = ReadyView(frame: UIScreen.main.bounds)
+        view.addSubview(blackView)
+        blackView.addSubview(readyView!)
+    }
+    
+    @objc func getReady() {
+        blackView.removeGestureRecognizer(UITapGestureRecognizer())
+        UIView.transition(with: blackView,
+                          duration: 0.5, options: .transitionCrossDissolve) { [weak self] in
+            self?.readyView!.removeFromSuperview()
+        }
+        UserDefaults.standard.set(0, forKey: "clear")
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { [weak self] _ in
+            self?.currentIndex = 0
+        }
+    }
+    
     func configureSubviews() {
         view.addSubview(backImageView)
         
