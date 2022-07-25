@@ -13,26 +13,17 @@ class QuizPageViewController: UIPageViewController {
     
     // PageViewContoll에서 띄울 화면에 대한 변수
     private var pages:[UIViewController] = []
-    // 현재 페이지를 나타내는 변수 (버튼 구현 용)
-    private var pageIndex = 0
-    private var answerButtons:[UIButton] = {
-        var answerButtons:[UIButton] = []
-        for i in 0...(sampleAnswer.count-1) {
-            let answerButton = UIButton()
-            answerButtons.append(answerButton)
-        }
-        return answerButtons
-    }()
     
     required override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
         super.init(transitionStyle: style, navigationOrientation: navigationOrientation)
+        
+        NotificationCenter.default.post(name: Notification.Name("nextPage"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(goToNextPage), name:Notification.Name("nextPage"), object: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private var quizCompleteView : QuizCompleteView?
     
     override func viewDidLoad() {
         
@@ -52,14 +43,11 @@ class QuizPageViewController: UIPageViewController {
         self.delegate = self
         
         setQuizPages()
-        drawCharacterImage()
-        drawButton()
     }
     
     // quizPage 설정
     func setQuizPages() {
         let initialPage = 0
-        pageIndex = initialPage
         
         for i in 0...(sampleQuiz.count-1) {
             let page = QuizViewController()
@@ -68,64 +56,6 @@ class QuizPageViewController: UIPageViewController {
         }
         
         setViewControllers([pages[initialPage]], direction: .forward, animated: true)
-    }
-    
-    // 맨 위 버튼에 그려지는 이미지 그리기
-    func drawCharacterImage() {
-        let characterImage = UIImageView(image: UIImage(named: "detectiveImage1"))
-        self.view.addSubview(characterImage)
-        characterImage.translatesAutoresizingMaskIntoConstraints = false
-        characterImage.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        characterImage.heightAnchor.constraint(equalToConstant: 90).isActive = true
-        characterImage.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20).isActive = true
-        characterImage.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -220).isActive = true
-    }
-    
-    // 퀴즈 버튼 그리기
-    func drawButton() {
-        
-        for i in (0...(sampleAnswer[pageIndex].count - 1)).reversed() {
-            self.view.addSubview(answerButtons[i])
-            answerButtons[i].translatesAutoresizingMaskIntoConstraints = false
-            answerButtons[i].setTitle("\(sampleAnswer[pageIndex][i])", for: .normal)
-            answerButtons[i].layer.borderColor = UIColor.appColor(.primaryWhite).cgColor
-            answerButtons[i].layer.backgroundColor = UIColor.appColor(AssetsColor.primaryBrown).cgColor
-            answerButtons[i].layer.cornerRadius = 8
-            answerButtons[i].titleLabel?.font = UIFont(name: "KOTRA HOPE", size: 30)
-            answerButtons[i].centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-            if i==(sampleAnswer[pageIndex].count - 1) {
-                answerButtons[i].bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
-            } else {
-                answerButtons[i].bottomAnchor.constraint(equalTo: answerButtons[i+1].topAnchor, constant: -10).isActive = true
-            }
-            answerButtons[i].heightAnchor.constraint(equalToConstant: 50).isActive = true
-            answerButtons[i].widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.9).isActive = true
-            answerButtons[i].addTarget(self, action: #selector(self.goToNextPage), for: .touchUpInside)
-        }
-    }
-    
-    // 버튼 내용 pageIndex에 맞춰 변경
-    func updateButton() {
-        for i in 0...(sampleAnswer[pageIndex].count-1) {
-            answerButtons[i].setTitle("\(sampleAnswer[pageIndex][i])", for: .normal)
-            if pageIndex == sampleQuiz.count - 1 {
-                answerButtons[i].addTarget(self, action: #selector(self.addCompleteView), for: .touchUpInside)
-            } else {
-                answerButtons[i].addTarget(self, action: #selector(self.goToNextPage), for: .touchUpInside)
-            }
-        }
-    }
-    
-    // quizCompleteView 닫기
-    @objc func closeCompleteView(){
-        quizCompleteView!.removeFromSuperview()
-    }
-    
-    // quizCompleteView 띄우기
-    @objc func addCompleteView(){
-        quizCompleteView = QuizCompleteView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), animalName: "polarbear")
-        quizCompleteView!.completeButton.addTarget(self, action: #selector(closeCompleteView), for: .touchUpInside)
-        view.addSubview(quizCompleteView!)
     }
 }
 
@@ -137,8 +67,6 @@ extension QuizPageViewController: UIPageViewControllerDataSource, UIPageViewCont
                 return nil
             } else {
                 // go to previous page in array
-                pageIndex -= 1
-                updateButton()
                 return self.pages[viewControllerIndex - 1]
             }
             
@@ -150,8 +78,6 @@ extension QuizPageViewController: UIPageViewControllerDataSource, UIPageViewCont
         if let viewControllerIndex = self.pages.firstIndex(of: viewController) {
             if viewControllerIndex < self.pages.count - 1 {
                 // go to next page in array
-                pageIndex += 1
-                updateButton()
                 return self.pages[viewControllerIndex + 1]
             } else {
                 return nil

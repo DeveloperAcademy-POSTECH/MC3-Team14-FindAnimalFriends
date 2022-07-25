@@ -18,6 +18,17 @@ class QuizViewController: UIViewController {
     private let quizLabel = UILabel()
     // 배경으로 넣을 ImageView
     private let backImgView = UIImageView(image: UIImage(named: "memoSpring"))
+    // 정답이 쓰여있는 버튼
+    private var answerButtons:[UIButton] = {
+        var answerButtons:[UIButton] = []
+        for i in 0...(sampleAnswer.count-1) {
+            let answerButton = UIButton()
+            answerButtons.append(answerButton)
+        }
+        return answerButtons
+    }()
+    // 종료 화면
+    private var quizCompleteView : QuizCompleteView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +36,8 @@ class QuizViewController: UIViewController {
         drawBackgroundImage()
         drawIndicateLable()
         drawQuiz()
+        drawCharacterImage()
+        drawButton()
     }
     
     // backImgView을 그리는 기능
@@ -62,6 +75,73 @@ class QuizViewController: UIViewController {
         quizLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         quizLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.9).isActive = true
         quizLabel.numberOfLines = 0
+    }
+    
+    // 퀴즈 버튼 그리기
+    func drawButton() {
+        
+        for i in (0...(sampleAnswer[index ?? 0].count - 1)).reversed() {
+            self.view.addSubview(answerButtons[i])
+            answerButtons[i].translatesAutoresizingMaskIntoConstraints = false
+            answerButtons[i].setTitle("\(sampleAnswer[index ?? 0][i])", for: .normal)
+            answerButtons[i].layer.borderColor = UIColor.appColor(.primaryWhite).cgColor
+            answerButtons[i].layer.backgroundColor = UIColor.appColor(AssetsColor.primaryBrown).cgColor
+            answerButtons[i].layer.cornerRadius = 8
+            answerButtons[i].titleLabel?.font = UIFont(name: "KOTRA HOPE", size: 30)
+            answerButtons[i].centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            if i==(sampleAnswer[index ?? 0].count - 1) {
+                answerButtons[i].bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
+            } else {
+                answerButtons[i].bottomAnchor.constraint(equalTo: answerButtons[i+1].topAnchor, constant: -10).isActive = true
+            }
+            answerButtons[i].heightAnchor.constraint(equalToConstant: 50).isActive = true
+            answerButtons[i].widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.9).isActive = true
+            
+            if index == sampleQuiz.count - 1 {
+                answerButtons[i].addTarget(self, action: #selector(addCompleteView), for: .touchUpInside)
+            } else {
+                answerButtons[i].addTarget(self, action: #selector(sendNextPageNoti), for: .touchUpInside)
+            }
+        }
+    }
+    
+    // 버튼 내용 pageIndex에 맞춰 변경
+    func updateButton() {
+        for i in 0...(sampleAnswer[index ?? 0].count-1) {
+            answerButtons[i].setTitle("\(sampleAnswer[index ?? 0][i])", for: .normal)
+            if index == sampleQuiz.count - 1 {
+                answerButtons[i].addTarget(self, action: #selector(addCompleteView), for: .touchUpInside)
+            } else {
+                answerButtons[i].addTarget(self, action: #selector(sendNextPageNoti), for: .touchUpInside)
+            }
+        }
+    }
+    
+    @objc func sendNextPageNoti() {
+        NotificationCenter.default.post(name: Notification.Name("nextPage"), object: nil)
+    }
+    
+    // 맨 위 버튼에 그려지는 이미지 그리기
+    func drawCharacterImage() {
+        let characterImage = UIImageView(image: UIImage(named: "detectiveImage1"))
+        self.view.addSubview(characterImage)
+        characterImage.translatesAutoresizingMaskIntoConstraints = false
+        characterImage.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        characterImage.heightAnchor.constraint(equalToConstant: 90).isActive = true
+        characterImage.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20).isActive = true
+        characterImage.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -220).isActive = true
+    }
+    
+    // quizCompleteView 닫기
+    @objc func closeCompleteView(){
+        quizCompleteView!.removeFromSuperview()
+    }
+    
+    // quizCompleteView 띄우기
+    @objc func addCompleteView(){
+        quizCompleteView = QuizCompleteView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), animalName: "polarbear")
+        quizCompleteView!.completeButton.addTarget(self, action: #selector(closeCompleteView), for: .touchUpInside)
+        view.addSubview(quizCompleteView!)
     }
 
     override func didReceiveMemoryWarning() {
