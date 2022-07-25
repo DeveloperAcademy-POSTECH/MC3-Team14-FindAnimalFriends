@@ -29,28 +29,29 @@ extension CGSize {
 }
 
 enum AssetsColor {
-  case primaryGreen
-  case primaryRed
-  case primaryBrown
-  case primaryOrange
-  case primaryWhite
-  case memoWhite
+    case primaryGreen
+    case primaryRed
+    case primaryBrown
+    case primaryOrange
+    case primaryWhite
+    case memoWhite
 }
+
 extension UIColor {
-  static func appColor(_ name: AssetsColor) -> UIColor {
-    switch name {
-    case .primaryGreen:
-      return #colorLiteral(red: 0.1607843137, green: 0.8117647059, blue: 0.2196078431, alpha: 1)
-    case .primaryRed:
-      return #colorLiteral(red: 1, green: 0, blue: 0, alpha: 1)
-    case .primaryBrown:
-      return #colorLiteral(red: 0.568627451, green: 0.2117647059, blue: 0.1137254902, alpha: 1)
-    case .primaryOrange:
-      return #colorLiteral(red: 0.9058823529, green: 0.6352941176, blue: 0.3294117647, alpha: 1)
-    case .primaryWhite:
-      return #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
-    case .memoWhite:
-      return #colorLiteral(red: 0.980392158, green: 0.980392158, blue: 0.980392158, alpha: 1)
+    static func appColor(_ name: AssetsColor) -> UIColor {
+        switch name {
+        case .primaryGreen:
+            return #colorLiteral(red: 0.1607843137, green: 0.8117647059, blue: 0.2196078431, alpha: 1)
+        case .primaryRed:
+            return #colorLiteral(red: 1, green: 0, blue: 0, alpha: 1)
+        case .primaryBrown:
+            return #colorLiteral(red: 0.568627451, green: 0.2117647059, blue: 0.1137254902, alpha: 1)
+        case .primaryOrange:
+            return #colorLiteral(red: 0.9058823529, green: 0.6352941176, blue: 0.3294117647, alpha: 1)
+        case .primaryWhite:
+            return #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
+        case .memoWhite:
+            return #colorLiteral(red: 0.984313786, green: 0.984313786, blue: 0.984313786, alpha: 1)
+        }
     }
-  }
 }

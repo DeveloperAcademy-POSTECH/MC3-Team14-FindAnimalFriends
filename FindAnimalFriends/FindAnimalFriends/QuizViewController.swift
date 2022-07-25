@@ -33,7 +33,7 @@ class QuizViewController: UIViewController {
         backImgView.translatesAutoresizingMaskIntoConstraints = false
         backImgView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         backImgView.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor).isActive = true
-        self.view.backgroundColor = UIColor.appColor(AssetsColor.memoWhite)
+        self.view.backgroundColor = .appColor(.memoWhite)
     }
     
     // quizLabel을 그리는 기능

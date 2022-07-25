@@ -9,48 +9,10 @@ import UIKit
 
 
 // TODO: - PageView를 넘기는 기능 때문에 PageViewController에 버튼이 따로 빠져있습니다. UIPageViewController에서 다음 페이지로 넘어가는 기능을 다른 뷰에 뺄 수 있는지 알아봐야합니다.
-class QuizPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-    
-    required override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
-        super.init(transitionStyle: style, navigationOrientation: navigationOrientation)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        print("\(self.gestureRecognizers)")
-        if let viewControllerIndex = self.pages.firstIndex(of: viewController) {
-            if viewControllerIndex == 0 {
-                return nil
-            } else {
-                // go to previous page in array
-                pageIndex -= 1
-                updateButton()
-                return self.pages[viewControllerIndex - 1]
-            }
-            
-        }
-        return nil
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if let viewControllerIndex = self.pages.firstIndex(of: viewController) {
-            if viewControllerIndex < self.pages.count - 1 {
-                // go to next page in array
-                pageIndex += 1
-                updateButton()
-                return self.pages[viewControllerIndex + 1]
-            } else {
-                return nil
-            }
-        }
-        return nil
-    }
+class QuizPageViewController: UIPageViewController {
     
     // PageViewContoll에서 띄울 화면에 대한 변수
-    private var pages = [UIViewController]()
+    private var pages:[UIViewController] = []
     // 현재 페이지를 나타내는 변수 (버튼 구현 용)
     private var pageIndex = 0
     private var answerButtons:[UIButton] = {
@@ -61,6 +23,14 @@ class QuizPageViewController: UIPageViewController, UIPageViewControllerDataSour
         }
         return answerButtons
     }()
+    
+    required override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
+        super.init(transitionStyle: style, navigationOrientation: navigationOrientation)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private var quizCompleteView : QuizCompleteView?
     
@@ -118,7 +88,7 @@ class QuizPageViewController: UIPageViewController, UIPageViewControllerDataSour
             self.view.addSubview(answerButtons[i])
             answerButtons[i].translatesAutoresizingMaskIntoConstraints = false
             answerButtons[i].setTitle("\(sampleAnswer[pageIndex][i])", for: .normal)
-            answerButtons[i].layer.borderColor = UIColor.appColor(AssetsColor.primaryWhite).cgColor
+            answerButtons[i].layer.borderColor = UIColor.appColor(.primaryWhite).cgColor
             answerButtons[i].layer.backgroundColor = UIColor.appColor(AssetsColor.primaryBrown).cgColor
             answerButtons[i].layer.cornerRadius = 8
             answerButtons[i].titleLabel?.font = UIFont(name: "KOTRA HOPE", size: 30)
@@ -156,6 +126,38 @@ class QuizPageViewController: UIPageViewController, UIPageViewControllerDataSour
         quizCompleteView = QuizCompleteView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), animalName: "polarbear")
         quizCompleteView!.completeButton.addTarget(self, action: #selector(closeCompleteView), for: .touchUpInside)
         view.addSubview(quizCompleteView!)
+    }
+}
+
+extension QuizPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        print("\(self.gestureRecognizers)")
+        if let viewControllerIndex = self.pages.firstIndex(of: viewController) {
+            if viewControllerIndex == 0 {
+                return nil
+            } else {
+                // go to previous page in array
+                pageIndex -= 1
+                updateButton()
+                return self.pages[viewControllerIndex - 1]
+            }
+            
+        }
+        return nil
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        if let viewControllerIndex = self.pages.firstIndex(of: viewController) {
+            if viewControllerIndex < self.pages.count - 1 {
+                // go to next page in array
+                pageIndex += 1
+                updateButton()
+                return self.pages[viewControllerIndex + 1]
+            } else {
+                return nil
+            }
+        }
+        return nil
     }
 }
 
