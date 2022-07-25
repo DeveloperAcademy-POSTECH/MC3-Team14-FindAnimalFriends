@@ -12,53 +12,47 @@ class MainViewController: UIViewController {
     
     // MARK: Properties
     
-    // 각 animal memo의 위치 비율.
-    // 배경화면 크기가 정비율을 지키며 2배가 될 때, 해당 정비율에 맞게 비율을 잡을 수 있도록 하기 위함.
-    private let memosRatio: [[CGFloat]] = [
-        [8, 6], //tiger
-        [1.8, 5.5], //elephant
-        [3, 2.5], //panda
-        [8, 1.6], //dolphin
-        [1.8, 1.5] //polarbear
+    private var currentIndex: Int = 0 // 현재 오픈되어있는 Animal 컨텐츠 중 마지막 index.
+    
+    private let memos = [ // Animal memo data
+        Memo(memoRatio: [8, 6], memoAnimal: "tigerMemo"),
+        Memo(memoRatio: [1.8, 5.5], memoAnimal: "elephantMemo"),
+        Memo(memoRatio: [3, 2.5], memoAnimal: "pandaMemo"),
+        Memo(memoRatio: [8, 1.6], memoAnimal: "dolphinMemo"),
+        Memo(memoRatio: [1.8, 1.5], memoAnimal: "polarbearMemo")
     ]
     
-    // 각 animal memo의 Asset image 이름. 위의 memosRatio와 index순서 같게 함.
-    private let memosAnimal = [
-        "tigerMemo",
-        "elephantMemo",
-        "pandaMemo",
-        "dolphinMemo",
-        "polarbearMemo"
-    ]
+    private var memoButtons: [UIButton] = [] // 전체 크기변화 handling을 위한 버튼 배열.
     
-    // 전체 크기변화 handling을 위한 버튼 배열.
-    private var memoButtons: [UIButton] = []
+    private let maskLayer = CAShapeLayer() // Mask Circle path(경로)를 총괄하는 layer
     
     // MARK: UIComponents
     
-    // origin(x,y좌표)와 Asset image이름을 받아 memo버튼을 생성하는 함수.
-    func memoButton(_ origin: CGPoint, imageName: String) -> UIButton {
-        let button = UIButton(frame: CGRect(origin: origin, size: .memoSize))
-        button.setImage(UIImage(named: imageName), for: .normal)
+    // Memo 모델을 받아 memo버튼을 생성하는 함수.
+    private func memoButton(_ memo: Memo) -> UIButton {
+        let button = UIButton(frame: memo.memoFrame)
+        button.setImage(UIImage(named: memo.memoAnimal), for: .normal)
+        // FIXME: 좀 더 알아보고 추가 리팩토링 때 시도하기.
+        // button.autoresizingMask = .flexibleWidth
         return button
     }
     
-    // 크기가 1배수~2배수로 변화하는 corkboard 배경.
-    private let backImageView: UIImageView = {
-        let imageView = UIImageView()
+    private let backImageView: UIImageView = { // 크기가 1배수~2배수로 변화하는 corkboard 배경.
+        let imageView = UIImageView(frame: UIScreen.main.bounds)
         imageView.image = UIImage(named: "mainBackground")
         imageView.contentMode = .scaleToFill
         imageView.isUserInteractionEnabled = true //이거 추가해야 여기 subView 추가했을 때 서브버튼 액션이 가능해짐
         return imageView
     }()
     
-    private lazy var xButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 200, width: 100, height: 100))
-        button.setImage(UIImage(systemName: "xmark"), for: .normal)
-        button.addTarget(self, action: #selector(zoomOutAction), for: .touchUpInside)
-        return button
+    private let blackView: UIView = { // 어두운 방 느낌을 내기위한 뷰. mask당하는 뷰.
+        let uiView = UIView(frame: UIScreen.main.bounds)
+        uiView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+        return uiView
     }()
     
+    private let entranceView = EntranceView(frame: .zero)
+
     // MARK: life cycle Method
 
     override func viewDidLoad() {
@@ -66,74 +60,114 @@ class MainViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         
-        addSubviewsWithFrame()
+        configureSubviews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        view.addSubview(xButton)
+        //index를 통한 handling 예정.
+        currentIndex = UserDefaults.standard.integer(forKey: "clear") >= 5 ? 4 : UserDefaults.standard.integer(forKey: "clear")
+        
+        setupLights()
     }
 }
 
 // MARK: Private Extension
 
 private extension MainViewController {
-    func addSubviewsWithFrame() {
-        backImageView.frame = view.bounds
+    func configureSubviews() {
         view.addSubview(backImageView)
         
-        // corkboard배경에 animal memo 버튼들 .addSubview로 추가
-        for i in 0...4 {
-            let ratio = memosRatio[i]
-            let button = memoButton(CGPoint(x: .screenW / ratio[0], y: .screenH / ratio[1]), imageName: memosAnimal[i])
-            button.tag = i
-            button.addTarget(self, action: #selector(zoomInAction(_:)), for: .touchUpInside)
+        for (idx, i) in memos.enumerated().reversed() { // .enumeratad.reversed 순서 중요.
+            let button = memoButton(i)
+            button.tag = idx // tag는 순서대로 잘 달린다. cause reversed()
+            button.addTarget(self, action: #selector(animate(_:)), for: .touchUpInside)
+            memoButtons.append(button)
             backImageView.addSubview(button)
-            memoButtons.append(button) // 빈 배열에 버튼들 추가. 줌 축소 확대 시 .map 사용하여 전체 핸들링을 위함
         }
     }
     
-    @objc func zoomInAction(_ sender: UIButton) {
-        let ratio = memosRatio[sender.tag] // 뒷 배경이미지의 origin을 잡기 위해 클릭된 버튼의 ratio를 받음.
-        
-        UIView.animate(withDuration: 1.5, delay: 0, options: .curveEaseInOut) { [weak self] in
-            guard let self = self else { return }
-            
-            self.backImageView.frame.size = .backDoubleSize // corkboard 배경늘리기. 너비, 높이 * 2 (면적으로는 4배)
-            
-            // frame을 한 번에 CGRect로 잡지않고, CGPoint&CGSize로 나누어 잡은 이유
-            // -> 커진 back을 기준으로 ratio를 잡아야하기에 먼저 사이즈를 키우고, 커진 사이즈와 ratio를 통해 origin을 잡은 것.
-            self.backImageView.frame.origin = CGPoint(
-                x: -self.backImageView.frame.width / ratio[0] + .screenW/5,
-                y: -self.backImageView.frame.height / ratio[1] + .screenH/3
-            )
-            // sender를 통해선 클릭된 버튼만 전달되지만, 실제 메인에선 하나의 버튼이 커질 때 나머지들도 함께 커져야한다. 그래서 배열을 만들고 map 고차함수를 이용하여 모두의 frame을 잡아준다.
-            let _ = self.memoButtons.map { button in
-                let tag = button.tag
-                button.frame = CGRect(
-                    origin: CGPoint(
-                        x: self.backImageView.frame.width / self.memosRatio[tag][0],
-                        y: self.backImageView.frame.height / self.memosRatio[tag][1]
-                    ),
-                    size: .memoDoubleSize
-                )
-            }
+    func setupLights() {
+        let path = UIBezierPath(rect: view.bounds)
+        for memo in memos[0...currentIndex] {
+            path.append(memo.outMaskLayer)
         }
-        sender.isUserInteractionEnabled = false // zoom in 후에 터치 잠기도록.
+        maskLayer.path = path.cgPath
+        maskLayer.fillRule = .evenOdd
+        blackView.layer.mask = maskLayer
+        backImageView.insertSubview(blackView, at: memos.count - currentIndex - 1) // 중복x. 기존 위치에서 새로운 위치로 업데이트된다.
     }
     
-    @objc func zoomOutAction() {
+    @objc func animate(_ sender: UIButton) {
+        zoomAction(tag: sender.tag)
+    }
+    
+    func zoomAction(tag: Int) {
         UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut) { [weak self] in
             guard let self = self else { return }
-            self.backImageView.frame = self.view.bounds // 원래 크기인 view.bounds로 회귀.
+            
+            Zoom.status = (Zoom.status == .zoomIn ? .zoomOut : .zoomIn) // toggle
+
+            self.backImageView.frame = self.memos[tag].backImageFrame //
+            self.blackView.frame = self.backImageView.bounds // frame -> bounds로 수정 (fix)
+
             let _ = self.memoButtons.map { button in
-                let tag = button.tag
-                button.frame = CGRect(
-                    origin: CGPoint(
-                        x: .screenW / self.memosRatio[tag][0],
-                        y: .screenH / self.memosRatio[tag][1]
-                        ),
-                    size: .memoSize
-                    )
-                button.isUserInteractionEnabled = true // 추후 핸들링 예정
+                button.frame = self.memos[button.tag].memoFrame
+                button.isUserInteractionEnabled = (Zoom.status == .zoomOut)
             }
+        }
+        
+        maskLayerAnimation() // light(조명) 확대, 축소
+        
+        showEntranceView(tag: tag)
+    }
+    
+    func maskLayerAnimation() {
+        var path = UIBezierPath()
+        if Zoom.status == .zoomIn {
+            path = UIBezierPath(rect: self.backImageView.bounds)
+            for memo in memos[0...currentIndex] {
+                path.append(memo.inMaskLayer)
+            }
+        } else {
+            path = UIBezierPath(rect: view.bounds)
+            for memo in memos[0...currentIndex] {
+                path.append(memo.outMaskLayer)
+            }
+        }
+        
+        let animation = CABasicAnimation(keyPath: "path")
+        animation.fromValue = self.maskLayer.path
+        animation.toValue = path.cgPath
+        animation.duration = 1.0
+        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        maskLayer.add(animation, forKey: nil)
+        DispatchQueue.main.async {
+            self.maskLayer.path = path.cgPath
+        }
+    }
+    
+    func showEntranceView(tag: Int) {
+        if Zoom.status == .zoomIn {
+            DispatchQueue.main.asyncAfter(deadline: .now()+1.0) { [weak self] in
+                guard let self = self else { return }
+                self.entranceView.frame = self.view.bounds
+                self.entranceView.cancelButton.addTarget(self, action: #selector(self.animate(_:)), for: .touchUpInside)
+                self.entranceView.pushButton.addTarget(self, action: #selector(self.pushToQuiz), for: .touchUpInside)
+                self.view.addSubview(self.entranceView)
+            }
+        } else {
+            entranceView.removeFromSuperview()
+        }
+    }
+    
+    @objc func pushToQuiz() {
+        let vc = ClearTestViewController()
+        vc.contentIndex = currentIndex // 추후 로직 수정 예정
+        navigationController?.pushViewController(vc, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5) { [weak self] in
+            self?.zoomAction(tag: 0)
         }
     }
 }

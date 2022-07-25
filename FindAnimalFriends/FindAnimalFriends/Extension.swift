@@ -20,36 +20,49 @@ extension CGFloat {
 
 extension CGSize {
     
+    // 축소일 때 동물메모의 크기
     static let memoSize = CGSize(width: .screenW / 3, height: .screenW / 3.2)
     
+    // 확대일 때 동물메모의 크기
     static let memoDoubleSize = CGSize(width: .screenW / 1.5, height: .screenW / 1.6)
     
+    // 확대일 때 배경의 크기
     static let backDoubleSize = CGSize(width: .screenW * 2, height: .screenH * 2)
+    
+    // 축소일 때 mask의 크기
+    static let maskSize = CGSize(width: .screenW / 2, height: .screenW / 2)
+    
+    // 확대일 때 mask의 크기
+    static let maskDoubleSize = CGSize(width: .screenW, height: .screenW)
     
 }
 
 enum AssetsColor {
-  case primaryGreen
-  case primaryRed
-  case primaryBrown
-  case primaryOrange
-  case primaryWhite
+    case primaryGreen
+    case primaryRed
+    case primaryBrown
+    case primaryOrange
+    case primaryWhite
+    case memoWhite
 }
+
 extension UIColor {
-  static func appColor(_ name: AssetsColor) -> UIColor {
-    switch name {
-    case .primaryGreen:
-      return #colorLiteral(red: 0.1607843137, green: 0.8117647059, blue: 0.2196078431, alpha: 1)
-    case .primaryRed:
-      return #colorLiteral(red: 1, green: 0, blue: 0, alpha: 1)
-    case .primaryBrown:
-      return #colorLiteral(red: 0.568627451, green: 0.2117647059, blue: 0.1137254902, alpha: 1)
-    case .primaryOrange:
-      return #colorLiteral(red: 0.9058823529, green: 0.6352941176, blue: 0.3294117647, alpha: 1)
-    case .primaryWhite:
-      return #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
+    static func appColor(_ name: AssetsColor) -> UIColor {
+        switch name {
+        case .primaryGreen:
+            return #colorLiteral(red: 0.1607843137, green: 0.8117647059, blue: 0.2196078431, alpha: 1)
+        case .primaryRed:
+            return #colorLiteral(red: 1, green: 0, blue: 0, alpha: 1)
+        case .primaryBrown:
+            return #colorLiteral(red: 0.568627451, green: 0.2117647059, blue: 0.1137254902, alpha: 1)
+        case .primaryOrange:
+            return #colorLiteral(red: 0.9058823529, green: 0.6352941176, blue: 0.3294117647, alpha: 1)
+        case .primaryWhite:
+            return #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
+        case .memoWhite:
+            return #colorLiteral(red: 0.984313786, green: 0.984313786, blue: 0.984313786, alpha: 1)
+        }
     }
-  }
 }
 
 

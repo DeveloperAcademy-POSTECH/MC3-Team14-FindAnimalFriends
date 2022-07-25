@@ -19,6 +19,12 @@ func converterHeight(getHeight: CGFloat) -> CGFloat {
     return (boundHeight * getHeight)/standardHeight
 }
 
+func converterFontSize(getFontSize:CGFloat) -> CGFloat{
+    let widthFont = converterWidth(getWidth: getFontSize)
+    let heightFont = converterHeight(getHeight: getFontSize)
+    return (widthFont+heightFont)/2
+}
+
 import Foundation
 import UIKit
 class QuizCompleteView: UIView {
@@ -39,7 +45,7 @@ class QuizCompleteView: UIView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "assistant2")
+        imageView.image = UIImage(named: "assistantImage2")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -49,7 +55,7 @@ class QuizCompleteView: UIView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "detective3")
+        imageView.image = UIImage(named: "detectiveImage3")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -75,7 +81,7 @@ class QuizCompleteView: UIView {
     let completeButton: UIButton = {
         let button = UIButton()
         button.setTitle("동물 친구를 찾았어요 :)", for: .normal)
-        button.titleLabel?.font = UIFont(name: "KOTRA HOPE", size: 24)
+        button.titleLabel?.font = UIFont(name: "KOTRA HOPE", size: converterFontSize(getFontSize: 24))
         button.titleLabel?.textColor = .white
         button.clipsToBounds = true
         button.backgroundColor = UIColor(red: 231/255, green: 162/255, blue: 84/255, alpha: 100)//hexcode: E7A254
