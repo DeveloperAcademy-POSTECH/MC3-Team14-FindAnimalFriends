@@ -79,3 +79,13 @@ extension UIButton {
         self.layer.shadowOpacity = 0.4
     }
 }
+
+extension UILabel {
+    func subtitleVersion() {
+        self.numberOfLines = 0
+        self.font = UIFont(name: "KOTRA HOPE", size: .ten*2)
+        self.textColor = .white
+        self.backgroundColor = .black.withAlphaComponent(0.8)
+        self.textAlignment = .left
+    }
+}

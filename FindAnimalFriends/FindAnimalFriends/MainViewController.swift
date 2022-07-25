@@ -12,7 +12,9 @@ class MainViewController: UIViewController {
     
     // MARK: Properties
     
-    private var currentIndex: Int = 0 // 현재 오픈되어있는 Animal 컨텐츠 중 마지막 index.
+    private var currentAnimal: String = "tiger"
+    
+    private var currentIndex: Int = -1 // 현재 오픈되어있는 Animal 컨텐츠 중 마지막 index.
     
     private let memos = [ // Animal memo data
         Memo(memoRatio: [8, 6], memoAnimal: "tigerMemo"),
@@ -51,6 +53,9 @@ class MainViewController: UIViewController {
         return uiView
     }()
     
+    // code review 이후 추가된 것들
+//    private var readyView = ReadyView()
+    
     private var entranceView: EntranceView?
 
     // MARK: life cycle Method
@@ -67,7 +72,9 @@ class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         
         //index를 통한 handling 예정.
-        currentIndex = UserDefaults.standard.integer(forKey: "clear") >= 5 ? 4 : UserDefaults.standard.integer(forKey: "clear")
+        if UserDefaults.standard.dictionaryRepresentation().keys.contains("clear") {
+            currentIndex = UserDefaults.standard.integer(forKey: "clear") >= 5 ? 4 : UserDefaults.standard.integer(forKey: "clear")
+        }
         
         setupLights()
     }
@@ -120,7 +127,9 @@ private extension MainViewController {
         
         maskLayerAnimation() // light(조명) 확대, 축소
         
-        showEntranceView(animalName: memos[tag].memoAnimal.replacingOccurrences(of: "Memo", with: ""))
+        currentAnimal = memos[tag].memoAnimal.replacingOccurrences(of: "Memo", with: "")
+        
+        showEntranceView()
     }
     
     func maskLayerAnimation() {
@@ -148,7 +157,7 @@ private extension MainViewController {
         }
     }
     
-    func showEntranceView(animalName: String) {
+    func showEntranceView() {
         if Zoom.status == .zoomIn {
             entranceView = EntranceView(frame: .zero)
             guard let entranceView = entranceView else { return }
@@ -157,7 +166,7 @@ private extension MainViewController {
                 entranceView.frame = self.view.bounds
                 entranceView.cancelButton.addTarget(self, action: #selector(self.animate(_:)), for: .touchUpInside)
                 entranceView.pushButton.addTarget(self, action: #selector(self.pushToQuiz), for: .touchUpInside)
-                entranceView.animalName = animalName
+                entranceView.animalName = self.currentAnimal
                 entranceView.setupCodeName()
                 self.view.addSubview(entranceView)
             }
@@ -169,7 +178,7 @@ private extension MainViewController {
     
     @objc func pushToQuiz() {
         let vc = ClearTestViewController()
-        vc.contentIndex = currentIndex // 추후 로직 수정 예정
+        vc.animal = currentAnimal // 추후 로직 수정 예정
         navigationController?.pushViewController(vc, animated: true)
         DispatchQueue.main.asyncAfter(deadline: .now()+0.5) { [weak self] in
             self?.zoomAction(tag: 0)

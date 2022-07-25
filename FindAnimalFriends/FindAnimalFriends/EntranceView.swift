@@ -34,11 +34,7 @@ class EntranceView: UIView {
     private let textLabel: UILabel = {
         let label = UILabel()
         label.text = ""
-        label.numberOfLines = 0
-        label.font = UIFont(name: "KOTRA HOPE", size: .ten*2)
-        label.textColor = .white
-        label.backgroundColor = .black.withAlphaComponent(0.8)
-        label.textAlignment = .left
+        label.subtitleVersion()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
