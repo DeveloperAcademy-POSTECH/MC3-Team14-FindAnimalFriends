@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = UINavigationController(rootViewController: MainViewController())
+        window?.rootViewController = UINavigationController(rootViewController: LaunchScreenController())
         window?.makeKeyAndVisible()
     }
 
@@ -48,6 +48,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
+    func moveVC(nibName : String) {
+        if nibName == "WebViewController" {
+            let webVC = MainViewController(nibName: nibName, bundle: nil)
+            let navigationController = UINavigationController(rootViewController: webVC)
+            navigationController.navigationBar.isHidden = true
+            self.window?.rootViewController = navigationController
+        } else if nibName == "LaunchScreen" {
+            self.window?.rootViewController = UIStoryboard(name: nibName, bundle: nil).instantiateInitialViewController()
+        }
+        self.window?.makeKeyAndVisible()
+    }
 
 }
 
