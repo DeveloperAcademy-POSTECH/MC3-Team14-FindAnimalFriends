@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
         DispatchQueue.main.asyncAfter(deadline: .now()+1) {
-            self.window?.rootViewController = UINavigationController(rootViewController: LaunchScreenController())
+            self.window?.rootViewController = UINavigationController(rootViewController: MainViewController())
         }
         //출처: https://hongssup.tistory.com/150
         //근거 - sleep은 Thread를 멈춰서 앱 자체를 delay시키는 것이기에, DispatchQueue를 이용해서 비동기로 지연해주는 것이 좋다고 한다.

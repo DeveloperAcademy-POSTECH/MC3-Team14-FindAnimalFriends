@@ -8,6 +8,7 @@
 import UIKit
 
 class EntranceView: UIView {
+//    button.titleLabel?.font = UIFont(name: "KOTRA HOPE", size: .screenW*0.06)
     
     lazy var cancelButton: UIButton = {
         let button = UIButton()
@@ -21,11 +22,12 @@ class EntranceView: UIView {
     }()
     
     lazy var pushButton: UIButton = { //FIXME: Sub UIView 자체에서 navigation push 하는 법?이 있나? 없을듯
-        let button = UIButton()
-        button.setTitle("퀴즈풀기", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .black)
+        let button = UIButton() //type: .system하면 기본 highlighted 효과 있음.
+        button.setTitle("퀴즈 풀기", for: .normal)
+        button.titleLabel?.font = UIFont(name: "KOTRA HOPE", size: .ten*2.4)
         button.setTitleColor(UIColor.white, for: .normal)
-        button.layer.backgroundColor = UIColor.red.cgColor
+        button.backgroundColor = UIColor.appColor(.primaryBrown)
+        button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -48,11 +50,13 @@ class EntranceView: UIView {
             
             pushButton.topAnchor.constraint(equalTo: centerYAnchor, constant: .screenW/3),
             pushButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            pushButton.widthAnchor.constraint(equalToConstant: .screenW*0.7),
-            pushButton.heightAnchor.constraint(equalToConstant: .hund)
+            pushButton.widthAnchor.constraint(equalToConstant: .hund*2.7),
+            pushButton.heightAnchor.constraint(equalToConstant: .hund*0.7)
         ])
     }
 }
 
 // TODO: convenience init, required init, override init
 // to mizz - 오늘 말해준 required 꼭 필요하진않을지도?
+
+// UIControl.State -> 어떤 상태일 때 어떤 setting을 할 것인지 정할 수 있다.
