@@ -4,7 +4,7 @@
 //
 //  Created by Hyeonsoo Kim on 2022/07/23.
 //
-
+import AVFoundation
 import UIKit
 
 extension CGFloat {
@@ -64,3 +64,19 @@ extension UIColor {
         }
     }
 }
+
+
+// MARK: Sound 관련 변수, 함수
+var player: AVAudioPlayer!
+func playSound(sound: String){
+     let url = Bundle.main.url(forResource: sound, withExtension: "wav")
+     guard url != nil else{
+         return
+     }
+     do{
+         player = try AVAudioPlayer(contentsOf: url!)
+         player?.play()
+     }catch{
+         print("\(error)")
+     }
+ }
