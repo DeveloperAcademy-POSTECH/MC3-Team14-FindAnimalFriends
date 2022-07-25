@@ -50,7 +50,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func moveVC(nibName : String) {
         if nibName == "WebViewController" {
-            let webVC = MainViewController(nibName: nibName, bundle: nil)
+            let webVC = LaunchScreenController(nibName: nibName, bundle: nil)
             let navigationController = UINavigationController(rootViewController: webVC)
             navigationController.navigationBar.isHidden = true
             self.window?.rootViewController = navigationController
