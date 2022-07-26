@@ -19,7 +19,9 @@ func converterHeight(getHeight: CGFloat) -> CGFloat {
     return (boundHeight * getHeight)/standardHeight
 }
 
-func converterFontSize(getFontSize:CGFloat) -> CGFloat{
+//MARK: converterFontSize함수(아이폰 13 기준으로 정해진 폰트크기를 넣으면 실 기기의 폰트사이즈로 변환)
+//FIXME: 변경된 폰트값이 예상과 일치하는지 확인 필요
+func converterFontSize(getFontSize: CGFloat) -> CGFloat {
     let widthFont = converterWidth(getWidth: getFontSize)
     let heightFont = converterHeight(getHeight: getFontSize)
     return (widthFont+heightFont)/2
