@@ -51,15 +51,37 @@ class MainViewController: UIViewController {
         return imageView
     }()
     
-    private lazy var blackView: UIView = { // 어두운 방 느낌을 내기위한 뷰. mask당하는 뷰.
+    private var readyView: ReadyView?
+    
+    private var entranceView: EntranceView?
+    
+    //MARK: Dummy - Real Hard Coding
+    
+    private var dummyButtons: [UIButton] = []
+    
+    private let dummyBack: UIImageView = {
+        let imageView = UIImageView(frame: UIScreen.main.bounds)
+        imageView.image = UIImage(named: "mainBackground")
+        imageView.contentMode = .scaleToFill
+        return imageView
+    }()
+    
+    private lazy var dummyBlack: UIView = {
         let uiView = UIView(frame: UIScreen.main.bounds)
         uiView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
         return uiView
     }()
     
-    private var readyView: ReadyView?
-    
-    private var entranceView: EntranceView?
+    private func configureDummy() {
+        view.addSubview(dummyBack)
+        for (idx, i) in memos.enumerated() {
+            let button = memoButton(i)
+            button.tag = idx
+            dummyButtons.append(button)
+            dummyBack.addSubview(button)
+        }
+        dummyBack.addSubview(dummyBlack)
+    }
 
     // MARK: life cycle Method
 
@@ -67,6 +89,8 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
+        
+        configureDummy()
         
         configureSubviews()
     }
@@ -76,11 +100,21 @@ class MainViewController: UIViewController {
         
         //index를 통한 handling 예정.
         if UserDefaults.standard.dictionaryRepresentation().keys.contains("clear") {
-            currentIndex = UserDefaults.standard.integer(forKey: "clear") >= 5 ? 4 : UserDefaults.standard.integer(forKey: "clear")
+            let index = UserDefaults.standard.integer(forKey: "clear")
+            if index >= 5 {
+                currentIndex = 4
+                
+            } else {
+                currentIndex = index
+            }
         }
         
         if currentIndex == -1 {
             setReady()
+        }
+        
+        let _ = memoButtons.map { button in
+            button.isUserInteractionEnabled = (button.tag == currentIndex)
         }
     }
 }
@@ -97,19 +131,21 @@ private extension MainViewController {
     @objc func getReady() {
         UIView.transition(with: readyView!,
                           duration: 0.5, options: .transitionCrossDissolve) { [weak self] in
-            self?.readyView!.removeFromSuperview()
+            self?.readyView?.detectiveView.removeFromSuperview()
+            self?.readyView?.textLabel.removeFromSuperview()
         }
-        view.addSubview(blackView) // Remove ReadyView ~ setLight() 사이 1초동안 띄울용도
         UserDefaults.standard.set(0, forKey: "clear")
         Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { [weak self] _ in
+            self?.readyView?.removeFromSuperview()
             self?.currentIndex = 0
+            self?.memoButtons[0].isUserInteractionEnabled = true //FIXME: 그냥 구현용 하드코딩
         }
     }
     
     func configureSubviews() {
         view.addSubview(backImageView)
         
-        for (idx, i) in memos.enumerated().reversed() { // .enumeratad.reversed 순서 중요.
+        for (idx, i) in memos.enumerated() { // .enumeratad.reversed 순서 중요.
             let button = memoButton(i)
             button.tag = idx // tag는 순서대로 잘 달린다. cause reversed()
             button.addTarget(self, action: #selector(animate(_:)), for: .touchUpInside)
@@ -119,14 +155,13 @@ private extension MainViewController {
     }
     
     func setupLights() {
-        let path = UIBezierPath(rect: view.bounds)
+        let path = UIBezierPath()
         for memo in memos[0...currentIndex] {
             path.append(memo.outMaskLayer)
         }
         maskLayer.path = path.cgPath
-        maskLayer.fillRule = .evenOdd
-        blackView.layer.mask = maskLayer
-        backImageView.insertSubview(blackView, at: memos.count - currentIndex - 1) // 중복x. 기존 위치에서 새로운 위치로 업데이트된다.
+        maskLayer.fillRule = .nonZero
+        backImageView.layer.mask = maskLayer
     }
     
     @objc func animate(_ sender: UIButton) {
@@ -140,13 +175,19 @@ private extension MainViewController {
             
             Zoom.status = (Zoom.status == .zoomIn ? .zoomOut : .zoomIn)
 
-            self.backImageView.frame = self.memos[tag].backImageFrame //
-            self.blackView.frame = self.backImageView.bounds // frame -> bounds로 수정 (fix)
+            self.backImageView.frame = self.memos[tag].backImageFrame
+            self.dummyBack.frame = self.memos[tag].backImageFrame
+            self.dummyBlack.frame = self.dummyBack.bounds
 
             let _ = self.memoButtons.map { button in
                 button.frame = self.memos[button.tag].memoFrame
-                button.isUserInteractionEnabled = (Zoom.status == .zoomOut)
             }
+            
+            let _ = self.dummyButtons.map { button in
+                button.frame = self.memos[button.tag].memoFrame
+            }
+            
+            self.memoButtons[self.currentIndex].isUserInteractionEnabled = (Zoom.status == .zoomOut)
         }
         
         maskLayerAnimation() // light(조명) 확대, 축소
@@ -157,14 +198,12 @@ private extension MainViewController {
     }
     
     func maskLayerAnimation() {
-        var path = UIBezierPath()
+        let path = UIBezierPath()
         if Zoom.status == .zoomIn {
-            path = UIBezierPath(rect: self.backImageView.bounds)
             for memo in memos[0...currentIndex] {
                 path.append(memo.inMaskLayer)
             }
         } else {
-            path = UIBezierPath(rect: view.bounds)
             for memo in memos[0...currentIndex] {
                 path.append(memo.outMaskLayer)
             }

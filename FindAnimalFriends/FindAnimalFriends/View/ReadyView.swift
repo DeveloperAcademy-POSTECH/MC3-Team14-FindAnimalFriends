@@ -17,14 +17,14 @@ class ReadyView: UIView {
         return view
     }()
     
-    private let detectiveView: UIImageView = {
+    let detectiveView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "detectiveImage3"))
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    private let textLabel: UILabel = {
+    let textLabel: UILabel = {
         let label = UILabel()
         label.text = ""
         label.subtitleVersion()

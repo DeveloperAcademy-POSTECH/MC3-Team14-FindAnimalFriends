@@ -172,6 +172,7 @@ class QuizViewController: UIViewController {
     @objc func addCompleteView() {
         quizCompleteView = QuizCompleteView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), animalName: animalName ?? "panda")
         quizCompleteView!.completeButton.addTarget(self, action: #selector(closeCompleteView), for: .touchUpInside)
+        UserDefaults.standard.set(QuizDao().getAnimalDict()[animalName!]! + 1, forKey: "clear")
         view.addSubview(quizCompleteView!)
     }
     
