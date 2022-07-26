@@ -64,3 +64,28 @@ extension UIColor {
         }
     }
 }
+
+extension UIButton {
+    func custom(_ title: String, titleColor: UIColor, size fontSize: CGFloat, backColor: UIColor) {
+        self.setTitle(title, for: .normal)
+        self.titleLabel?.font = UIFont(name: "KOTRA HOPE", size: fontSize)
+        self.setTitleColor(titleColor, for: .normal)
+        self.backgroundColor = backColor
+        self.layer.cornerRadius = 8
+        
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 1.0, height: 4.0)
+        self.layer.shadowRadius = 2
+        self.layer.shadowOpacity = 0.4
+    }
+}
+
+extension UILabel {
+    func subtitleVersion() {
+        self.numberOfLines = 0
+        self.font = UIFont(name: "KOTRA HOPE", size: .ten*2)
+        self.textColor = .white
+        self.backgroundColor = .black.withAlphaComponent(0.8)
+        self.textAlignment = .left
+    }
+}

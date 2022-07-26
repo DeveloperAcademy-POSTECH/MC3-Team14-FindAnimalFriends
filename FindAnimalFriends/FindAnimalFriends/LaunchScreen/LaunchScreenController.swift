@@ -6,8 +6,9 @@
 //
 
 import UIKit
-class LaunchScreenController: UIViewController, UIScrollViewDelegate {
+class LaunchScreenController: UIViewController {
     // MARK: 온보딩 관련 변수, 함수
+    // FIXME: font 크기 관련 정리, 버튼 사이즈 관련 정리
     var isOnboarding = true
     let pageControlNum = 3
     lazy var onboardingExitButton: UIButton = {
@@ -16,17 +17,21 @@ class LaunchScreenController: UIViewController, UIScrollViewDelegate {
         let button: UIButton = UIButton(frame: CGRect(x: posX, y: posY, width: .screenW*0.7, height: .screenH*0.08))
         button.setTitle("시작하기", for: .normal)
         button.titleLabel?.font = UIFont(name: "KOTRA HOPE", size: .screenW*0.06)
-        button.clipsToBounds = true
         button.backgroundColor = UIColor.appColor(.primaryBrown)
         button.layer.cornerRadius = 10.0
         button.addTarget(self, action: #selector(onClickMyButton(_:)), for: .touchUpInside)
         button.layer.opacity = 0
         return button
     }()
+    // FIXME: if 문 삭제
     @objc internal func onClickMyButton(_ sender: Any) {
-        if let button = sender as? UIButton {
-            UIView.animate(withDuration: 0.5) {
-                self.view.removeFromSuperview()
+        if sender is UIButton {
+            UIView.transition(with: view, duration: 1, options: .transitionCurlUp) {
+                self.isOnboarding = false
+                UserDefaults.standard.set(self.isOnboarding, forKey: "isOnboarding")
+                self.view.layer.opacity = 0
+            } completion: { _ in
+                self.view.window?.rootViewController = MainViewController()
             }
         }
     }
@@ -78,14 +83,17 @@ class LaunchScreenController: UIViewController, UIScrollViewDelegate {
                                         onboardingView.addSubview(self.yourAnimalFriendsLabel)
                                         onboardingView.addSubview(self.comingBackLabel)
                                     }
-                                    else if i == 3 {
-                                        continue
-                                    }
                                 }
                                 self.view.addSubview(self.scrollView)
                                 self.setupSliderLayout()
                             } else {
-                                self.view.removeFromSuperview()
+                                UIView.transition(with: self.view, duration: 1) {
+                                    self.isOnboarding = false
+                                    UserDefaults.standard.set(self.isOnboarding, forKey: "isOnboarding")
+                                    self.view.layer.opacity = 0
+                                } completion: { _ in
+                                    self.view.window?.rootViewController = MainViewController()
+                                }
                             }
                         } completion: { _ in
                             UIView.animate(withDuration: 0.5) {
@@ -142,7 +150,7 @@ class LaunchScreenController: UIViewController, UIScrollViewDelegate {
         let label = UILabel(frame: CGRect(x: (.screenW*0.66)/2, y: 0, width: .screenW, height: .screenH*0.06))
         label.layer.opacity = 0
         label.text = "큰일났어요"
-    
+        
         label.font = UIFont(name: "KOTRA HOPE", size: .screenH*0.05)
         return label
     }()
@@ -288,11 +296,11 @@ class LaunchScreenController: UIViewController, UIScrollViewDelegate {
         let posY: CGFloat = (.screenH*0.64)/2
         let totalAnimalsImage: UIImageView = UIImageView(frame: CGRect(x: posX, y: posY, width: .screenW*0.8, height: .screenH*0.32))
         totalAnimalsImage.image = UIImage(named: "totalAnimals")!
-        
         return totalAnimalsImage
     }()
     
     // MARK: UIPageControl 관련 변수, 함수
+    // FIXME: 페이지 컨트롤 로 변수명 변경하기
     private lazy var imageSlider: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.numberOfPages = pageControlNum
@@ -301,15 +309,18 @@ class LaunchScreenController: UIViewController, UIScrollViewDelegate {
         pageControl.pageIndicatorTintColor = .systemGray3
         return pageControl
     }()
+    // FIXME: 출처남기기
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView(frame: self.view.frame)
-        scrollView.showsHorizontalScrollIndicator = false;
+        scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         scrollView.isPagingEnabled = true
         scrollView.delegate = self
         scrollView.contentSize = CGSize(width: CGFloat(pageControlNum) * self.view.frame.maxX, height: 0)
         return scrollView
     }()
+    
+    // FIXME: 함수설명 넣고 띄우기 프로퍼티, 유아이프로퍼티, 라이프사이클, function(함수가 많으면 Private으로 따로 뺌),  extension
     private func setupSliderLayout(){
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -324,8 +335,14 @@ class LaunchScreenController: UIViewController, UIScrollViewDelegate {
             imageSlider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        if UserDefaults.standard.dictionaryRepresentation().keys.contains("isOnboarding") {
+            isOnboarding = UserDefaults.standard.bool(forKey: "isOnboarding")
+        }
+        print(UserDefaults.standard.bool(forKey: "isOnboarding"))
+        //UserDefaults에 저장된 상태 데이터를 스위치에 알려주는 작업
         view.backgroundColor = .white
         view.addSubview(findLabel)
         view.addSubview(animalLabel)
@@ -333,9 +350,15 @@ class LaunchScreenController: UIViewController, UIScrollViewDelegate {
         view.addSubview(detectiveImage)
         timeCount()
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        isOnboarding = false
+        UserDefaults.standard.set(self.isOnboarding, forKey: "isOnboarding")
+        print(UserDefaults.standard.bool(forKey: "isOnboarding"))
+    }
 }
 
-extension LaunchScreenController: UICollectionViewDelegate {
+extension LaunchScreenController: UIScrollViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let nextPage = Int(targetContentOffset.pointee.x / self.view.frame.width)
         self.imageSlider.currentPage = nextPage
@@ -354,7 +377,7 @@ extension LaunchScreenController: UICollectionViewDelegate {
                     } completion: { _ in
                         UIView.animate(withDuration: 0.5) {
                             self.letMeKnowLabel.layer.opacity = 1
-                           
+                            
                         }
                     }
                 }

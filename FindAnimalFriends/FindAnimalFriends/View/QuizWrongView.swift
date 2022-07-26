@@ -18,7 +18,7 @@ class QuizWrongView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    // (전체길이 - 글자길이) /2
+    
     //MARK: assistantImage
     private let disappointLabel: UILabel = {
         let label = UILabel()
@@ -90,14 +90,6 @@ class QuizWrongView: UIView {
             assistantImage.trailingAnchor.constraint(equalTo: blackView.trailingAnchor, constant: -1*converterWidth(getWidth: 257))
         ]
         
-//        let disappointLabelConstraints = [
-//            disappointLabel.centerXAnchor.constraint(equalTo: whiteView.centerXAnchor),
-//            disappointLabel.topAnchor.constraint(equalTo: whiteView.topAnchor, constant: converterHeight(getHeight: 44)),
-//            disappointLabel.bottomAnchor.constraint(equalTo: whiteView.bottomAnchor, constant: -1*converterHeight(getHeight: 133)),
-//            disappointLabel.leadingAnchor.constraint(equalTo: whiteView.leadingAnchor, constant: converterWidth(getWidth: 22)),
-//            disappointLabel.trailingAnchor.constraint(equalTo: whiteView.trailingAnchor, constant: -1*converterWidth(getWidth: 22))
-//        ]
-        
         let whiteViewConstraints = [
             whiteView.topAnchor.constraint(equalTo: topAnchor, constant: converterHeight(getHeight: 301)),
             whiteView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -1*converterHeight(getHeight: 338)),
@@ -119,7 +111,6 @@ class QuizWrongView: UIView {
         NSLayoutConstraint.activate(assisstantImageViewConstraints)
         NSLayoutConstraint.activate(blackViewConstraints)
         NSLayoutConstraint.activate(whiteViewConstraints)
-        //NSLayoutConstraint.activate(disappointLabelConstraints)
         NSLayoutConstraint.activate(completeButtonConstraints)
         
     }
