@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 class QuizCompleteViewController: UIViewController {
     
-    private var quizCompleteView : QuizCompleteView?
-    private var getAnimalName:String = "polarbear"
+    private var quizCompleteView: QuizCompleteView?
+    private var getAnimalName: String = "polarbear"
     
     override func viewDidLoad() {
         super.viewDidLoad()
