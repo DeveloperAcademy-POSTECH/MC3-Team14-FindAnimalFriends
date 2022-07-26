@@ -10,7 +10,7 @@ import Foundation
 struct Quiz : Decodable, Identifiable {
     var id: Int
     var question: String
-    var answer: [String]
+    var answers: [String]
     var rightAnswerIndex: Int
 }
 
@@ -23,7 +23,7 @@ struct QuizDao {
 
     private let totalAnimalQuizzes: [AnimalQuizzes] = loadQuizzes("AnimalQuizzes.json")
     
-    private let errorQuizzes: AnimalQuizzes = AnimalQuizzes(id: 0, quizzes: [Quiz(id: 0, question: "에러입니다", answer: ["에러", "에러", "에러", "에러"], rightAnswerIndex: 1)])
+    private let errorQuizzes: AnimalQuizzes = AnimalQuizzes(id: 0, quizzes: [Quiz(id: 0, question: "에러입니다", answers: ["에러", "에러", "에러", "에러"], rightAnswerIndex: 1)])
     
     private let animalDict = ["polarbear": 0, "elephant": 1, "dolphin": 2, "tiger": 3, "panda": 4]
     
