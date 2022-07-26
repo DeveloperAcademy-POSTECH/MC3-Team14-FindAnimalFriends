@@ -146,10 +146,14 @@ class QuizViewController: UIViewController {
     func updateButtonFunction() {
         for i in 0...(buttonCount-1) {
             answerButtons[i].setTitle("\(quizAnswers[i])", for: .normal)
-            if index == totalQuizCount - 1 {
-                answerButtons[i].addTarget(self, action: #selector(addCompleteView), for: .touchUpInside)
+            if i != quiz?.rightAnswerIndex {
+                answerButtons[i].addTarget(self, action: #selector(addWrongView), for: .touchUpInside)
             } else {
-                answerButtons[i].addTarget(self, action: #selector(sendNextPageNoti), for: .touchUpInside)
+                if index == totalQuizCount - 1 {
+                    answerButtons[i].addTarget(self, action: #selector(addCompleteView), for: .touchUpInside)
+                } else {
+                    answerButtons[i].addTarget(self, action: #selector(sendNextPageNoti), for: .touchUpInside)
+                }
             }
         }
     }
