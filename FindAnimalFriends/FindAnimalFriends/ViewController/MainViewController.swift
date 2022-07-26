@@ -54,9 +54,6 @@ class MainViewController: UIViewController {
     private lazy var blackView: UIView = { // 어두운 방 느낌을 내기위한 뷰. mask당하는 뷰.
         let uiView = UIView(frame: UIScreen.main.bounds)
         uiView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
-        if currentIndex == -1 {
-            uiView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(getReady)))
-        }
         return uiView
     }()
     
@@ -93,16 +90,16 @@ class MainViewController: UIViewController {
 private extension MainViewController {
     func setReady() {
         readyView = ReadyView(frame: UIScreen.main.bounds)
-        view.addSubview(blackView)
-        blackView.addSubview(readyView!)
+        readyView?.onboardingBlackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(getReady)))
+        view.addSubview(readyView!)
     }
     
     @objc func getReady() {
-        blackView.removeGestureRecognizer(UITapGestureRecognizer())
-        UIView.transition(with: blackView,
+        UIView.transition(with: readyView!,
                           duration: 0.5, options: .transitionCrossDissolve) { [weak self] in
             self?.readyView!.removeFromSuperview()
         }
+        view.addSubview(blackView) // Remove ReadyView ~ setLight() 사이 1초동안 띄울용도
         UserDefaults.standard.set(0, forKey: "clear")
         Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { [weak self] _ in
             self?.currentIndex = 0
@@ -151,7 +148,7 @@ private extension MainViewController {
                 button.isUserInteractionEnabled = (Zoom.status == .zoomOut)
             }
         }
-        
+        // bug 1. 앱을 온보딩을 거치고 readyView를 거치고 온 후에만 나타나는 버그.
         maskLayerAnimation() // light(조명) 확대, 축소
         
         currentAnimal = memos[tag].memoAnimal.replacingOccurrences(of: "Memo", with: "")

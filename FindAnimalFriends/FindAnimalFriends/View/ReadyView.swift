@@ -11,6 +11,12 @@ class ReadyView: UIView {
     
     private let subtitle = "자... 그럼 시작해볼까?"
     
+    let onboardingBlackView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black.withAlphaComponent(0.95)
+        return view
+    }()
+    
     private let detectiveView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "detectiveImage3"))
         imageView.contentMode = .scaleAspectFit
@@ -28,8 +34,12 @@ class ReadyView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        addSubview(onboardingBlackView)
         addSubview(detectiveView)
         addSubview(textLabel)
+        
+        onboardingBlackView.frame = frame
+        
         makeConstraints()
         setupCodeName()
     }
