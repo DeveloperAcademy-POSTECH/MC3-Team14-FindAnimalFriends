@@ -54,9 +54,6 @@ class MainViewController: UIViewController {
     private lazy var blackView: UIView = { // 어두운 방 느낌을 내기위한 뷰. mask당하는 뷰.
         let uiView = UIView(frame: UIScreen.main.bounds)
         uiView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
-        if currentIndex == -1 {
-            uiView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(getReady)))
-        }
         return uiView
     }()
     
@@ -93,16 +90,16 @@ class MainViewController: UIViewController {
 private extension MainViewController {
     func setReady() {
         readyView = ReadyView(frame: UIScreen.main.bounds)
-        view.addSubview(blackView)
-        blackView.addSubview(readyView!)
+        readyView?.onboardingBlackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(getReady)))
+        view.addSubview(readyView!)
     }
     
     @objc func getReady() {
-        blackView.removeGestureRecognizer(UITapGestureRecognizer())
-        UIView.transition(with: blackView,
+        UIView.transition(with: readyView!,
                           duration: 0.5, options: .transitionCrossDissolve) { [weak self] in
             self?.readyView!.removeFromSuperview()
         }
+        view.addSubview(blackView) // Remove ReadyView ~ setLight() 사이 1초동안 띄울용도
         UserDefaults.standard.set(0, forKey: "clear")
         Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { [weak self] _ in
             self?.currentIndex = 0
@@ -137,10 +134,11 @@ private extension MainViewController {
     }
     
     func zoomAction(tag: Int) {
+        
         UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut) { [weak self] in
             guard let self = self else { return }
             
-            Zoom.status = (Zoom.status == .zoomIn ? .zoomOut : .zoomIn) // toggle
+            Zoom.status = (Zoom.status == .zoomIn ? .zoomOut : .zoomIn)
 
             self.backImageView.frame = self.memos[tag].backImageFrame //
             self.blackView.frame = self.backImageView.bounds // frame -> bounds로 수정 (fix)
@@ -178,9 +176,7 @@ private extension MainViewController {
         animation.duration = 1.0
         animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         maskLayer.add(animation, forKey: nil)
-        DispatchQueue.main.async {
-            self.maskLayer.path = path.cgPath
-        }
+        self.maskLayer.path = path.cgPath
     }
     
     func showEntranceView() {
@@ -203,8 +199,7 @@ private extension MainViewController {
     }
     
     @objc func pushToQuiz() {
-        let vc = ClearTestViewController()
-        vc.animal = currentAnimal // 추후 로직 수정 예정
+        let vc = QuizPageViewController(transitionStyle: .pageCurl, navigationOrientation: .vertical, animalName: currentAnimal)
         navigationController?.pushViewController(vc, animated: true)
         DispatchQueue.main.asyncAfter(deadline: .now()+0.5) { [weak self] in
             self?.zoomAction(tag: 0)
