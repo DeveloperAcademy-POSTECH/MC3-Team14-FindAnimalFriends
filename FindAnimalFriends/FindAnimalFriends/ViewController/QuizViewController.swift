@@ -163,11 +163,12 @@ class QuizViewController: UIViewController {
     // quizCompleteView 닫기
     @objc func closeCompleteView() {
         quizCompleteView!.removeFromSuperview()
+        self.navigationController?.popViewController(animated: true)
     }
     
     // quizCompleteView 띄우기
     @objc func addCompleteView() {
-        quizCompleteView = QuizCompleteView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), animalName: "polarbear")
+        quizCompleteView = QuizCompleteView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), animalName: animalName ?? "panda")
         quizCompleteView!.completeButton.addTarget(self, action: #selector(closeCompleteView), for: .touchUpInside)
         view.addSubview(quizCompleteView!)
     }
