@@ -148,7 +148,7 @@ private extension MainViewController {
                 button.isUserInteractionEnabled = (Zoom.status == .zoomOut)
             }
         }
-        // bug 1. 앱을 온보딩을 거치고 readyView를 거치고 온 후에만 나타나는 버그.
+        
         maskLayerAnimation() // light(조명) 확대, 축소
         
         currentAnimal = memos[tag].memoAnimal.replacingOccurrences(of: "Memo", with: "")
@@ -176,12 +176,7 @@ private extension MainViewController {
         animation.duration = 1.0
         animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         maskLayer.add(animation, forKey: nil)
-        // Remove DispatchQueue -> 비동기 할당으로 인해서 순간적인 버그가 일어나는 듯하여서 (추정)
-//        DispatchQueue.main.async {
-            //async로 돌렸기에 함수를 탈출. 1초 뒤에서야 호출이됨. 그 전까진 기존 위치 그대로인 것.
-            //변하는 동안 다다다다 누르면 순간적으로 실제 아직 변하지않은 위치의 layer가 뜨는 듯...
-            self.maskLayer.path = path.cgPath
-//        }
+        self.maskLayer.path = path.cgPath
     }
     
     func showEntranceView() {
