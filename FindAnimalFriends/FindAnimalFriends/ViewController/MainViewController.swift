@@ -203,8 +203,7 @@ private extension MainViewController {
     }
     
     @objc func pushToQuiz() {
-        let vc = ClearTestViewController()
-        vc.animal = currentAnimal // 추후 로직 수정 예정
+        let vc = QuizPageViewController(transitionStyle: .pageCurl, navigationOrientation: .vertical, animalName: currentAnimal)
         navigationController?.pushViewController(vc, animated: true)
         DispatchQueue.main.asyncAfter(deadline: .now()+0.5) { [weak self] in
             self?.zoomAction(tag: 0)
