@@ -12,13 +12,21 @@ import UIKit
 class QuizPageViewController: UIPageViewController {
     
     // PageViewContoll에서 띄울 화면에 대한 변수
-    private var pages:[UIViewController] = []
+    private var pages: [UIViewController] = []
+    // 대상 동물의 이름
+    private var animalName: String?
+    // Quiz의 데이터가 저장되어있는 변수
+    private var animalQuizzes: AnimalQuizzes {
+        QuizDao().getQuizzessByName(animalName: animalName ?? "panda")
+    }
     
-    required override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
+    required init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil, animalName: String) {
         super.init(transitionStyle: style, navigationOrientation: navigationOrientation)
         
         NotificationCenter.default.post(name: Notification.Name("nextPage"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(goToNextPage), name:Notification.Name("nextPage"), object: nil)
+        
+        self.animalName = animalName
     }
     
     required init?(coder: NSCoder) {
@@ -31,8 +39,7 @@ class QuizPageViewController: UIPageViewController {
         for recognizer in self.gestureRecognizers {
             if recognizer is UITapGestureRecognizer {
                 recognizer.isEnabled = false
-            }
-            else if recognizer is UIPanGestureRecognizer {
+            } else if recognizer is UIPanGestureRecognizer {
                 recognizer.isEnabled = false
             }
         }
@@ -40,17 +47,20 @@ class QuizPageViewController: UIPageViewController {
         super.viewDidLoad()
         
         self.dataSource = self
-        self.delegate = self
         
         setQuizPages()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("nextPage"), object: nil)
     }
     
     // quizPage 설정
     func setQuizPages() {
         let initialPage = 0
         
-        for i in 0...(sampleQuiz.count-1) {
-            let page = QuizViewController()
+        for i in 0...(animalQuizzes.quizzes.count-1) {
+            let page = QuizViewController(animalName: animalName ?? "panda", quiz: animalQuizzes.quizzes[i])
             page.index = i
             self.pages.append(page)
         }
@@ -59,9 +69,8 @@ class QuizPageViewController: UIPageViewController {
     }
 }
 
-extension QuizPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+extension QuizPageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        print("\(self.gestureRecognizers)")
         if let viewControllerIndex = self.pages.firstIndex(of: viewController) {
             if viewControllerIndex == 0 {
                 return nil
@@ -97,17 +106,4 @@ extension UIPageViewController {
             }
         }
     }
-    
-    // 이전 페이지로 가는 기능 (사용하지 않음)
-    func goToPreviousPage(animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
-        if let currentViewController = viewControllers?[0] {
-            if let previousPage = dataSource?.pageViewController(self, viewControllerBefore: currentViewController){
-                setViewControllers([previousPage], direction: .reverse, animated: true, completion: completion)
-            }
-        }
-    }
 }
-
-// 퀴즈에 대한 데이터가 만들어지기 전에 사용할 퀴즈 예시 데이터
-var sampleQuiz = ["Q11fjweiojfijniowfnowifnwif0wenfg0iwn0ine0pfgfjwnfonwdfionswf", "Q2", "Q3", "Q4", "Q5"]
-var sampleAnswer = [["A1-1", "A1-2", "A1-3", "A1-4"], ["A2-1", "A2-2", "A2-3", "A2-4"],["A3-1", "A3-2", "A3-3", "A3-4"],["A4-1", "A4-2", "A4-3", "A4-4"],["A5-1", "A5-2", "A5-3", "A5-4"]]
