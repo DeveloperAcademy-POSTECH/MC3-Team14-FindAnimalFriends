@@ -39,6 +39,8 @@ class QuizViewController: UIViewController {
     // 정답이 쓰여있는 버튼
     private var answerButtons: [UIButton] = []
     // 종료 화면
+    private var quizWrongView: QuizWrongView?
+    // 종료 화면
     private var quizCompleteView: QuizCompleteView?
     
     required init(animalName: String, quiz: Quiz) {
@@ -136,22 +138,22 @@ class QuizViewController: UIViewController {
             answerButtons[i].heightAnchor.constraint(equalToConstant: 50).isActive = true
             answerButtons[i].widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.9).isActive = true
             
-            if index == buttonCount - 1 {
-                answerButtons[i].addTarget(self, action: #selector(addCompleteView), for: .touchUpInside)
-            } else {
-                answerButtons[i].addTarget(self, action: #selector(sendNextPageNoti), for: .touchUpInside)
-            }
+            updateButtonFunction()
         }
     }
     
     // 버튼 내용 pageIndex에 맞춰 변경
-    func updateButton() {
+    func updateButtonFunction() {
         for i in 0...(buttonCount-1) {
             answerButtons[i].setTitle("\(quizAnswers[i])", for: .normal)
-            if index == buttonCount - 1 {
-                answerButtons[i].addTarget(self, action: #selector(addCompleteView), for: .touchUpInside)
+            if i != quiz?.rightAnswerIndex {
+                answerButtons[i].addTarget(self, action: #selector(addWrongView), for: .touchUpInside)
             } else {
-                answerButtons[i].addTarget(self, action: #selector(sendNextPageNoti), for: .touchUpInside)
+                if index == totalQuizCount - 1 {
+                    answerButtons[i].addTarget(self, action: #selector(addCompleteView), for: .touchUpInside)
+                } else {
+                    answerButtons[i].addTarget(self, action: #selector(sendNextPageNoti), for: .touchUpInside)
+                }
             }
         }
     }
@@ -171,6 +173,18 @@ class QuizViewController: UIViewController {
         quizCompleteView = QuizCompleteView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), animalName: animalName ?? "panda")
         quizCompleteView!.completeButton.addTarget(self, action: #selector(closeCompleteView), for: .touchUpInside)
         view.addSubview(quizCompleteView!)
+    }
+    
+    // quizWrongView 닫기
+    @objc func closeQuizWrongView() {
+        quizWrongView!.removeFromSuperview()
+    }
+    
+    // quizWrongView 띄우기
+    @objc func addWrongView() {
+        quizWrongView = QuizWrongView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
+        quizWrongView!.completeButton.addTarget(self, action: #selector(closeQuizWrongView), for: .touchUpInside)
+        view.addSubview(quizWrongView!)
     }
 
     override func didReceiveMemoryWarning() {
