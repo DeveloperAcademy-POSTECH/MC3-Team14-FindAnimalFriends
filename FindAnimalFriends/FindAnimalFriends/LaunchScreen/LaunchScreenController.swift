@@ -31,7 +31,8 @@ class LaunchScreenController: UIViewController {
                 UserDefaults.standard.set(self.isOnboarding, forKey: "isOnboarding")
                 self.view.layer.opacity = 0
             } completion: { _ in
-                self.view.window?.rootViewController = MainViewController()
+                self.view.window?.rootViewController = UINavigationController(rootViewController: MainViewController())
+                // navigation Controller 추가
             }
         }
     }
@@ -92,7 +93,7 @@ class LaunchScreenController: UIViewController {
                                     UserDefaults.standard.set(self.isOnboarding, forKey: "isOnboarding")
                                     self.view.layer.opacity = 0
                                 } completion: { _ in
-                                    self.view.window?.rootViewController = MainViewController()
+                                    self.view.window?.rootViewController = UINavigationController(rootViewController: MainViewController())
                                 }
                             }
                         } completion: { _ in
@@ -341,7 +342,6 @@ class LaunchScreenController: UIViewController {
         if UserDefaults.standard.dictionaryRepresentation().keys.contains("isOnboarding") {
             isOnboarding = UserDefaults.standard.bool(forKey: "isOnboarding")
         }
-        print(UserDefaults.standard.bool(forKey: "isOnboarding"))
         //UserDefaults에 저장된 상태 데이터를 스위치에 알려주는 작업
         view.backgroundColor = .white
         view.addSubview(findLabel)
@@ -354,7 +354,6 @@ class LaunchScreenController: UIViewController {
         super.viewDidDisappear(animated)
         isOnboarding = false
         UserDefaults.standard.set(self.isOnboarding, forKey: "isOnboarding")
-        print(UserDefaults.standard.bool(forKey: "isOnboarding"))
     }
 }
 
