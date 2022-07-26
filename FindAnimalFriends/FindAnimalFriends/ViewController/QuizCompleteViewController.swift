@@ -24,7 +24,7 @@ class QuizCompleteViewController: UIViewController {
         quizCompleteView!.removeFromSuperview()
     }
     
-    func setAnimalName(getAnimalName:String){
+    func setAnimalName(getAnimalName: String) {
         self.getAnimalName = getAnimalName
     }
     
