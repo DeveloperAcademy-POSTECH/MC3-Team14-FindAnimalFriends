@@ -32,6 +32,7 @@ class LaunchScreenController: UIViewController {
                 self.view.layer.opacity = 0
             } completion: { _ in
                 self.view.window?.rootViewController = UINavigationController(rootViewController: MainViewController())
+                // navigation Controller 추가
             }
         }
     }
