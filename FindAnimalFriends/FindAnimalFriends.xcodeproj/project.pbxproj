@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		42C01235288D63C300E0CADB /* QuizWrongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C01234288D63C300E0CADB /* QuizWrongView.swift */; };
 		42C01237288D63F300E0CADB /* QuizWrongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C01236288D63F300E0CADB /* QuizWrongViewController.swift */; };
+		42C0123C288FB2EA00E0CADB /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C0123B288FB2EA00E0CADB /* DataModel.swift */; };
+		42C0123E288FB35500E0CADB /* AnimalQuizzes.json in Resources */ = {isa = PBXBuildFile; fileRef = 42C0123D288FB35500E0CADB /* AnimalQuizzes.json */; };
 		42E8B23F288C0E210097D909 /* QuizCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E8B23E288C0E210097D909 /* QuizCompleteView.swift */; };
 		42F30F23288C03A900F772C6 /* QuizCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F30F22288C03A900F772C6 /* QuizCompleteViewController.swift */; };
 		964E45C8288D8F33004A43D4 /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964E45C7288D8F33004A43D4 /* Memo.swift */; };
@@ -31,6 +33,8 @@
 /* Begin PBXFileReference section */
 		42C01234288D63C300E0CADB /* QuizWrongView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizWrongView.swift; sourceTree = "<group>"; };
 		42C01236288D63F300E0CADB /* QuizWrongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizWrongViewController.swift; sourceTree = "<group>"; };
+		42C0123B288FB2EA00E0CADB /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		42C0123D288FB35500E0CADB /* AnimalQuizzes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AnimalQuizzes.json; sourceTree = "<group>"; };
 		42E8B23E288C0E210097D909 /* QuizCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCompleteView.swift; sourceTree = "<group>"; };
 		42F30F22288C03A900F772C6 /* QuizCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCompleteViewController.swift; sourceTree = "<group>"; };
 		964E45C7288D8F33004A43D4 /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
@@ -63,6 +67,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		42C01238288FB26A00E0CADB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				42C0123B288FB2EA00E0CADB /* DataModel.swift */,
+				42C0123D288FB35500E0CADB /* AnimalQuizzes.json */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		42C01239288FB28200E0CADB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				964E45C9288DB69C004A43D4 /* EntranceView.swift */,
+				96D35B47288F12F9000FAC52 /* ReadyView.swift */,
+				42E8B23E288C0E210097D909 /* QuizCompleteView.swift */,
+				964E45C7288D8F33004A43D4 /* Memo.swift */,
+				42C01234288D63C300E0CADB /* QuizWrongView.swift */,
+				42F30F22288C03A900F772C6 /* QuizCompleteViewController.swift */,
+				42C01236288D63F300E0CADB /* QuizWrongViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		42C0123A288FB29000E0CADB /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FE5DCEED288D57D800DBD272 /* QuizPageViewController.swift */,
+				FE5DCEEC288D57D800DBD272 /* QuizViewController.swift */,
+				9678A714288AC3E600678BDF /* MainViewController.swift */,
+				96DBD9BA288BC9FF006B2767 /* ClearTestViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		9678A704288AC3E600678BDF = {
 			isa = PBXGroup;
 			children = (
@@ -82,25 +120,17 @@
 		9678A70F288AC3E600678BDF /* FindAnimalFriends */ = {
 			isa = PBXGroup;
 			children = (
+				42C0123A288FB29000E0CADB /* ViewController */,
+				42C01239288FB28200E0CADB /* View */,
+				42C01238288FB26A00E0CADB /* Model */,
 				BAA5DF4C288BFFD1001931FE /* Font */,
+				BA9D1EAD288BCBD70023C807 /* LaunchScreen */,
 				9678A710288AC3E600678BDF /* AppDelegate.swift */,
 				9678A712288AC3E600678BDF /* SceneDelegate.swift */,
-				BA9D1EAD288BCBD70023C807 /* LaunchScreen */,
-				FE5DCEED288D57D800DBD272 /* QuizPageViewController.swift */,
-				FE5DCEEC288D57D800DBD272 /* QuizViewController.swift */,
-				9678A714288AC3E600678BDF /* MainViewController.swift */,
-				964E45C9288DB69C004A43D4 /* EntranceView.swift */,
-				96D35B47288F12F9000FAC52 /* ReadyView.swift */,
-				96DBD9BA288BC9FF006B2767 /* ClearTestViewController.swift */,
-				964E45C7288D8F33004A43D4 /* Memo.swift */,
 				96DBD9B8288BB9E6006B2767 /* Extension.swift */,
 				9678A719288AC3E700678BDF /* Assets.xcassets */,
 				9678A71B288AC3E700678BDF /* LaunchScreen.storyboard */,
 				9678A71E288AC3E700678BDF /* Info.plist */,
-				42E8B23E288C0E210097D909 /* QuizCompleteView.swift */,
-				42F30F22288C03A900F772C6 /* QuizCompleteViewController.swift */,
-				42C01234288D63C300E0CADB /* QuizWrongView.swift */,
-				42C01236288D63F300E0CADB /* QuizWrongViewController.swift */,
 			);
 			path = FindAnimalFriends;
 			sourceTree = "<group>";
@@ -189,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAA5DF5F288D30B9001931FE /* LaunchImage.png in Resources */,
+				42C0123E288FB35500E0CADB /* AnimalQuizzes.json in Resources */,
 				9678A71D288AC3E700678BDF /* LaunchScreen.storyboard in Resources */,
 				9678A71A288AC3E700678BDF /* Assets.xcassets in Resources */,
 				BAA5DF51288C0594001931FE /* KOTRA HOPE.ttf in Resources */,
@@ -207,6 +238,7 @@
 				42F30F23288C03A900F772C6 /* QuizCompleteViewController.swift in Sources */,
 				9678A715288AC3E600678BDF /* MainViewController.swift in Sources */,
 				96DBD9BB288BC9FF006B2767 /* ClearTestViewController.swift in Sources */,
+				42C0123C288FB2EA00E0CADB /* DataModel.swift in Sources */,
 				964E45CA288DB69C004A43D4 /* EntranceView.swift in Sources */,
 				964E45C8288D8F33004A43D4 /* Memo.swift in Sources */,
 				FE5DCEEF288D57D900DBD272 /* QuizPageViewController.swift in Sources */,

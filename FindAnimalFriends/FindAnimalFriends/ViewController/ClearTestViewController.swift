@@ -31,7 +31,7 @@ class ClearTestViewController: UIViewController {
     }
     
     @objc func tapClear() {
-        guard let index = QuizDao().animalDict[animal ?? "tiger"] else { return }
+        guard let index = QuizDao().getAnimalDict()[animal ?? "tiger"] else { return }
         UserDefaults.standard.set(index + 1, forKey: "clear")
         //currentIndex == index였지만, 클리어함으로써 새로 조명이 켜질 currentIndex는 index + 1이 된다.
         navigationController?.popViewController(animated: true)
