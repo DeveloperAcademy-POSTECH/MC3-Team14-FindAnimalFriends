@@ -137,10 +137,11 @@ private extension MainViewController {
     }
     
     func zoomAction(tag: Int) {
+        
         UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut) { [weak self] in
             guard let self = self else { return }
             
-            Zoom.status = (Zoom.status == .zoomIn ? .zoomOut : .zoomIn) // toggle
+            Zoom.status = (Zoom.status == .zoomIn ? .zoomOut : .zoomIn)
 
             self.backImageView.frame = self.memos[tag].backImageFrame //
             self.blackView.frame = self.backImageView.bounds // frame -> bounds로 수정 (fix)
@@ -178,9 +179,12 @@ private extension MainViewController {
         animation.duration = 1.0
         animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         maskLayer.add(animation, forKey: nil)
-        DispatchQueue.main.async {
+        // Remove DispatchQueue -> 비동기 할당으로 인해서 순간적인 버그가 일어나는 듯하여서 (추정)
+//        DispatchQueue.main.async {
+            //async로 돌렸기에 함수를 탈출. 1초 뒤에서야 호출이됨. 그 전까진 기존 위치 그대로인 것.
+            //변하는 동안 다다다다 누르면 순간적으로 실제 아직 변하지않은 위치의 layer가 뜨는 듯...
             self.maskLayer.path = path.cgPath
-        }
+//        }
     }
     
     func showEntranceView() {
