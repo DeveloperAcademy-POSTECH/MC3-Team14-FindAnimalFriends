@@ -84,8 +84,6 @@
 				42E8B23E288C0E210097D909 /* QuizCompleteView.swift */,
 				964E45C7288D8F33004A43D4 /* Memo.swift */,
 				42C01234288D63C300E0CADB /* QuizWrongView.swift */,
-				42F30F22288C03A900F772C6 /* QuizCompleteViewController.swift */,
-				42C01236288D63F300E0CADB /* QuizWrongViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -96,6 +94,8 @@
 				FE5DCEED288D57D800DBD272 /* QuizPageViewController.swift */,
 				FE5DCEEC288D57D800DBD272 /* QuizViewController.swift */,
 				9678A714288AC3E600678BDF /* MainViewController.swift */,
+				42C01236288D63F300E0CADB /* QuizWrongViewController.swift */,
+				42F30F22288C03A900F772C6 /* QuizCompleteViewController.swift */,
 				96DBD9BA288BC9FF006B2767 /* ClearTestViewController.swift */,
 			);
 			path = ViewController;
