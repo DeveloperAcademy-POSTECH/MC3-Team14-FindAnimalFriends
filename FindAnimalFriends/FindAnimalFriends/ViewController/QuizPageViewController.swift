@@ -131,7 +131,6 @@ class QuizPageViewController: UIPageViewController {
 
 extension QuizPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        print("\(self.gestureRecognizers)")
         if let viewControllerIndex = self.pages.firstIndex(of: viewController) {
             if viewControllerIndex == 0 {
                 return nil
