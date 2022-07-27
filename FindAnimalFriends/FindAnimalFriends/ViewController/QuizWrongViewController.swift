@@ -15,7 +15,7 @@ class QuizWrongViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         quizWrongView = QuizWrongView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
-        quizWrongView!.completeButton.addTarget(self, action: #selector(closeQuizWrongView), for: .touchUpInside)
+        quizWrongView!.completeButton.addTarget(self, action: #selector(closeWrongView), for: .touchUpInside)
         view.addSubview(quizWrongView!)
     }
     @objc func closeQuizWrongView() {
