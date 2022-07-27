@@ -166,7 +166,7 @@ class QuizViewController: UIViewController {
     
     // quizCompleteView 띄우기
     @objc func addCompleteView() {
-        AVPlay.shared.playSound(sound: "cheerSound")
+        AVPlay.shared.playSound(sound: "cheerSound2")
         quizCompleteView = QuizCompleteView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), animalName: animalName ?? "panda")
         quizCompleteView!.completeButton.addTarget(self, action: #selector(closeCompleteView), for: .touchUpInside)
         view.addSubview(quizCompleteView!)
@@ -203,6 +203,7 @@ class QuizViewController: UIViewController {
     
     // quizExplanationView 닫기
     @objc func addExplanationView() {
+        AVPlay.shared.playSound(sound: "startGameSound2")
         quizExplanationView = QuizExplanationView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
         quizExplanationView!.completeButton.addTarget(self, action: #selector(closeExplanationView), for: .touchUpInside)
         view.addSubview(quizExplanationView!)
