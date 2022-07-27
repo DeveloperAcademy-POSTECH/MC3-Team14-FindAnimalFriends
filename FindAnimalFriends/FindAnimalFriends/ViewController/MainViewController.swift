@@ -103,22 +103,16 @@ class MainViewController: UIViewController {
         
         //index를 통한 handling 예정.
         if UserDefaults.standard.dictionaryRepresentation().keys.contains("clear") {
-            let index = UserDefaults.standard.integer(forKey: "clear")
-            if index >= 5 {
-                currentIndex = 4
-                
-            } else {
-                currentIndex = index
-            }
+            currentIndex = UserDefaults.standard.integer(forKey: "clear")
         }
         
         if currentIndex == -1 {
             setReady()
         }
         
-        let _ = memoButtons.map { button in
+        let _ = memoButtons.map { button in // button 터치 조절
             button.isUserInteractionEnabled = (button.tag == currentIndex)
-        }
+        } //FIXME: 추후 수정가능성있는 부분.
     }
 }
 
@@ -176,8 +170,12 @@ private extension MainViewController {
     
     func setupLights() {
         let path = UIBezierPath()
-        for memo in memos[0...currentIndex] {
-            path.append(memo.outMaskLayer)
+        if currentIndex < 5 {
+            for memo in memos[0...currentIndex] {
+                path.append(memo.outMaskLayer)
+            }
+        } else {
+            path.append(UIBezierPath(rect: view.bounds))
         }
         maskLayer.path = path.cgPath
         maskLayer.fillRule = .nonZero
@@ -211,8 +209,9 @@ private extension MainViewController {
                 lottie.frame = self.memos[lottie.tag].lottieFrame
                 lottie.checkView.frame.size = self.memos[lottie.tag].lottieFrame.size
             }
-            
-            self.memoButtons[self.currentIndex].isUserInteractionEnabled = (Zoom.status == .zoomOut)
+            if self.currentIndex < 5 {
+                self.memoButtons[self.currentIndex].isUserInteractionEnabled = (Zoom.status == .zoomOut)
+            }
         }
 
         maskLayerAnimation() // light(조명) 확대, 축소
@@ -223,13 +222,14 @@ private extension MainViewController {
     }
     
     func maskLayerAnimation() {
+        let index = currentIndex > 4 ? 4 : currentIndex
         let path = UIBezierPath()
         if Zoom.status == .zoomIn {
-            for memo in memos[0...currentIndex] {
+            for memo in memos[0...index] {
                 path.append(memo.inMaskLayer)
             }
         } else {
-            for memo in memos[0...currentIndex] {
+            for memo in memos[0...index] {
                 path.append(memo.outMaskLayer)
             }
         }
