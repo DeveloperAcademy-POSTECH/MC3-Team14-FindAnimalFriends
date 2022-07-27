@@ -60,8 +60,8 @@ class QuizViewController: UIViewController {
         
         drawBackgroundImage()
         drawIndicateLable()
-        drawQuiz()
         drawCharacterImage()
+        drawQuiz()
         drawButton()
     }
     
@@ -90,7 +90,7 @@ class QuizViewController: UIViewController {
         self.view.addSubview(quizIndicatorLabel)
         quizIndicatorLabel.translatesAutoresizingMaskIntoConstraints = false
         quizIndicatorLabel.text = "\((index ?? 0)+1)/\(totalQuizCount)"
-        quizIndicatorLabel.font = UIFont(name: "KOTRA HOPE", size: 36)
+        quizIndicatorLabel.font = UIFont(name: "KOTRA HOPE", size: .ten*2.0)
         quizIndicatorLabel.textColor = .black
         quizIndicatorLabel.topAnchor.constraint(equalTo: backImgView.bottomAnchor).isActive = true
         quizIndicatorLabel.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: 20).isActive = true
@@ -104,13 +104,15 @@ class QuizViewController: UIViewController {
         self.view.addSubview(quizLabel)
         let attributedString = NSMutableAttributedString.init(string: "\(quiz?.question ?? "Error: No Quiz")")
         attributedString.addAttribute(NSAttributedString.Key.underlineStyle, value: 1, range: NSRange.init(location: 0, length: attributedString.length))
+        attributedString.addAttribute(NSAttributedString.Key.backgroundColor, value: UIColor.appColor(.memoWhite), range: NSRange.init(location: 0, length: attributedString.length))
         quizLabel.attributedText = attributedString
-        quizLabel.font = UIFont(name: "KOTRA HOPE", size: 36)
+        quizLabel.font = UIFont(name: "KOTRA HOPE", size: .ten*2.4)
         quizLabel.translatesAutoresizingMaskIntoConstraints = false
         quizLabel.topAnchor.constraint(equalTo: self.quizIndicatorLabel.bottomAnchor, constant: 10).isActive = true
         quizLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         quizLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.9).isActive = true
         quizLabel.numberOfLines = 0
+        
     }
     
     // 퀴즈 버튼 그리기
@@ -124,11 +126,7 @@ class QuizViewController: UIViewController {
         for i in (0...(buttonCount - 1)).reversed() {
             self.view.addSubview(answerButtons[i])
             answerButtons[i].translatesAutoresizingMaskIntoConstraints = false
-            answerButtons[i].setTitle("\(quizAnswers[i])", for: .normal)
-            answerButtons[i].layer.borderColor = UIColor.appColor(.primaryWhite).cgColor
-            answerButtons[i].layer.backgroundColor = UIColor.appColor(AssetsColor.primaryBrown).cgColor
-            answerButtons[i].layer.cornerRadius = 8
-            answerButtons[i].titleLabel?.font = UIFont(name: "KOTRA HOPE", size: 30)
+            answerButtons[i].custom("\(quizAnswers[i])", titleColor: .white, size: .ten*2.4, backColor: .appColor(.primaryBrown))
             answerButtons[i].centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
             if i==(buttonCount - 1) {
                 answerButtons[i].bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
