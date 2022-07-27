@@ -49,23 +49,8 @@ class QuizExplanationView: UIView {
     
     let completeButton: UIButton = {
         let button = UIButton()
-        button.setTitle("다음 문제로", for: .normal)
-        button.titleLabel?.font = UIFont(name: "KOTRA HOPE", size: 24)
-        button.titleLabel?.textColor = .white
-        button.clipsToBounds = true
-        button.backgroundColor = UIColor(red: 231/255, green: 162/255, blue: 84/255, alpha: 100)//hexcode: E7A254
-        button.layer.cornerRadius = 8
+        button.custom("다음 문제로", titleColor: .white, size: 24, backColor: UIColor(red: 231/255, green: 162/255, blue: 84/255, alpha: 100))
         button.translatesAutoresizingMaskIntoConstraints = false
-        //뷰 그림자부분
-        button.layer.shadowColor = UIColor.black.cgColor // 그림자색깔
-        button.layer.masksToBounds = false  // 뷰 내부에 속한 요소들이 UIView 밖을 벗어날 때, 잘라낼 것인지결정하는 변수 그림자는 밖에 그려지는 것이므로(UIView를 벗어나므로) false로 설정함
-        //button.layer.shadowOffset = CGSize(width: 0, height: 2) // 그림자의 위치조정
-        button.layer.shadowOffset = CGSize(width: 1.0, height: 4.0) // 그림자의 위치조정
-        button.layer.shadowRadius = 2//그림자의 반경
-        button.layer.shadowOpacity = 0.4 // 그림자의 alpha값
-        
-        //https://gonslab.tistory.com/23 참고했음
-        
         return button
         
     }()
