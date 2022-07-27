@@ -21,10 +21,17 @@ class LaunchScreenController: UIViewController {
         button.layer.cornerRadius = 10.0
         button.addTarget(self, action: #selector(onClickMyButton(_:)), for: .touchUpInside)
         button.layer.opacity = 0
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.masksToBounds = false
+        button.layer.shadowOffset = CGSize(width: 1.0, height: 4.0)
+        button.layer.shadowRadius = 2
+        button.layer.shadowOpacity = 0.4
+        //https://gonslab.tistory.com/23 참고했음
         return button
     }()
     // FIXME: if 문 삭제
     @objc internal func onClickMyButton(_ sender: Any) {
+        AVPlay.shared.playSound(sound: "startGameSound")
         if sender is UIButton {
             UIView.transition(with: view, duration: 1, options: .transitionCurlUp) {
                 self.isOnboarding = false
@@ -100,24 +107,26 @@ class LaunchScreenController: UIViewController {
                                 }
                             }
                         } completion: { _ in
-                            UIView.animate(withDuration: 0.5) {
-                                self.view.layer.opacity = 1
-                            } completion: { _ in
+                            if self.isOnboarding {
                                 UIView.animate(withDuration: 0.5) {
-                                    self.troubleLabel.layer.opacity = 1
-//                                    AVPlay.shared.playSound(sound: "textSound")
+                                    self.view.layer.opacity = 1
                                 } completion: { _ in
                                     UIView.animate(withDuration: 0.5) {
-                                        self.animalFriendsLabel.layer.opacity = 1
-//                                        AVPlay.shared.playSound(sound: "textSound")
-                                    }  completion: { _ in
+                                        self.troubleLabel.layer.opacity = 1
+                                        AVPlay.shared.playSound(sound: "textSound")
+                                    } completion: { _ in
                                         UIView.animate(withDuration: 0.5) {
-                                            self.allLabel.layer.opacity = 1
-//                                            AVPlay.shared.playSound(sound: "textSound")
-                                        } completion: { _ in
+                                            self.animalFriendsLabel.layer.opacity = 1
+                                            AVPlay.shared.playSound(sound: "textSound")
+                                        }  completion: { _ in
                                             UIView.animate(withDuration: 0.5) {
-                                                self.disappearLabel.layer.opacity = 1
-//                                                AVPlay.shared.playSound(sound: "textSound")
+                                                self.allLabel.layer.opacity = 1
+                                                AVPlay.shared.playSound(sound: "textSound")
+                                            } completion: { _ in
+                                                UIView.animate(withDuration: 0.5) {
+                                                    self.disappearLabel.layer.opacity = 1
+                                                    AVPlay.shared.playSound(sound: "textSound")
+                                                }
                                             }
                                         }
                                     }
@@ -374,19 +383,19 @@ extension LaunchScreenController: UIScrollViewDelegate {
             self.onboardingExitButton.removeFromSuperview()
             UIView.animate(withDuration: 0.5) {
                 self.toKimAssistantLabel.layer.opacity = 1
-//                AVPlay.shared.playSound(sound: "textSound")
+                AVPlay.shared.playSound(sound: "textSound")
             } completion: { _ in
                 UIView.animate(withDuration: 0.5) {
                     self.ofAnimalFriendsLabel.layer.opacity = 1
-//                    AVPlay.shared.playSound(sound: "textSound")
+                    AVPlay.shared.playSound(sound: "textSound")
                 }  completion: { _ in
                     UIView.animate(withDuration: 0.5) {
                         self.characteristicsLabel.layer.opacity = 1
-//                        AVPlay.shared.playSound(sound: "textSound")
+                        AVPlay.shared.playSound(sound: "textSound")
                     } completion: { _ in
                         UIView.animate(withDuration: 0.5) {
                             self.letMeKnowLabel.layer.opacity = 1
-//                            AVPlay.shared.playSound(sound: "textSound")
+                            AVPlay.shared.playSound(sound: "textSound")
                             
                         }
                     }
@@ -395,20 +404,20 @@ extension LaunchScreenController: UIScrollViewDelegate {
         } else if nextPage == 2 {
             UIView.animate(withDuration: 0.5) {
                 self.characteristicsOfAnimalFriendsLabel.layer.opacity = 1
-//                AVPlay.shared.playSound(sound: "textSound")
+                AVPlay.shared.playSound(sound: "textSound")
             } completion: { _ in
                 UIView.animate(withDuration: 0.5) {
                     self.tellMeWellLabel.layer.opacity = 1
-//                    AVPlay.shared.playSound(sound: "textSound")
+                    AVPlay.shared.playSound(sound: "textSound")
                 }  completion: { _ in
                     UIView.animate(withDuration: 0.5) {
                         self.yourAnimalFriendsLabel.layer.opacity = 1
-//                        AVPlay.shared.playSound(sound: "textSound")
+                        AVPlay.shared.playSound(sound: "textSound")
                     } completion: { _ in
                         UIView.animate(withDuration: 0.5) {
                             self.comingBackLabel.layer.opacity = 1
                             self.onboardingExitButton.layer.opacity = 1
-//                            AVPlay.shared.playSound(sound: "textSound")
+                            AVPlay.shared.playSound(sound: "textSound")
                         }
                     }
                 }
