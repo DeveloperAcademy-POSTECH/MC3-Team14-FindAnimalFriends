@@ -10,7 +10,7 @@ import Lottie
 
 class CheckmarkLottieView: UIView {
 
-    private lazy var lottieView: AnimationView = {
+    lazy var checkView: AnimationView = {
         let lottieView = AnimationView(name: "checkmark")
         lottieView.contentMode = .scaleAspectFit
         lottieView.loopMode = .playOnce
@@ -20,9 +20,8 @@ class CheckmarkLottieView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        addSubview(lottieView)
-        lottieView.frame = frame
+        addSubview(checkView)
+        checkView.frame = bounds //bounds~!
     }
     
     required init?(coder: NSCoder) {

@@ -29,6 +29,7 @@ class MainViewController: UIViewController {
     ]
     
     private var memoButtons: [UIButton] = [] // 전체 크기변화 handling을 위한 버튼 배열.
+    private var lottieViews: [CheckmarkLottieView] = []
     
     private let maskLayer = CAShapeLayer() // Mask Circle path(경로)를 총괄하는 layer
     
@@ -151,6 +152,11 @@ private extension MainViewController {
             button.addTarget(self, action: #selector(animate(_:)), for: .touchUpInside)
             memoButtons.append(button)
             backImageView.addSubview(button)
+            
+            let lottieView = CheckmarkLottieView(frame: i.lottieFrame)
+            lottieView.checkView.play()
+            lottieViews.append(lottieView)
+            backImageView.addSubview(lottieView)
         }
     }
     
