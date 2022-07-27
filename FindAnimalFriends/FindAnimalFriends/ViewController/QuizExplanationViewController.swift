@@ -19,6 +19,7 @@ class QuizExplanationViewController: UIViewController {
         view.addSubview(quizExplanationView!)
     }
     @objc func closeQuizExplanationView() {
+        // 추후 다음 퀴즈로 넘어가는 함수로 변경 예정
         quizExplanationView!.removeFromSuperview()
     }
     
