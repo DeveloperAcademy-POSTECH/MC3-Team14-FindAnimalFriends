@@ -168,7 +168,7 @@ class QuizViewController: UIViewController {
     
     // quizCompleteView 띄우기
     @objc func addCompleteView() {
-        AVPlay.shared.playSound(sound: "cheerSound")
+        AVPlay.shared2.playSound(sound: "cheerSound")
         quizCompleteView = QuizCompleteView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), animalName: animalName ?? "panda")
         quizCompleteView!.completeButton.addTarget(self, action: #selector(closeCompleteView), for: .touchUpInside)
         UserDefaults.standard.set(QuizDao().getAnimalDict()[animalName!]! + 1, forKey: "clear")
