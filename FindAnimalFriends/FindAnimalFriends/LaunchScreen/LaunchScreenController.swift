@@ -39,14 +39,17 @@ class LaunchScreenController: UIViewController {
     
     // MARK: 시간경과에 따른 애니메이션 함수
     func timeCount() {
-        UIView.animate(withDuration: 0.5, delay: 0.5) { [self] in
+        UIView.animate(withDuration: 0.5) { [self] in
             self.findLabel.layer.opacity = 1
+            AVPlay.shared.playSound(sound: "textSound")
         } completion: { _ in
             UIView.animate(withDuration: 0.5) {
                 self.animalLabel.layer.opacity = 1
+                AVPlay.shared.playSound(sound: "textSound")
             } completion: { _ in
                 UIView.animate(withDuration: 0.5) {
                     self.friendsLabel.layer.opacity = 1
+                    AVPlay.shared.playSound(sound: "textSound")
                 } completion: { _ in
                     UIView.animate(withDuration: 0.5) {
                         self.view.layer.opacity = 0
@@ -102,15 +105,19 @@ class LaunchScreenController: UIViewController {
                             } completion: { _ in
                                 UIView.animate(withDuration: 0.5) {
                                     self.troubleLabel.layer.opacity = 1
+//                                    AVPlay.shared.playSound(sound: "textSound")
                                 } completion: { _ in
                                     UIView.animate(withDuration: 0.5) {
                                         self.animalFriendsLabel.layer.opacity = 1
+//                                        AVPlay.shared.playSound(sound: "textSound")
                                     }  completion: { _ in
                                         UIView.animate(withDuration: 0.5) {
                                             self.allLabel.layer.opacity = 1
+//                                            AVPlay.shared.playSound(sound: "textSound")
                                         } completion: { _ in
                                             UIView.animate(withDuration: 0.5) {
                                                 self.disappearLabel.layer.opacity = 1
+//                                                AVPlay.shared.playSound(sound: "textSound")
                                             }
                                         }
                                     }
@@ -367,15 +374,19 @@ extension LaunchScreenController: UIScrollViewDelegate {
             self.onboardingExitButton.removeFromSuperview()
             UIView.animate(withDuration: 0.5) {
                 self.toKimAssistantLabel.layer.opacity = 1
+//                AVPlay.shared.playSound(sound: "textSound")
             } completion: { _ in
                 UIView.animate(withDuration: 0.5) {
                     self.ofAnimalFriendsLabel.layer.opacity = 1
+//                    AVPlay.shared.playSound(sound: "textSound")
                 }  completion: { _ in
                     UIView.animate(withDuration: 0.5) {
                         self.characteristicsLabel.layer.opacity = 1
+//                        AVPlay.shared.playSound(sound: "textSound")
                     } completion: { _ in
                         UIView.animate(withDuration: 0.5) {
                             self.letMeKnowLabel.layer.opacity = 1
+//                            AVPlay.shared.playSound(sound: "textSound")
                             
                         }
                     }
@@ -384,16 +395,20 @@ extension LaunchScreenController: UIScrollViewDelegate {
         } else if nextPage == 2 {
             UIView.animate(withDuration: 0.5) {
                 self.characteristicsOfAnimalFriendsLabel.layer.opacity = 1
+//                AVPlay.shared.playSound(sound: "textSound")
             } completion: { _ in
                 UIView.animate(withDuration: 0.5) {
                     self.tellMeWellLabel.layer.opacity = 1
+//                    AVPlay.shared.playSound(sound: "textSound")
                 }  completion: { _ in
                     UIView.animate(withDuration: 0.5) {
                         self.yourAnimalFriendsLabel.layer.opacity = 1
+//                        AVPlay.shared.playSound(sound: "textSound")
                     } completion: { _ in
                         UIView.animate(withDuration: 0.5) {
                             self.comingBackLabel.layer.opacity = 1
                             self.onboardingExitButton.layer.opacity = 1
+//                            AVPlay.shared.playSound(sound: "textSound")
                         }
                     }
                 }
