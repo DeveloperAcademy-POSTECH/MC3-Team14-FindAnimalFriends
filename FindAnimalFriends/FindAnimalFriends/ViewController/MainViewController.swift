@@ -192,7 +192,6 @@ private extension MainViewController {
         
         UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut) { [weak self] in
             guard let self = self else { return }
-            
             Zoom.status = (Zoom.status == .zoomIn ? .zoomOut : .zoomIn)
 
             self.backImageView.frame = self.memos[tag].backImageFrame
