@@ -256,6 +256,7 @@ private extension MainViewController {
                 entranceView.pushButton.addTarget(self, action: #selector(self.pushToQuiz), for: .touchUpInside)
                 entranceView.animalName = self.currentAnimal
                 entranceView.setupCodeName()
+                entranceView.isClear()
                 self.view.addSubview(entranceView)
             }
         } else {
