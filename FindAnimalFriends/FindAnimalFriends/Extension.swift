@@ -5,6 +5,7 @@
 //  Created by Hyeonsoo Kim on 2022/07/23.
 //
 
+import AVFoundation
 import UIKit
 
 extension CGFloat {
@@ -25,6 +26,12 @@ extension CGSize {
     
     // 확대일 때 동물메모의 크기
     static let memoDoubleSize = CGSize(width: .screenW / 1.5, height: .screenW / 1.6)
+    
+    // 축소일 때 checkmark lottie 크기
+    static let checkSize = CGSize(width: .screenW / 6, height: .screenW / 6)
+    
+    // 확대일 때 checkmark lottie 크기
+    static let checkDoubleSize = CGSize(width: .screenW / 3, height: .screenW / 3)
     
     // 확대일 때 배경의 크기
     static let backDoubleSize = CGSize(width: .screenW * 2, height: .screenH * 2)
@@ -88,4 +95,48 @@ extension UILabel {
         self.backgroundColor = .black.withAlphaComponent(0.8)
         self.textAlignment = .left
     }
+}
+
+class BGMPlay {
+
+    static let shared = BGMPlay()
+
+    var player: AVAudioPlayer!
+
+    func playSound(sound: String) {
+         let url = Bundle.main.url(forResource: sound, withExtension: "wav")
+         guard url != nil else{
+             return
+         }
+         do{
+             player = try AVAudioPlayer(contentsOf: url!)
+             player.prepareToPlay()
+             player?.play()
+             player?.numberOfLoops = -1
+       
+         } catch {
+             print("\(error)")
+         }
+     }
+}
+
+class AVPlay {
+
+    static let shared2 = AVPlay()
+
+    var player2: AVAudioPlayer!
+
+    func playSound2(sound: String) {
+         let url2 = Bundle.main.url(forResource: sound, withExtension: "wav")
+         guard url2 != nil else{
+             return
+         }
+         do{
+             player2 = try AVAudioPlayer(contentsOf: url2!)
+             player2?.play()
+           
+         } catch {
+             print("\(error)")
+         }
+     }
 }
