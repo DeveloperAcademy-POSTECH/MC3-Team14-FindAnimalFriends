@@ -62,6 +62,14 @@ class EntranceView: UIView {
         }
     }
     
+    func isClear() {
+        let nowIndex = QuizDao().getAnimalDict()[animalName ?? ""] ?? 0
+        let openIndex = UserDefaults.standard.integer(forKey: "clear")
+        if nowIndex < openIndex {
+            pushButton.setTitle("다시 풀기", for: .normal)
+        }
+    }
+    
     private func configureConstraints() {
         NSLayoutConstraint.activate([
             cancelButton.topAnchor.constraint(equalTo: centerYAnchor, constant: -.screenH/5),

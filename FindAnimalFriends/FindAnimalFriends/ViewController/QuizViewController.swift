@@ -171,8 +171,14 @@ class QuizViewController: UIViewController {
         AVPlay.shared2.playSound2(sound: "cheerSound")
         quizCompleteView = QuizCompleteView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), animalName: animalName ?? "panda")
         quizCompleteView!.completeButton.addTarget(self, action: #selector(closeCompleteView), for: .touchUpInside)
-        UserDefaults.standard.set(QuizDao().getAnimalDict()[animalName!]! + 1, forKey: "clear")
         view.addSubview(quizCompleteView!)
+        
+        // 이전 문제를 다시 푼 것이라면, UserDefaults에 저장하지않도록.
+        let openIndex = UserDefaults.standard.integer(forKey: "clear")
+        let nowAnimalIndex = QuizDao().getAnimalDict()[animalName ?? ""] ?? 0
+        if openIndex == nowAnimalIndex {
+            UserDefaults.standard.set(QuizDao().getAnimalDict()[animalName!]! + 1, forKey: "clear")
+        }
     }
     
     // quizWrongView 닫기
