@@ -369,8 +369,6 @@ class LaunchScreenController: UIViewController {
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        isOnboarding = false
-        UserDefaults.standard.set(self.isOnboarding, forKey: "isOnboarding")
     }
 }
 
