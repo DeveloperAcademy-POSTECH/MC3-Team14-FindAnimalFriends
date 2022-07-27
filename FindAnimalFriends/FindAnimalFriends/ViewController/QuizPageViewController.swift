@@ -101,7 +101,7 @@ extension UIPageViewController {
     // 다음 페이지로 가는 기능
     @objc func goToNextPage() {
         if let currentViewController = viewControllers?[0] {
-            AVPlay.shared2.playSound(sound: "pageFlipSound")
+            AVPlay.shared2.playSound2(sound: "pageFlipSound")
             if let nextPage = dataSource?.pageViewController(self, viewControllerAfter: currentViewController) {
                 setViewControllers([nextPage], direction: .forward, animated: true, completion: nil)
             }
