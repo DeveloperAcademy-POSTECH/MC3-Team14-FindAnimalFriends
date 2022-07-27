@@ -31,7 +31,7 @@ class LaunchScreenController: UIViewController {
     }()
     // FIXME: if 문 삭제
     @objc internal func onClickMyButton(_ sender: Any) {
-        AVPlay.shared.playSound(sound: "startGameSound")
+        AVPlay.shared2.playSound2(sound: "startGameSound")
         if sender is UIButton {
             UIView.transition(with: view, duration: 1, options: .transitionCurlUp) {
                 self.isOnboarding = false
@@ -48,15 +48,16 @@ class LaunchScreenController: UIViewController {
     func timeCount() {
         UIView.animate(withDuration: 0.5) { [self] in
             self.findLabel.layer.opacity = 1
-            AVPlay.shared.playSound(sound: "textSound")
+            BGMPlay.shared.playSound(sound: "BGM")
+            AVPlay.shared2.playSound2(sound: "textSound")
         } completion: { _ in
             UIView.animate(withDuration: 0.5) {
                 self.animalLabel.layer.opacity = 1
-                AVPlay.shared.playSound(sound: "textSound")
+                AVPlay.shared2.playSound2(sound: "textSound")
             } completion: { _ in
                 UIView.animate(withDuration: 0.5) {
                     self.friendsLabel.layer.opacity = 1
-                    AVPlay.shared.playSound(sound: "textSound")
+                    AVPlay.shared2.playSound2(sound: "textSound")
                 } completion: { _ in
                     UIView.animate(withDuration: 0.5) {
                         self.view.layer.opacity = 0
@@ -113,19 +114,19 @@ class LaunchScreenController: UIViewController {
                                 } completion: { _ in
                                     UIView.animate(withDuration: 0.5) {
                                         self.troubleLabel.layer.opacity = 1
-                                        AVPlay.shared.playSound(sound: "textSound")
+                                        AVPlay.shared2.playSound2(sound: "textSound")
                                     } completion: { _ in
                                         UIView.animate(withDuration: 0.5) {
                                             self.animalFriendsLabel.layer.opacity = 1
-                                            AVPlay.shared.playSound(sound: "textSound")
+                                            AVPlay.shared2.playSound2(sound: "textSound")
                                         }  completion: { _ in
                                             UIView.animate(withDuration: 0.5) {
                                                 self.allLabel.layer.opacity = 1
-                                                AVPlay.shared.playSound(sound: "textSound")
+                                                AVPlay.shared2.playSound2(sound: "textSound")
                                             } completion: { _ in
                                                 UIView.animate(withDuration: 0.5) {
                                                     self.disappearLabel.layer.opacity = 1
-                                                    AVPlay.shared.playSound(sound: "textSound")
+                                                    AVPlay.shared2.playSound2(sound: "textSound")
                                                 }
                                             }
                                         }
@@ -368,8 +369,6 @@ class LaunchScreenController: UIViewController {
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        isOnboarding = false
-        UserDefaults.standard.set(self.isOnboarding, forKey: "isOnboarding")
     }
 }
 
@@ -383,19 +382,19 @@ extension LaunchScreenController: UIScrollViewDelegate {
             self.onboardingExitButton.removeFromSuperview()
             UIView.animate(withDuration: 0.5) {
                 self.toKimAssistantLabel.layer.opacity = 1
-                AVPlay.shared.playSound(sound: "textSound")
+                AVPlay.shared2.playSound2(sound: "textSound")
             } completion: { _ in
                 UIView.animate(withDuration: 0.5) {
                     self.ofAnimalFriendsLabel.layer.opacity = 1
-                    AVPlay.shared.playSound(sound: "textSound")
+                    AVPlay.shared2.playSound2(sound: "textSound")
                 }  completion: { _ in
                     UIView.animate(withDuration: 0.5) {
                         self.characteristicsLabel.layer.opacity = 1
-                        AVPlay.shared.playSound(sound: "textSound")
+                        AVPlay.shared2.playSound2(sound: "textSound")
                     } completion: { _ in
                         UIView.animate(withDuration: 0.5) {
                             self.letMeKnowLabel.layer.opacity = 1
-                            AVPlay.shared.playSound(sound: "textSound")
+                            AVPlay.shared2.playSound2(sound: "textSound")
                             
                         }
                     }
@@ -404,20 +403,20 @@ extension LaunchScreenController: UIScrollViewDelegate {
         } else if nextPage == 2 {
             UIView.animate(withDuration: 0.5) {
                 self.characteristicsOfAnimalFriendsLabel.layer.opacity = 1
-                AVPlay.shared.playSound(sound: "textSound")
+                AVPlay.shared2.playSound2(sound: "textSound")
             } completion: { _ in
                 UIView.animate(withDuration: 0.5) {
                     self.tellMeWellLabel.layer.opacity = 1
-                    AVPlay.shared.playSound(sound: "textSound")
+                    AVPlay.shared2.playSound2(sound: "textSound")
                 }  completion: { _ in
                     UIView.animate(withDuration: 0.5) {
                         self.yourAnimalFriendsLabel.layer.opacity = 1
-                        AVPlay.shared.playSound(sound: "textSound")
+                        AVPlay.shared2.playSound2(sound: "textSound")
                     } completion: { _ in
                         UIView.animate(withDuration: 0.5) {
                             self.comingBackLabel.layer.opacity = 1
                             self.onboardingExitButton.layer.opacity = 1
-                            AVPlay.shared.playSound(sound: "textSound")
+                            AVPlay.shared2.playSound2(sound: "textSound")
                         }
                     }
                 }

@@ -97,9 +97,9 @@ extension UILabel {
     }
 }
 
-class AVPlay {
+class BGMPlay {
 
-    static let shared = AVPlay()
+    static let shared = BGMPlay()
 
     var player: AVAudioPlayer!
 
@@ -110,7 +110,31 @@ class AVPlay {
          }
          do{
              player = try AVAudioPlayer(contentsOf: url!)
+             player.prepareToPlay()
              player?.play()
+             player?.numberOfLoops = -1
+       
+         } catch {
+             print("\(error)")
+         }
+     }
+}
+
+class AVPlay {
+
+    static let shared2 = AVPlay()
+
+    var player2: AVAudioPlayer!
+
+    func playSound2(sound: String) {
+         let url2 = Bundle.main.url(forResource: sound, withExtension: "wav")
+         guard url2 != nil else{
+             return
+         }
+         do{
+             player2 = try AVAudioPlayer(contentsOf: url2!)
+             player2?.play()
+           
          } catch {
              print("\(error)")
          }
