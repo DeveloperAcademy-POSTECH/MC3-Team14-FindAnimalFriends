@@ -50,7 +50,7 @@ class ReadyView: UIView {
     
     private func setupCodeName() {
         DispatchQueue.main.async {
-            AVPlay.shared2.playSound2(sound: "typingSound2")
+            AVPlay.shared.playSound(sound: "typingSound2")
             for i in self.subtitle {
                 self.textLabel.text! += "\(i)"
                 RunLoop.current.run(until: Date() + 0.05)
