@@ -22,7 +22,7 @@ class QuizExplanationView: UIView {
         return imageView
     }()
     
-    private lazy var disappointLabel: UILabel = {
+    private lazy var explanationLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.text = self.quizExplanation
@@ -61,7 +61,7 @@ class QuizExplanationView: UIView {
         addSubview(blackView)
         blackView.addSubview(whiteView)
         blackView.addSubview(detectiveImage)
-        whiteView.addSubview(disappointLabel)
+        whiteView.addSubview(explanationLabel)
         whiteView.addSubview(completeButton)
         applyConstraints()
         blackView.sendSubviewToBack(detectiveImage)
