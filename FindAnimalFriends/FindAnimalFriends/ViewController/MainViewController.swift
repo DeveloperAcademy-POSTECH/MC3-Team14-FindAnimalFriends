@@ -17,6 +17,7 @@ class MainViewController: UIViewController {
     
     private var openIndex: Int = -1 { // 현재 오픈되어있는 Animal 컨텐츠 중 마지막 index.
         didSet {
+            guard oldValue != openIndex else { return }
             setupLights()
             setupLotties()
         }
