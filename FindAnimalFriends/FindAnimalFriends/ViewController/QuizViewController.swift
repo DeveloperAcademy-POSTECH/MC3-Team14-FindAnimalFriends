@@ -166,7 +166,7 @@ class QuizViewController: UIViewController {
     
     // quizCompleteView 띄우기
     @objc func addCompleteView() {
-        AVPlay.shared2.playSound2(sound: "cheerSound2")
+        AVPlay.shared.playSound(sound: "cheerSound")
         quizCompleteView = QuizCompleteView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), animalName: animalName ?? "panda")
         quizCompleteView!.completeButton.addTarget(self, action: #selector(closeCompleteView), for: .touchUpInside)
         view.addSubview(quizCompleteView!)
@@ -186,7 +186,7 @@ class QuizViewController: UIViewController {
     
     // quizWrongView 띄우기
     @objc func addWrongView() {
-        AVPlay.shared2.playSound2(sound: "failSound")
+        AVPlay.shared.playSound(sound: "failSound")
         quizWrongView = QuizWrongView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
         quizWrongView!.completeButton.addTarget(self, action: #selector(closeWrongView), for: .touchUpInside)
         view.addSubview(quizWrongView!)

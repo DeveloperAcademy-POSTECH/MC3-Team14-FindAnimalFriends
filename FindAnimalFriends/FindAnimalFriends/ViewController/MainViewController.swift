@@ -186,11 +186,13 @@ private extension MainViewController {
     }
     
     @objc func animate(_ sender: UIButton) {
-        zoomAction(tag: sender.tag)
+        zoomAction(tag: sender.tag, isSound: true)
     }
     
-    func zoomAction(tag: Int) {
-        
+    func zoomAction(tag: Int, isSound: Bool) {
+        if isSound {
+            AVPlay.shared.playSound(sound: "switchScreen")
+        }
         UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut) { [weak self] in
             guard let self = self else { return }
             Zoom.status = (Zoom.status == .zoomIn ? .zoomOut : .zoomIn)
@@ -267,10 +269,10 @@ private extension MainViewController {
     
     @objc func pushToQuiz() {
         let vc = QuizPageViewController(transitionStyle: .pageCurl, navigationOrientation: .vertical, animalName: currentAnimal)
-        AVPlay.shared2.playSound2(sound: "startGameSound")
+        AVPlay.shared.playSound(sound: "startGameSound2")
         navigationController?.pushViewController(vc, animated: true)
         DispatchQueue.main.asyncAfter(deadline: .now()+0.5) { [weak self] in
-            self?.zoomAction(tag: 0)
+            self?.zoomAction(tag: 0, isSound: false)
         }
     }
 }
