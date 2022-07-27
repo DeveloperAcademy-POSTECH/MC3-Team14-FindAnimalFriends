@@ -97,7 +97,7 @@ class AVPlay {
 
     var player: AVAudioPlayer!
 
-    func playSound(sound: String){
+    func playSound(sound: String) {
          let url = Bundle.main.url(forResource: sound, withExtension: "wav")
          guard url != nil else{
              return
@@ -105,7 +105,7 @@ class AVPlay {
          do{
              player = try AVAudioPlayer(contentsOf: url!)
              player?.play()
-         }catch{
+         } catch {
              print("\(error)")
          }
      }

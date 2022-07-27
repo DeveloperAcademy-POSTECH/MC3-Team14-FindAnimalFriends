@@ -338,7 +338,7 @@ class LaunchScreenController: UIViewController {
     }()
     
     // FIXME: 함수설명 넣고 띄우기 프로퍼티, 유아이프로퍼티, 라이프사이클, function(함수가 많으면 Private으로 따로 뺌),  extension
-    private func setupSliderLayout(){
+    private func setupSliderLayout() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.bounds.height*0.15),

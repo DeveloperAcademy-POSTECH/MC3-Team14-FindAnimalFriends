@@ -29,6 +29,7 @@
 		BA356C5F289116A100224A24 /* typingSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = BA356C5E289116A100224A24 /* typingSound.wav */; };
 		BA356C61289117F600224A24 /* startGameSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = BA356C60289117F600224A24 /* startGameSound.wav */; };
 		BA356C6328911A0100224A24 /* typingSound2.wav in Resources */ = {isa = PBXBuildFile; fileRef = BA356C6228911A0100224A24 /* typingSound2.wav */; };
+		BA356C6528911CEA00224A24 /* pageFlipSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = BA356C6428911CEA00224A24 /* pageFlipSound.wav */; };
 		BAA5DF4F288C03F1001931FE /* LaunchScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA5DF4E288C03F1001931FE /* LaunchScreenController.swift */; };
 		BAA5DF51288C0594001931FE /* KOTRA HOPE.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAA5DF50288C0594001931FE /* KOTRA HOPE.ttf */; };
 		BAA5DF5F288D30B9001931FE /* LaunchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = BAA5DF5E288D30B9001931FE /* LaunchImage.png */; };
@@ -61,6 +62,7 @@
 		BA356C5E289116A100224A24 /* typingSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = typingSound.wav; sourceTree = "<group>"; };
 		BA356C60289117F600224A24 /* startGameSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = startGameSound.wav; sourceTree = "<group>"; };
 		BA356C6228911A0100224A24 /* typingSound2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = typingSound2.wav; sourceTree = "<group>"; };
+		BA356C6428911CEA00224A24 /* pageFlipSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pageFlipSound.wav; sourceTree = "<group>"; };
 		BAA5DF4E288C03F1001931FE /* LaunchScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenController.swift; sourceTree = "<group>"; };
 		BAA5DF50288C0594001931FE /* KOTRA HOPE.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KOTRA HOPE.ttf"; sourceTree = "<group>"; };
 		BAA5DF5E288D30B9001931FE /* LaunchImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchImage.png; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				BA356C60289117F600224A24 /* startGameSound.wav */,
+				BA356C6428911CEA00224A24 /* pageFlipSound.wav */,
 				BA356C5C2891062600224A24 /* textSound.wav */,
 				BA356C582891050300224A24 /* textSound2.wav */,
 				BA356C592891050300224A24 /* textSound3.wav */,
@@ -254,6 +257,7 @@
 				BA356C6328911A0100224A24 /* typingSound2.wav in Resources */,
 				BAA5DF51288C0594001931FE /* KOTRA HOPE.ttf in Resources */,
 				BA356C5D2891062600224A24 /* textSound.wav in Resources */,
+				BA356C6528911CEA00224A24 /* pageFlipSound.wav in Resources */,
 				BA356C61289117F600224A24 /* startGameSound.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
