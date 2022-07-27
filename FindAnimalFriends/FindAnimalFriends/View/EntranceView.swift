@@ -54,7 +54,7 @@ class EntranceView: UIView {
     func setupCodeName() {
         makeDescription()
         DispatchQueue.main.async {
-            AVPlay.shared2.playSound2(sound: "typingSound")
+            AVPlay.shared.playSound(sound: "typingSound")
             for i in self.animalDescription {
                 self.textLabel.text! += "\(i)"
                 RunLoop.current.run(until: Date() + 0.05)

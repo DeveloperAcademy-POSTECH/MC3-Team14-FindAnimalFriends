@@ -122,18 +122,18 @@ class BGMPlay {
 
 class AVPlay {
 
-    static let shared2 = AVPlay()
+    static let shared = AVPlay()
 
-    var player2: AVAudioPlayer!
+    var player: AVAudioPlayer!
 
-    func playSound2(sound: String) {
+    func playSound(sound: String) {
          let url2 = Bundle.main.url(forResource: sound, withExtension: "wav")
          guard url2 != nil else{
              return
          }
          do{
-             player2 = try AVAudioPlayer(contentsOf: url2!)
-             player2?.play()
+             player = try AVAudioPlayer(contentsOf: url2!)
+             player?.play()
            
          } catch {
              print("\(error)")
