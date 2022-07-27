@@ -27,6 +27,12 @@ extension CGSize {
     // 확대일 때 동물메모의 크기
     static let memoDoubleSize = CGSize(width: .screenW / 1.5, height: .screenW / 1.6)
     
+    // 축소일 때 checkmark lottie 크기
+    static let checkSize = CGSize(width: .screenW / 6, height: .screenW / 6)
+    
+    // 확대일 때 checkmark lottie 크기
+    static let checkDoubleSize = CGSize(width: .screenW / 3, height: .screenW / 3)
+    
     // 확대일 때 배경의 크기
     static let backDoubleSize = CGSize(width: .screenW * 2, height: .screenH * 2)
     

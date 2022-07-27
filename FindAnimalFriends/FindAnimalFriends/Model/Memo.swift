@@ -37,12 +37,23 @@ struct Memo {
         )
     }
     
+    // 하위 모든 Computed property의 크기는 상단 memoFrame의 크기에 비례한다.
+    var lottieFrame: CGRect {
+        return CGRect(
+            origin: CGPoint(
+                x: memoFrame.origin.x + memoFrame.width/2,
+                y: memoFrame.origin.y + memoFrame.width/2
+            ),
+            size: isZoomMode ? .checkDoubleSize : .checkSize
+        )
+    }
+    
     var backImageFrame: CGRect { // memoRatio와 isZoomMode를 기반으로 배경의 좌표와 크기를 반환
         if isZoomMode {
             return CGRect(
                 origin: CGPoint(
-                    x: -.screenW*2 / memoRatio[0] + .screenW/5,
-                    y: -.screenH*2 / memoRatio[1] + .screenH/3
+                    x: -memoFrame.origin.x + .screenW/5,
+                    y: -memoFrame.origin.y + .screenH/3
                 ),
                 size: .backDoubleSize
             )
@@ -55,8 +66,8 @@ struct Memo {
         return UIBezierPath(
             ovalIn: CGRect(
                 origin: CGPoint(
-                    x: .screenW / memoRatio[0] - .screenW/10,
-                    y: .screenH / memoRatio[1] - .screenW/10
+                    x: memoFrame.origin.x - .screenW/10,
+                    y: memoFrame.origin.y - .screenW/10
                 ),
                 size: .maskSize
             )
@@ -67,8 +78,8 @@ struct Memo {
         return UIBezierPath(
             ovalIn: CGRect(
                 origin: CGPoint(
-                    x: .screenW * 2 / memoRatio[0] - .screenW/5,
-                    y: .screenH * 2 / memoRatio[1] - .screenW/5
+                    x: memoFrame.origin.x - .screenW/5,
+                    y: memoFrame.origin.y - .screenW/5
                 ),
                 size: .maskDoubleSize
             )

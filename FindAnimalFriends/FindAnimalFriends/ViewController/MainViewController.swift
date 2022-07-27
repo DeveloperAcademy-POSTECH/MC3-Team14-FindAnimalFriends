@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Lottie
 
 
 class MainViewController: UIViewController {
@@ -17,6 +18,7 @@ class MainViewController: UIViewController {
     private var currentIndex: Int = -1 { // 현재 오픈되어있는 Animal 컨텐츠 중 마지막 index.
         didSet {
             setupLights()
+            setupLotties()
         }
     }
     
@@ -29,6 +31,7 @@ class MainViewController: UIViewController {
     ]
     
     private var memoButtons: [UIButton] = [] // 전체 크기변화 handling을 위한 버튼 배열.
+    private var lottieViews: [CheckmarkLottieView] = []
     
     private let maskLayer = CAShapeLayer() // Mask Circle path(경로)를 총괄하는 layer
     
@@ -100,22 +103,16 @@ class MainViewController: UIViewController {
         
         //index를 통한 handling 예정.
         if UserDefaults.standard.dictionaryRepresentation().keys.contains("clear") {
-            let index = UserDefaults.standard.integer(forKey: "clear")
-            if index >= 5 {
-                currentIndex = 4
-                
-            } else {
-                currentIndex = index
-            }
+            currentIndex = UserDefaults.standard.integer(forKey: "clear")
         }
         
         if currentIndex == -1 {
             setReady()
         }
         
-        let _ = memoButtons.map { button in
+        let _ = memoButtons.map { button in // button 터치 조절
             button.isUserInteractionEnabled = (button.tag == currentIndex)
-        }
+        } //FIXME: 추후 수정가능성있는 부분.
     }
 }
 
@@ -151,13 +148,36 @@ private extension MainViewController {
             button.addTarget(self, action: #selector(animate(_:)), for: .touchUpInside)
             memoButtons.append(button)
             backImageView.addSubview(button)
+            
+            let lottieView = CheckmarkLottieView(frame: i.lottieFrame)
+            lottieView.tag = idx
+            lottieViews.append(lottieView)
+            backImageView.addSubview(lottieView)
+        }
+    }
+    
+    func setupLotties() {
+        for (idx, lottie) in lottieViews.enumerated() {
+            if currentIndex > 4 {
+                lottie.checkView.play()
+            } else if idx == currentIndex - 1 {
+                lottie.checkView.play()
+            } else if idx < currentIndex - 1 {
+                lottie.checkView.currentFrame = lottie.checkView.animation?.endFrame ?? 91
+            } else {
+                lottie.checkView.currentFrame = 0
+            }
         }
     }
     
     func setupLights() {
         let path = UIBezierPath()
-        for memo in memos[0...currentIndex] {
-            path.append(memo.outMaskLayer)
+        if currentIndex < 5 {
+            for memo in memos[0...currentIndex] {
+                path.append(memo.outMaskLayer)
+            }
+        } else {
+            path.append(UIBezierPath(rect: view.bounds))
         }
         maskLayer.path = path.cgPath
         maskLayer.fillRule = .nonZero
@@ -186,9 +206,15 @@ private extension MainViewController {
                 button.frame = self.memos[button.tag].memoFrame
             }
             
-            self.memoButtons[self.currentIndex].isUserInteractionEnabled = (Zoom.status == .zoomOut)
+            let _ = self.lottieViews.map { lottie in
+                lottie.frame = self.memos[lottie.tag].lottieFrame
+                lottie.checkView.frame.size = self.memos[lottie.tag].lottieFrame.size
+            }
+            if self.currentIndex < 5 {
+                self.memoButtons[self.currentIndex].isUserInteractionEnabled = (Zoom.status == .zoomOut)
+            }
         }
-        
+
         maskLayerAnimation() // light(조명) 확대, 축소
         
         currentAnimal = memos[tag].memoAnimal.replacingOccurrences(of: "Memo", with: "")
@@ -197,13 +223,14 @@ private extension MainViewController {
     }
     
     func maskLayerAnimation() {
+        let index = currentIndex > 4 ? 4 : currentIndex
         let path = UIBezierPath()
         if Zoom.status == .zoomIn {
-            for memo in memos[0...currentIndex] {
+            for memo in memos[0...index] {
                 path.append(memo.inMaskLayer)
             }
         } else {
-            for memo in memos[0...currentIndex] {
+            for memo in memos[0...index] {
                 path.append(memo.outMaskLayer)
             }
         }
