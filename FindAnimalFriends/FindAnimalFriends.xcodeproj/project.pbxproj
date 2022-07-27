@@ -13,6 +13,8 @@
 		42C0123E288FB35500E0CADB /* AnimalQuizzes.json in Resources */ = {isa = PBXBuildFile; fileRef = 42C0123D288FB35500E0CADB /* AnimalQuizzes.json */; };
 		42E8B23F288C0E210097D909 /* QuizCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E8B23E288C0E210097D909 /* QuizCompleteView.swift */; };
 		42F30F23288C03A900F772C6 /* QuizCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F30F22288C03A900F772C6 /* QuizCompleteViewController.swift */; };
+		831EDE9828915BA1002F9364 /* QuizExplanationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831EDE9728915BA1002F9364 /* QuizExplanationView.swift */; };
+		831EDE9A28915BBE002F9364 /* QuizExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831EDE9928915BBE002F9364 /* QuizExplanationViewController.swift */; };
 		964E45C8288D8F33004A43D4 /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964E45C7288D8F33004A43D4 /* Memo.swift */; };
 		964E45CA288DB69C004A43D4 /* EntranceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964E45C9288DB69C004A43D4 /* EntranceView.swift */; };
 		9678A711288AC3E600678BDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678A710288AC3E600678BDF /* AppDelegate.swift */; };
@@ -37,6 +39,8 @@
 		42C0123D288FB35500E0CADB /* AnimalQuizzes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AnimalQuizzes.json; sourceTree = "<group>"; };
 		42E8B23E288C0E210097D909 /* QuizCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCompleteView.swift; sourceTree = "<group>"; };
 		42F30F22288C03A900F772C6 /* QuizCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCompleteViewController.swift; sourceTree = "<group>"; };
+		831EDE9728915BA1002F9364 /* QuizExplanationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizExplanationView.swift; sourceTree = "<group>"; };
+		831EDE9928915BBE002F9364 /* QuizExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizExplanationViewController.swift; sourceTree = "<group>"; };
 		964E45C7288D8F33004A43D4 /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		964E45C9288DB69C004A43D4 /* EntranceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntranceView.swift; sourceTree = "<group>"; };
 		9678A70D288AC3E600678BDF /* FindAnimalFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindAnimalFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +88,7 @@
 				42E8B23E288C0E210097D909 /* QuizCompleteView.swift */,
 				964E45C7288D8F33004A43D4 /* Memo.swift */,
 				42C01234288D63C300E0CADB /* QuizWrongView.swift */,
+				831EDE9728915BA1002F9364 /* QuizExplanationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -97,6 +102,7 @@
 				42C01236288D63F300E0CADB /* QuizWrongViewController.swift */,
 				42F30F22288C03A900F772C6 /* QuizCompleteViewController.swift */,
 				96DBD9BA288BC9FF006B2767 /* ClearTestViewController.swift */,
+				831EDE9928915BBE002F9364 /* QuizExplanationViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -236,6 +242,7 @@
 				42C01237288D63F300E0CADB /* QuizWrongViewController.swift in Sources */,
 				42E8B23F288C0E210097D909 /* QuizCompleteView.swift in Sources */,
 				42F30F23288C03A900F772C6 /* QuizCompleteViewController.swift in Sources */,
+				831EDE9A28915BBE002F9364 /* QuizExplanationViewController.swift in Sources */,
 				9678A715288AC3E600678BDF /* MainViewController.swift in Sources */,
 				96DBD9BB288BC9FF006B2767 /* ClearTestViewController.swift in Sources */,
 				42C0123C288FB2EA00E0CADB /* DataModel.swift in Sources */,
@@ -247,6 +254,7 @@
 				9678A711288AC3E600678BDF /* AppDelegate.swift in Sources */,
 				BAA5DF4F288C03F1001931FE /* LaunchScreenController.swift in Sources */,
 				9678A713288AC3E600678BDF /* SceneDelegate.swift in Sources */,
+				831EDE9828915BA1002F9364 /* QuizExplanationView.swift in Sources */,
 				96DBD9B9288BB9E6006B2767 /* Extension.swift in Sources */,
 				42C01235288D63C300E0CADB /* QuizWrongView.swift in Sources */,
 			);
