@@ -158,7 +158,9 @@ private extension MainViewController {
     
     func setupLotties() {
         for (idx, lottie) in lottieViews.enumerated() {
-            if idx == currentIndex - 1 {
+            if currentIndex > 4 {
+                lottie.checkView.play()
+            } else if idx == currentIndex - 1 {
                 lottie.checkView.play()
             } else if idx < currentIndex - 1 {
                 lottie.checkView.currentFrame = lottie.checkView.animation?.endFrame ?? 91
