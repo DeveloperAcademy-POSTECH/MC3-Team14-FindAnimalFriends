@@ -16,6 +16,8 @@
 		964E45C8288D8F33004A43D4 /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964E45C7288D8F33004A43D4 /* Memo.swift */; };
 		964E45CA288DB69C004A43D4 /* EntranceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964E45C9288DB69C004A43D4 /* EntranceView.swift */; };
 		9656BC4A28910A5A00318D07 /* checkmark.json in Resources */ = {isa = PBXBuildFile; fileRef = 9656BC4928910A5A00318D07 /* checkmark.json */; };
+		9656BC4C28910AD500318D07 /* CheckmarkLottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9656BC4B28910AD500318D07 /* CheckmarkLottieView.swift */; };
+		9656BC4F28910B4800318D07 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 9656BC4E28910B4800318D07 /* Lottie */; };
 		9678A711288AC3E600678BDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678A710288AC3E600678BDF /* AppDelegate.swift */; };
 		9678A713288AC3E600678BDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678A712288AC3E600678BDF /* SceneDelegate.swift */; };
 		9678A715288AC3E600678BDF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678A714288AC3E600678BDF /* MainViewController.swift */; };
@@ -41,6 +43,7 @@
 		964E45C7288D8F33004A43D4 /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		964E45C9288DB69C004A43D4 /* EntranceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntranceView.swift; sourceTree = "<group>"; };
 		9656BC4928910A5A00318D07 /* checkmark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = checkmark.json; sourceTree = "<group>"; };
+		9656BC4B28910AD500318D07 /* CheckmarkLottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkLottieView.swift; sourceTree = "<group>"; };
 		9678A70D288AC3E600678BDF /* FindAnimalFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindAnimalFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9678A710288AC3E600678BDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9678A712288AC3E600678BDF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9656BC4F28910B4800318D07 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +87,7 @@
 			children = (
 				964E45C9288DB69C004A43D4 /* EntranceView.swift */,
 				96D35B47288F12F9000FAC52 /* ReadyView.swift */,
+				9656BC4B28910AD500318D07 /* CheckmarkLottieView.swift */,
 				42E8B23E288C0E210097D909 /* QuizCompleteView.swift */,
 				964E45C7288D8F33004A43D4 /* Memo.swift */,
 				42C01234288D63C300E0CADB /* QuizWrongView.swift */,
@@ -187,6 +192,9 @@
 			dependencies = (
 			);
 			name = FindAnimalFriends;
+			packageProductDependencies = (
+				9656BC4E28910B4800318D07 /* Lottie */,
+			);
 			productName = FindAnimalFriends;
 			productReference = 9678A70D288AC3E600678BDF /* FindAnimalFriends.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +223,9 @@
 				Base,
 			);
 			mainGroup = 9678A704288AC3E600678BDF;
+			packageReferences = (
+				9656BC4D28910B4800318D07 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = 9678A70E288AC3E600678BDF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -248,6 +259,7 @@
 				42C01237288D63F300E0CADB /* QuizWrongViewController.swift in Sources */,
 				42E8B23F288C0E210097D909 /* QuizCompleteView.swift in Sources */,
 				42F30F23288C03A900F772C6 /* QuizCompleteViewController.swift in Sources */,
+				9656BC4C28910AD500318D07 /* CheckmarkLottieView.swift in Sources */,
 				9678A715288AC3E600678BDF /* MainViewController.swift in Sources */,
 				96DBD9BB288BC9FF006B2767 /* ClearTestViewController.swift in Sources */,
 				42C0123C288FB2EA00E0CADB /* DataModel.swift in Sources */,
@@ -470,6 +482,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9656BC4D28910B4800318D07 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9656BC4E28910B4800318D07 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9656BC4D28910B4800318D07 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9678A705288AC3E600678BDF /* Project object */;
 }
