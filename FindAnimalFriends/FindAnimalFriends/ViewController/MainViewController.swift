@@ -267,6 +267,7 @@ private extension MainViewController {
     
     @objc func pushToQuiz() {
         let vc = QuizPageViewController(transitionStyle: .pageCurl, navigationOrientation: .vertical, animalName: currentAnimal)
+        AVPlay.shared.playSound(sound: "startGameSound")
         navigationController?.pushViewController(vc, animated: true)
         DispatchQueue.main.asyncAfter(deadline: .now()+0.5) { [weak self] in
             self?.zoomAction(tag: 0)
