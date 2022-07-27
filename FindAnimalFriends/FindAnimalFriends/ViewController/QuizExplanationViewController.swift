@@ -9,21 +9,18 @@ import UIKit
 
 class QuizExplanationViewController: UIViewController {
 
+    private var quizExplanationView : QuizExplanationView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .systemBackground
+        quizExplanationView = QuizExplanationView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
+        quizExplanationView!.completeButton.addTarget(self, action: #selector(closeQuizExplanationView), for: .touchUpInside)
+        view.addSubview(quizExplanationView!)
+    }
+    @objc func closeQuizExplanationView() {
+        quizExplanationView!.removeFromSuperview()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

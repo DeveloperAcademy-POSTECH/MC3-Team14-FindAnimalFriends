@@ -8,13 +8,118 @@
 import UIKit
 
 class QuizExplanationView: UIView {
+    var quizExplanation = "호랑이가 괜히 백수의 왕이라고 불리는게 아니지. 점프할때는 무려 3미터 이상도 뛸수 있고, 다른 고양잇과 동물들처럼 나무타기도 잘하지만, 물을 싫어하는 다른 고양잇과 동물들과는 달리 수영도 잘한단다."
+    //MARK: assistantImage
+    private let assistantImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        imageView.image = UIImage(named: "detectiveImage3")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    //MARK: assistantImage
+    private lazy var disappointLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.text = self.quizExplanation
+        label.font = UIFont(name: "KOTRA HOPE", size: converterFontSize(getFontSize: 24))
+        label.frame = CGRect(x: converterWidth(getWidth: 22), y: converterHeight(getHeight: 22), width: converterWidth(getWidth: 280), height: converterHeight(getHeight: .screenH/3.5))
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    //MARK: blackView
+    private let blackView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    //MARK: whiteView
+    private let whiteView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 24
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    //MARK: completeButton
+    let completeButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("다음 문제로", for: .normal)
+        button.titleLabel?.font = UIFont(name: "KOTRA HOPE", size: 24)
+        button.titleLabel?.textColor = .white
+        button.clipsToBounds = true
+        button.backgroundColor = UIColor(red: 231/255, green: 162/255, blue: 84/255, alpha: 100)//hexcode: E7A254
+        button.layer.cornerRadius = 8
+        button.translatesAutoresizingMaskIntoConstraints = false
+        //뷰 그림자부분
+        button.layer.shadowColor = UIColor.black.cgColor // 그림자색깔
+        button.layer.masksToBounds = false  // 뷰 내부에 속한 요소들이 UIView 밖을 벗어날 때, 잘라낼 것인지결정하는 변수 그림자는 밖에 그려지는 것이므로(UIView를 벗어나므로) false로 설정함
+        //button.layer.shadowOffset = CGSize(width: 0, height: 2) // 그림자의 위치조정
+        button.layer.shadowOffset = CGSize(width: 1.0, height: 4.0) // 그림자의 위치조정
+        button.layer.shadowRadius = 2//그림자의 반경
+        button.layer.shadowOpacity = 0.4 // 그림자의 alpha값
+        
+        //https://gonslab.tistory.com/23 참고했음
+        
+        return button
+        
+    }()
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    //MARK:
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubview(blackView)
+        blackView.addSubview(whiteView)
+        blackView.addSubview(assistantImage)
+        whiteView.addSubview(disappointLabel)
+        whiteView.addSubview(completeButton)
+        applyConstraints()
+        blackView.sendSubviewToBack(assistantImage)
     }
-    */
+    
+    private func applyConstraints() {
+    
+        let assisstantImageViewConstraints = [
+            assistantImage.topAnchor.constraint(equalTo: whiteView.topAnchor, constant: converterHeight(getHeight: -75)),
+            assistantImage.bottomAnchor.constraint(equalTo: whiteView.topAnchor, constant: converterHeight(getHeight: 20)),
+            assistantImage.leadingAnchor.constraint(equalTo: blackView.leadingAnchor, constant: converterWidth(getWidth: 37)),
+            assistantImage.trailingAnchor.constraint(equalTo: blackView.trailingAnchor, constant: -1*converterWidth(getWidth: 257))
+        ]
+        
+        let whiteViewConstraints = [
+            whiteView.topAnchor.constraint(equalTo: blackView.topAnchor, constant: converterHeight(getHeight: .hund*2)),
+            whiteView.bottomAnchor.constraint(equalTo: blackView.bottomAnchor, constant: -1*converterHeight(getHeight: .hund*3)),
+            whiteView.leadingAnchor.constraint(equalTo: blackView.leadingAnchor, constant: converterWidth(getWidth: 33)),
+            whiteView.trailingAnchor.constraint(equalTo: blackView.trailingAnchor, constant: -1*converterWidth(getWidth: 33))
+        ]
+        
+        let blackViewConstraints = [
+            blackView.widthAnchor.constraint(equalToConstant: bounds.width),
+            blackView.heightAnchor.constraint(equalToConstant: bounds.height)
+        ]
+        
+        let completeButtonConstraints = [
+            completeButton.topAnchor.constraint(equalTo: whiteView.topAnchor, constant: converterHeight(getHeight: .hund*2.5)),
+            completeButton.bottomAnchor.constraint(equalTo: whiteView.bottomAnchor, constant:  -1*converterHeight(getHeight: 32)),
+            completeButton.leadingAnchor.constraint(equalTo: whiteView.leadingAnchor, constant: converterWidth(getWidth: 25)),
+            completeButton.trailingAnchor.constraint(equalTo: whiteView.trailingAnchor, constant: -1*converterWidth(getWidth: 25)),
+        ]
+        
+        NSLayoutConstraint.activate(blackViewConstraints)
+        NSLayoutConstraint.activate(whiteViewConstraints)
+        NSLayoutConstraint.activate(assisstantImageViewConstraints)
+        NSLayoutConstraint.activate(completeButtonConstraints)
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
 }
