@@ -15,8 +15,9 @@ class MainViewController: UIViewController {
     
     private var currentAnimal: String = "tiger"
     
-    private var currentIndex: Int = -1 { // 현재 오픈되어있는 Animal 컨텐츠 중 마지막 index.
+    private var openIndex: Int = -1 { // 현재 오픈되어있는 Animal 컨텐츠 중 마지막 index.
         didSet {
+            guard oldValue != openIndex else { return }
             setupLights()
             setupLotties()
         }
@@ -103,15 +104,15 @@ class MainViewController: UIViewController {
         
         //index를 통한 handling 예정.
         if UserDefaults.standard.dictionaryRepresentation().keys.contains("clear") {
-            currentIndex = UserDefaults.standard.integer(forKey: "clear")
+            openIndex = UserDefaults.standard.integer(forKey: "clear")
         }
         
-        if currentIndex == -1 {
+        if openIndex == -1 {
             setReady()
         }
         
         let _ = memoButtons.map { button in // button 터치 조절
-            button.isUserInteractionEnabled = (button.tag == currentIndex)
+            button.isUserInteractionEnabled = (button.tag <= openIndex)
         } //FIXME: 추후 수정가능성있는 부분.
     }
 }
@@ -134,7 +135,7 @@ private extension MainViewController {
         UserDefaults.standard.set(0, forKey: "clear")
         Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { [weak self] _ in
             self?.readyView?.removeFromSuperview()
-            self?.currentIndex = 0
+            self?.openIndex = 0
             self?.memoButtons[0].isUserInteractionEnabled = true //FIXME: 그냥 구현용 하드코딩
         }
     }
@@ -158,11 +159,11 @@ private extension MainViewController {
     
     func setupLotties() {
         for (idx, lottie) in lottieViews.enumerated() {
-            if currentIndex > 4 {
+            if openIndex > 4 {
                 lottie.checkView.play()
-            } else if idx == currentIndex - 1 {
+            } else if idx == openIndex - 1 {
                 lottie.checkView.play()
-            } else if idx < currentIndex - 1 {
+            } else if idx < openIndex - 1 {
                 lottie.checkView.currentFrame = lottie.checkView.animation?.endFrame ?? 91
             } else {
                 lottie.checkView.currentFrame = 0
@@ -172,8 +173,8 @@ private extension MainViewController {
     
     func setupLights() {
         let path = UIBezierPath()
-        if currentIndex < 5 {
-            for memo in memos[0...currentIndex] {
+        if openIndex < 5 {
+            for memo in memos[0...openIndex] {
                 path.append(memo.outMaskLayer)
             }
         } else {
@@ -210,8 +211,8 @@ private extension MainViewController {
                 lottie.frame = self.memos[lottie.tag].lottieFrame
                 lottie.checkView.frame.size = self.memos[lottie.tag].lottieFrame.size
             }
-            if self.currentIndex < 5 {
-                self.memoButtons[self.currentIndex].isUserInteractionEnabled = (Zoom.status == .zoomOut)
+            if self.openIndex < 5 {
+                self.memoButtons[self.openIndex].isUserInteractionEnabled = (Zoom.status == .zoomOut)
             }
         }
 
@@ -223,7 +224,7 @@ private extension MainViewController {
     }
     
     func maskLayerAnimation() {
-        let index = currentIndex > 4 ? 4 : currentIndex
+        let index = openIndex > 4 ? 4 : openIndex
         let path = UIBezierPath()
         if Zoom.status == .zoomIn {
             for memo in memos[0...index] {
@@ -255,6 +256,7 @@ private extension MainViewController {
                 entranceView.pushButton.addTarget(self, action: #selector(self.pushToQuiz), for: .touchUpInside)
                 entranceView.animalName = self.currentAnimal
                 entranceView.setupCodeName()
+                entranceView.isClear()
                 self.view.addSubview(entranceView)
             }
         } else {
@@ -265,6 +267,7 @@ private extension MainViewController {
     
     @objc func pushToQuiz() {
         let vc = QuizPageViewController(transitionStyle: .pageCurl, navigationOrientation: .vertical, animalName: currentAnimal)
+        AVPlay.shared2.playSound2(sound: "startGameSound")
         navigationController?.pushViewController(vc, animated: true)
         DispatchQueue.main.asyncAfter(deadline: .now()+0.5) { [weak self] in
             self?.zoomAction(tag: 0)
