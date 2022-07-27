@@ -76,6 +76,7 @@
 		42C01238288FB26A00E0CADB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				964E45C7288D8F33004A43D4 /* Memo.swift */,
 				42C0123B288FB2EA00E0CADB /* DataModel.swift */,
 				42C0123D288FB35500E0CADB /* AnimalQuizzes.json */,
 			);
@@ -89,7 +90,6 @@
 				96D35B47288F12F9000FAC52 /* ReadyView.swift */,
 				9656BC4B28910AD500318D07 /* CheckmarkLottieView.swift */,
 				42E8B23E288C0E210097D909 /* QuizCompleteView.swift */,
-				964E45C7288D8F33004A43D4 /* Memo.swift */,
 				42C01234288D63C300E0CADB /* QuizWrongView.swift */,
 			);
 			path = View;
