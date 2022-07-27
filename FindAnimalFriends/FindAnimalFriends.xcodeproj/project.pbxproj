@@ -35,6 +35,7 @@
 		BAA5DF5F288D30B9001931FE /* LaunchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = BAA5DF5E288D30B9001931FE /* LaunchImage.png */; };
 		FE5DCEEE288D57D900DBD272 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5DCEEC288D57D800DBD272 /* QuizViewController.swift */; };
 		FE5DCEEF288D57D900DBD272 /* QuizPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5DCEED288D57D800DBD272 /* QuizPageViewController.swift */; };
+		FE5DCEF72891261100DBD272 /* cheerSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE5DCEF62891261100DBD272 /* cheerSound.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		BAA5DF5E288D30B9001931FE /* LaunchImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchImage.png; sourceTree = "<group>"; };
 		FE5DCEEC288D57D800DBD272 /* QuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
 		FE5DCEED288D57D800DBD272 /* QuizPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizPageViewController.swift; sourceTree = "<group>"; };
+		FE5DCEF62891261100DBD272 /* cheerSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cheerSound.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 		BA356C572891049000224A24 /* Sound */ = {
 			isa = PBXGroup;
 			children = (
+				FE5DCEF62891261100DBD272 /* cheerSound.wav */,
 				BA356C60289117F600224A24 /* startGameSound.wav */,
 				BA356C6428911CEA00224A24 /* pageFlipSound.wav */,
 				BA356C5C2891062600224A24 /* textSound.wav */,
@@ -255,6 +258,7 @@
 				9678A71A288AC3E700678BDF /* Assets.xcassets in Resources */,
 				BA356C5F289116A100224A24 /* typingSound.wav in Resources */,
 				BA356C6328911A0100224A24 /* typingSound2.wav in Resources */,
+				FE5DCEF72891261100DBD272 /* cheerSound.wav in Resources */,
 				BAA5DF51288C0594001931FE /* KOTRA HOPE.ttf in Resources */,
 				BA356C5D2891062600224A24 /* textSound.wav in Resources */,
 				BA356C6528911CEA00224A24 /* pageFlipSound.wav in Resources */,
