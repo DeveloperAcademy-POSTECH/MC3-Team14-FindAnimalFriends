@@ -21,10 +21,15 @@ class CheckmarkLottieView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(checkView)
-        checkView.frame = bounds //bounds~!
+        checkView.frame = bounds
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        checkView.frame = bounds //bounds~!
+//    }
 }

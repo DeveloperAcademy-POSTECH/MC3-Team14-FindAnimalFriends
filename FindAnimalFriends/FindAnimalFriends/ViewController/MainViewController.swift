@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Lottie
 
 
 class MainViewController: UIViewController {
@@ -17,6 +18,7 @@ class MainViewController: UIViewController {
     private var currentIndex: Int = -1 { // 현재 오픈되어있는 Animal 컨텐츠 중 마지막 index.
         didSet {
             setupLights()
+            setupLotties()
         }
     }
     
@@ -154,9 +156,21 @@ private extension MainViewController {
             backImageView.addSubview(button)
             
             let lottieView = CheckmarkLottieView(frame: i.lottieFrame)
-            lottieView.checkView.play()
+            lottieView.tag = idx
             lottieViews.append(lottieView)
             backImageView.addSubview(lottieView)
+        }
+    }
+    
+    func setupLotties() {
+        for (idx, lottie) in lottieViews.enumerated() {
+            if idx == currentIndex - 1 {
+                lottie.checkView.play()
+            } else if idx < currentIndex - 1 {
+                lottie.checkView.currentFrame = lottie.checkView.animation?.endFrame ?? 91
+            } else {
+                lottie.checkView.currentFrame = 0
+            }
         }
     }
     
@@ -193,9 +207,14 @@ private extension MainViewController {
                 button.frame = self.memos[button.tag].memoFrame
             }
             
+            let _ = self.lottieViews.map { lottie in
+                lottie.frame = self.memos[lottie.tag].lottieFrame
+                lottie.checkView.frame.size = self.memos[lottie.tag].lottieFrame.size
+            }
+            
             self.memoButtons[self.currentIndex].isUserInteractionEnabled = (Zoom.status == .zoomOut)
         }
-        
+
         maskLayerAnimation() // light(조명) 확대, 축소
         
         currentAnimal = memos[tag].memoAnimal.replacingOccurrences(of: "Memo", with: "")
