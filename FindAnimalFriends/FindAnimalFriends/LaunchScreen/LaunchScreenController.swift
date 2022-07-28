@@ -32,15 +32,13 @@ class LaunchScreenController: UIViewController {
     // FIXME: if 문 삭제
     @objc internal func onClickMyButton(_ sender: Any) {
         AVPlay.shared.playSound(sound: "startGameSound")
-        if sender is UIButton {
-            UIView.transition(with: view, duration: 1, options: .transitionCurlUp) {
-                self.isOnboarding = false
-                UserDefaults.standard.set(self.isOnboarding, forKey: "isOnboarding")
-                self.view.layer.opacity = 0
-            } completion: { _ in
-                self.view.window?.rootViewController = UINavigationController(rootViewController: MainViewController())
-                // navigation Controller 추가
-            }
+        UIView.transition(with: view, duration: 1, options: .transitionCurlUp) {
+            self.isOnboarding = false
+            UserDefaults.standard.set(self.isOnboarding, forKey: "isOnboarding")
+            self.view.layer.opacity = 0
+        } completion: { _ in
+            self.view.window?.rootViewController = UINavigationController(rootViewController: MainViewController())
+            // navigation Controller 추가
         }
     }
     

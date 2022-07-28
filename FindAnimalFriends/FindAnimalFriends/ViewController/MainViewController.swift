@@ -13,6 +13,7 @@ class MainViewController: UIViewController {
     
     // MARK: Properties
     
+    private var isOnboarding: Bool = false
     private var currentAnimal: String = "tiger"
     
     private var openIndex: Int = -1 { // 현재 오픈되어있는 Animal 컨텐츠 중 마지막 index.
@@ -55,11 +56,24 @@ class MainViewController: UIViewController {
         return imageView
     }()
     
+    // Go to Onboarding
+    private lazy var infoButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "questionmark.circle.fill"), for: .normal)
+        button.setPreferredSymbolConfiguration(
+            UIImage.SymbolConfiguration(pointSize: .hund/3, weight: .black), forImageIn: .normal
+        )
+        button.tintColor = .appColor(.primaryOrange)
+        button.addTarget(self, action: #selector(goToOnboarding), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     private var readyView: ReadyView?
     
     private var entranceView: EntranceView?
     
-    //MARK: Dummy - Real Hard Coding
+    // MARK: Dummy - Real Hard Coding
     
     private var dummyButtons: [UIButton] = []
     
@@ -93,6 +107,9 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
+        
+        //nav bar 영역의 버튼이 터치안되기에 숨겨줌
+        navigationController?.isNavigationBarHidden = true
         
         configureDummy()
         
@@ -155,6 +172,13 @@ private extension MainViewController {
             lottieViews.append(lottieView)
             backImageView.addSubview(lottieView)
         }
+        
+        view.addSubview(infoButton)
+        
+        NSLayoutConstraint.activate([
+            infoButton.topAnchor.constraint(equalTo: view.topAnchor, constant: .hund/2),
+            infoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -.hund/6)
+        ])
     }
     
     func setupLotties() {
@@ -273,6 +297,17 @@ private extension MainViewController {
         navigationController?.pushViewController(vc, animated: true)
         DispatchQueue.main.asyncAfter(deadline: .now()+0.5) { [weak self] in
             self?.zoomAction(tag: 0, isSound: false)
+        }
+    }
+    
+    @objc func goToOnboarding() {
+        UIView.transition(with: dummyBlack, duration: 1, options: .transitionCurlDown) {
+            self.isOnboarding = true
+            UserDefaults.standard.set(self.isOnboarding, forKey: "isOnboarding")
+            self.view.layer.opacity = 0
+        } completion: { _ in
+            self.view.window?.rootViewController = UINavigationController(rootViewController: LaunchScreenController())
+            // navigation Controller 추가
         }
     }
 }
