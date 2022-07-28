@@ -77,18 +77,6 @@ class QuizExplanationView: UIView {
         // detectiveImage 가려지게 하기
     }
     
-    required init(frame: CGRect, quizExplanation: String) {
-        super.init(frame: frame)
-        self.quizExplanation = quizExplanation
-        addSubview(blackView)
-        blackView.addSubview(whiteView)
-        blackView.addSubview(detectiveImage)
-        whiteView.addSubview(explanationLabel)
-        whiteView.addSubview(completeButton)
-        applyConstraints()
-        blackView.sendSubviewToBack(detectiveImage)
-    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
