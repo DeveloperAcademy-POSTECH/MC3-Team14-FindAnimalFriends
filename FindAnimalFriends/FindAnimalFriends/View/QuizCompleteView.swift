@@ -102,7 +102,9 @@ class QuizCompleteView: UIView {
         return button
         
     }()
-
+    
+    let lottieView = PartyPopperLotieView(frame: CGRect(x: converterWidth(getWidth: -20), y: converterHeight(getHeight: -250), width: converterWidth(getWidth: 374), height: converterHeight(getHeight: 844)))
+    
     //MARK:
     required init(frame: CGRect, animalName: String) {
         self.animalName = animalName
@@ -113,6 +115,8 @@ class QuizCompleteView: UIView {
         whiteView.addSubview(assistantImage)
         whiteView.addSubview(detectiveImage)
         whiteView.addSubview(completeButton)
+        whiteView.addSubview(lottieView)
+        lottieView.partyPopper.play()
         applyConstraints()
     }
     
