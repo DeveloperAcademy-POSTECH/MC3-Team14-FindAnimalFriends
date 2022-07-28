@@ -10,6 +10,7 @@ class LaunchScreenController: UIViewController {
     // MARK: 온보딩 관련 변수, 함수
     // FIXME: font 크기 관련 정리, 버튼 사이즈 관련 정리
     var isOnboarding = true
+    var isSplash = isSplash2.isSplash2
     let pageControlNum = 3
     lazy var onboardingExitButton: UIButton = {
         let posX: CGFloat = (.screenW*0.3)/2
@@ -43,91 +44,97 @@ class LaunchScreenController: UIViewController {
     }
     
     // MARK: 시간경과에 따른 애니메이션 함수
-    func timeCount() {
-        UIView.animate(withDuration: 0.5) { [self] in
-            self.findLabel.layer.opacity = 1
-            BGMPlay.shared.playSound(sound: "BGM")
-            AVPlay.shared.playSound(sound: "textSound")
-        } completion: { _ in
-            UIView.animate(withDuration: 0.5) {
-                self.animalLabel.layer.opacity = 1
+    func timeCount(_ isSplash: Bool) {
+        BGMPlay.shared.playSound(sound: "BGM")
+        if isSplash {
+            print(isSplash, "?")
+            UIView.animate(withDuration: 0.5) { [self] in
+                self.findLabel.layer.opacity = 1
                 AVPlay.shared.playSound(sound: "textSound")
             } completion: { _ in
                 UIView.animate(withDuration: 0.5) {
-                    self.friendsLabel.layer.opacity = 1
+                    self.animalLabel.layer.opacity = 1
                     AVPlay.shared.playSound(sound: "textSound")
                 } completion: { _ in
                     UIView.animate(withDuration: 0.5) {
-                        self.view.layer.opacity = 0
+                        self.friendsLabel.layer.opacity = 1
+                        AVPlay.shared.playSound(sound: "textSound")
+                    } completion: { _ in
+                        UIView.animate(withDuration: 0, delay: 2) {
+                            self.view.layer.opacity = 0
+                        } completion: { _ in
+                        }
+                    }
+                }
+            }
+        }
+        UIView.animate(withDuration: isSplash ? 0.5 : 0, delay: isSplash ? 2 : 0){
+            self.view.layer.opacity = 0
+        } completion: { _ in
+            UIView.animate(withDuration: 0.5) {
+                self.findLabel.removeFromSuperview()
+                self.animalLabel.removeFromSuperview()
+                self.friendsLabel.removeFromSuperview()
+                self.detectiveImage.removeFromSuperview()
+                if self.isOnboarding {
+                    self.view.addSubview(self.imageSlider)
+                    for i in 0 ..< self.pageControlNum {
+                        let onboardingView: UIView = UIView(frame: CGRect(x: CGFloat(i) * .screenW, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+                        self.scrollView.addSubview(onboardingView)
+                        if i == 0 {
+                            onboardingView.addSubview(self.detectiveImage2)
+                            onboardingView.addSubview(self.troubleLabel)
+                            onboardingView.addSubview(self.animalFriendsLabel)
+                            onboardingView.addSubview(self.allLabel)
+                            onboardingView.addSubview(self.disappearLabel)
+                            onboardingView.addSubview(self.exclamationMarkLabel)
+                        }
+                        else if i == 1 {
+                            onboardingView.addSubview(self.assistantImage1)
+                            onboardingView.addSubview(self.toKimAssistantLabel)
+                            onboardingView.addSubview(self.ofAnimalFriendsLabel)
+                            onboardingView.addSubview(self.characteristicsLabel)
+                            onboardingView.addSubview(self.letMeKnowLabel)
+                            onboardingView.addSubview(self.bulbLabel)
+                        }
+                        else if i == 2 {
+                            onboardingView.addSubview(self.totalAnimalsImage1)
+                            onboardingView.addSubview(self.characteristicsOfAnimalFriendsLabel)
+                            onboardingView.addSubview(self.tellMeWellLabel)
+                            onboardingView.addSubview(self.yourAnimalFriendsLabel)
+                            onboardingView.addSubview(self.comingBackLabel)
+                        }
+                    }
+                    self.view.addSubview(self.scrollView)
+                    self.setupSliderLayout()
+                } else {
+                    UIView.transition(with: self.view, duration: 1) {
+                        self.isOnboarding = false
+                        UserDefaults.standard.set(self.isOnboarding, forKey: "isOnboarding")
+                    } completion: { _ in
+                        self.view.window?.rootViewController = UINavigationController(rootViewController: MainViewController())
+                    }
+                }
+            } completion: { _ in
+                if self.isOnboarding {
+                    UIView.animate(withDuration: 0.5) {
+                        self.view.layer.opacity = 1
                     } completion: { _ in
                         UIView.animate(withDuration: 0.5) {
-                            self.findLabel.removeFromSuperview()
-                            self.animalLabel.removeFromSuperview()
-                            self.friendsLabel.removeFromSuperview()
-                            self.detectiveImage.removeFromSuperview()
-                            if self.isOnboarding {
-                                self.view.addSubview(self.imageSlider)
-                                for i in 0 ..< self.pageControlNum {
-                                    let onboardingView: UIView = UIView(frame: CGRect(x: CGFloat(i) * .screenW, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-                                    self.scrollView.addSubview(onboardingView)
-                                    if i == 0 {
-                                        onboardingView.addSubview(self.detectiveImage2)
-                                        onboardingView.addSubview(self.troubleLabel)
-                                        onboardingView.addSubview(self.animalFriendsLabel)
-                                        onboardingView.addSubview(self.allLabel)
-                                        onboardingView.addSubview(self.disappearLabel)
-                                        onboardingView.addSubview(self.exclamationMarkLabel)
-                                    }
-                                    else if i == 1 {
-                                        onboardingView.addSubview(self.assistantImage1)
-                                        onboardingView.addSubview(self.toKimAssistantLabel)
-                                        onboardingView.addSubview(self.ofAnimalFriendsLabel)
-                                        onboardingView.addSubview(self.characteristicsLabel)
-                                        onboardingView.addSubview(self.letMeKnowLabel)
-                                        onboardingView.addSubview(self.bulbLabel)
-                                    }
-                                    else if i == 2 {
-                                        onboardingView.addSubview(self.totalAnimalsImage1)
-                                        onboardingView.addSubview(self.characteristicsOfAnimalFriendsLabel)
-                                        onboardingView.addSubview(self.tellMeWellLabel)
-                                        onboardingView.addSubview(self.yourAnimalFriendsLabel)
-                                        onboardingView.addSubview(self.comingBackLabel)
-                                    }
-                                }
-                                self.view.addSubview(self.scrollView)
-                                self.setupSliderLayout()
-                            } else {
-                                UIView.transition(with: self.view, duration: 1) {
-                                    self.isOnboarding = false
-                                    UserDefaults.standard.set(self.isOnboarding, forKey: "isOnboarding")
-                                    self.view.layer.opacity = 0
-                                } completion: { _ in
-                                    self.view.window?.rootViewController = UINavigationController(rootViewController: MainViewController())
-                                }
-                            }
+                            self.troubleLabel.layer.opacity = 1
+                            AVPlay.shared.playSound(sound: "textSound")
                         } completion: { _ in
-                            if self.isOnboarding {
+                            UIView.animate(withDuration: 0.5) {
+                                self.animalFriendsLabel.layer.opacity = 1
+                                AVPlay.shared.playSound(sound: "textSound")
+                            }  completion: { _ in
                                 UIView.animate(withDuration: 0.5) {
-                                    self.view.layer.opacity = 1
+                                    self.allLabel.layer.opacity = 1
+                                    AVPlay.shared.playSound(sound: "textSound")
                                 } completion: { _ in
                                     UIView.animate(withDuration: 0.5) {
-                                        self.troubleLabel.layer.opacity = 1
+                                        self.disappearLabel.layer.opacity = 1
                                         AVPlay.shared.playSound(sound: "textSound")
-                                    } completion: { _ in
-                                        UIView.animate(withDuration: 0.5) {
-                                            self.animalFriendsLabel.layer.opacity = 1
-                                            AVPlay.shared.playSound(sound: "textSound")
-                                        }  completion: { _ in
-                                            UIView.animate(withDuration: 0.5) {
-                                                self.allLabel.layer.opacity = 1
-                                                AVPlay.shared.playSound(sound: "textSound")
-                                            } completion: { _ in
-                                                UIView.animate(withDuration: 0.5) {
-                                                    self.disappearLabel.layer.opacity = 1
-                                                    AVPlay.shared.playSound(sound: "textSound")
-                                                }
-                                            }
-                                        }
                                     }
                                 }
                             }
@@ -137,6 +144,7 @@ class LaunchScreenController: UIViewController {
             }
         }
     }
+    
     
     // MARK: 스플래시 & 온보딩 라벨 모음
     lazy var findLabel: UILabel = {
@@ -359,11 +367,13 @@ class LaunchScreenController: UIViewController {
         }
         //UserDefaults에 저장된 상태 데이터를 스위치에 알려주는 작업
         view.backgroundColor = .white
-        view.addSubview(findLabel)
-        view.addSubview(animalLabel)
-        view.addSubview(friendsLabel)
-        view.addSubview(detectiveImage)
-        timeCount()
+        if isSplash {
+            view.addSubview(findLabel)
+            view.addSubview(animalLabel)
+            view.addSubview(friendsLabel)
+            view.addSubview(detectiveImage)
+        }
+        timeCount(isSplash)
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
