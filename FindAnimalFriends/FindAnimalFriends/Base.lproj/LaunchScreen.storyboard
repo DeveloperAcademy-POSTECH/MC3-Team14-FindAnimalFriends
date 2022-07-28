@@ -16,22 +16,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="aSw-XK-zB6">
-                                <rect key="frame" x="90" y="383" width="234" height="130"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="130" id="I1w-qa-fkl"/>
-                                    <constraint firstAttribute="width" constant="234" id="u1o-d4-SrZ"/>
-                                </constraints>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="launchScreen.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="OW2-pW-DJo">
+                                <rect key="frame" x="83" y="335" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="aSw-XK-zB6" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="4j3-dw-Hhh"/>
-                            <constraint firstItem="aSw-XK-zB6" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="KQH-b3-Yqz"/>
-                            <constraint firstItem="aSw-XK-zB6" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Vhm-pc-XE5"/>
-                            <constraint firstItem="aSw-XK-zB6" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="dxD-VE-7FY"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -40,7 +31,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LaunchImage.png" width="233.52000427246094" height="129.60000610351562"/>
+        <image name="launchScreen.jpeg" width="1440" height="618"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -41,7 +41,7 @@
 		BA356C6F2891508000224A24 /* switchScreen.wav in Resources */ = {isa = PBXBuildFile; fileRef = BA356C6E2891508000224A24 /* switchScreen.wav */; };
 		BAA5DF4F288C03F1001931FE /* LaunchScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA5DF4E288C03F1001931FE /* LaunchScreenController.swift */; };
 		BAA5DF51288C0594001931FE /* KOTRA HOPE.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAA5DF50288C0594001931FE /* KOTRA HOPE.ttf */; };
-		BAA5DF5F288D30B9001931FE /* LaunchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = BAA5DF5E288D30B9001931FE /* LaunchImage.png */; };
+		BAED9D8B28927AF50085F024 /* launchScreen.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = BAED9D8A28927AF50085F024 /* launchScreen.jpeg */; };
 		FE5DCEEE288D57D900DBD272 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5DCEEC288D57D800DBD272 /* QuizViewController.swift */; };
 		FE5DCEEF288D57D900DBD272 /* QuizPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5DCEED288D57D800DBD272 /* QuizPageViewController.swift */; };
 		FE5DCEF72891261100DBD272 /* cheerSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE5DCEF62891261100DBD272 /* cheerSound.wav */; };
@@ -83,7 +83,7 @@
 		BA356C6E2891508000224A24 /* switchScreen.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = switchScreen.wav; sourceTree = "<group>"; };
 		BAA5DF4E288C03F1001931FE /* LaunchScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenController.swift; sourceTree = "<group>"; };
 		BAA5DF50288C0594001931FE /* KOTRA HOPE.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KOTRA HOPE.ttf"; sourceTree = "<group>"; };
-		BAA5DF5E288D30B9001931FE /* LaunchImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchImage.png; sourceTree = "<group>"; };
+		BAED9D8A28927AF50085F024 /* launchScreen.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = launchScreen.jpeg; sourceTree = "<group>"; };
 		FE5DCEEC288D57D800DBD272 /* QuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
 		FE5DCEED288D57D800DBD272 /* QuizPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizPageViewController.swift; sourceTree = "<group>"; };
 		FE5DCEF62891261100DBD272 /* cheerSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cheerSound.wav; sourceTree = "<group>"; };
@@ -213,7 +213,7 @@
 		BA9D1EB4288BD0430023C807 /* LaunchImage */ = {
 			isa = PBXGroup;
 			children = (
-				BAA5DF5E288D30B9001931FE /* LaunchImage.png */,
+				BAED9D8A28927AF50085F024 /* launchScreen.jpeg */,
 			);
 			path = LaunchImage;
 			sourceTree = "<group>";
@@ -294,7 +294,6 @@
 				BA356C6928914F7C00224A24 /* failSound.wav in Resources */,
 				BA356C5A2891050300224A24 /* textSound2.wav in Resources */,
 				BA356C672891288100224A24 /* BGM.wav in Resources */,
-				BAA5DF5F288D30B9001931FE /* LaunchImage.png in Resources */,
 				BA356C6F2891508000224A24 /* switchScreen.wav in Resources */,
 				BA356C5B2891050300224A24 /* textSound3.wav in Resources */,
 				42C0123E288FB35500E0CADB /* AnimalQuizzes.json in Resources */,
@@ -302,6 +301,7 @@
 				9678A71A288AC3E700678BDF /* Assets.xcassets in Resources */,
 				BA356C5F289116A100224A24 /* typingSound.wav in Resources */,
 				BA356C6328911A0100224A24 /* typingSound2.wav in Resources */,
+				BAED9D8B28927AF50085F024 /* launchScreen.jpeg in Resources */,
 				FE5DCEF72891261100DBD272 /* cheerSound.wav in Resources */,
 				BAA5DF51288C0594001931FE /* KOTRA HOPE.ttf in Resources */,
 				9656BC4A28910A5A00318D07 /* checkmark.json in Resources */,
