@@ -281,8 +281,7 @@ private extension MainViewController {
                 entranceView.cancelButton.addTarget(self, action: #selector(self.animate(_:)), for: .touchUpInside)
                 entranceView.pushButton.addTarget(self, action: #selector(self.pushToQuiz), for: .touchUpInside)
                 entranceView.animalName = self.currentAnimal
-                entranceView.setupCodeName()
-                entranceView.isClear()
+                entranceView.setupComments()
                 self.view.addSubview(entranceView)
             }
         } else {
