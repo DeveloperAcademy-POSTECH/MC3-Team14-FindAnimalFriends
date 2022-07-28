@@ -169,6 +169,7 @@ private extension MainViewController {
             
             let lottieView = CheckmarkLottieView(frame: i.lottieFrame)
             lottieView.tag = idx
+            lottieView.isUserInteractionEnabled = false
             lottieViews.append(lottieView)
             backImageView.addSubview(lottieView)
         }
