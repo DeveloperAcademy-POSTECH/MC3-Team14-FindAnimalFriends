@@ -50,6 +50,7 @@ enum AssetsColor {
     case primaryBrown
     case primaryOrange
     case primaryWhite
+    case primaryYellow
     case memoWhite
 }
 
@@ -66,6 +67,8 @@ extension UIColor {
             return #colorLiteral(red: 0.9058823529, green: 0.6352941176, blue: 0.3294117647, alpha: 1)
         case .primaryWhite:
             return #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
+        case .primaryYellow:
+            return #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
         case .memoWhite:
             return #colorLiteral(red: 0.984313786, green: 0.984313786, blue: 0.984313786, alpha: 1)
         }

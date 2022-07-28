@@ -51,8 +51,10 @@ class EntranceView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupCodeName() {
-        makeDescription()
+    func setupComments() {
+        makeDescription() //설명글귀 만들기
+        isClear() //재시도인지를 판단하고 버튼title 및 자막멘트 재설정
+        
         DispatchQueue.main.async {
             AVPlay.shared.playSound(sound: "typingSound")
             for i in self.animalDescription {
@@ -67,6 +69,7 @@ class EntranceView: UIView {
         let openIndex = UserDefaults.standard.integer(forKey: "clear")
         if nowIndex < openIndex {
             pushButton.setTitle("다시 풀기", for: .normal)
+            animalDescription = animalDescription.replacingOccurrences(of: "실종날짜: yy.MM.dd", with: "동물친구가 무사히 돌아왔어요~")
         }
     }
     
