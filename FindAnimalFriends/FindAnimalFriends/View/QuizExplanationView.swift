@@ -56,8 +56,9 @@ class QuizExplanationView: UIView {
     }()
 
     //MARK: Life Cycle Method
-    override init(frame: CGRect) {
+    required init(frame: CGRect, quizExplanation: String) {
         super.init(frame: frame)
+        self.quizExplanation = quizExplanation
         addSubview(blackView)
         blackView.addSubview(whiteView)
         blackView.addSubview(detectiveImage)
