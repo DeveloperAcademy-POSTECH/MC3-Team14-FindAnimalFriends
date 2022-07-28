@@ -29,7 +29,7 @@ class QuizExplanationView: UIView {
         label.textColor = .black
         label.text = self.quizExplanation
         label.font = UIFont(name: "KOTRA HOPE", size: converterFontSize(getFontSize: 22))
-        label.frame = CGRect(x: converterWidth(getWidth: 22), y: converterHeight(getHeight: 22), width: converterWidth(getWidth: 280), height: converterHeight(getHeight: .screenH/3.3))
+        label.frame = CGRect(x: converterWidth(getWidth: 22), y: converterHeight(getHeight: 22), width: converterWidth(getWidth: 280), height: .screenH/3)
         label.numberOfLines = 0
         return label
     }()
@@ -76,6 +76,7 @@ class QuizExplanationView: UIView {
         blackView.sendSubviewToBack(detectiveImage)
         // detectiveImage 가려지게 하기
     }
+    
     required init(frame: CGRect, quizExplanation: String) {
         super.init(frame: frame)
         self.quizExplanation = quizExplanation
@@ -101,7 +102,7 @@ class QuizExplanationView: UIView {
         ]
         let whiteViewConstraints = [
             whiteView.topAnchor.constraint(equalTo: blackView.topAnchor, constant: converterHeight(getHeight: .hund*2)),
-            whiteView.bottomAnchor.constraint(equalTo: blackView.bottomAnchor, constant: -1*converterHeight(getHeight: .hund*3)),
+            whiteView.bottomAnchor.constraint(equalTo: blackView.bottomAnchor, constant: -.hund*2.2),
             whiteView.leadingAnchor.constraint(equalTo: blackView.leadingAnchor, constant: converterWidth(getWidth: 33)),
             whiteView.trailingAnchor.constraint(equalTo: blackView.trailingAnchor, constant: -1*converterWidth(getWidth: 33))
         ]
@@ -112,8 +113,10 @@ class QuizExplanationView: UIView {
             detectiveImage.trailingAnchor.constraint(equalTo: blackView.trailingAnchor, constant: -1*converterWidth(getWidth: 257))
         ]
         let completeButtonConstraints = [
-            completeButton.topAnchor.constraint(equalTo: whiteView.topAnchor, constant: converterHeight(getHeight: .hund*2.7)),
-            completeButton.bottomAnchor.constraint(equalTo: whiteView.bottomAnchor, constant:  -1*converterHeight(getHeight: 32)),
+            completeButton.topAnchor.constraint(equalTo: explanationLabel.bottomAnchor, constant: .ten*3),
+            completeButton.bottomAnchor.constraint(equalTo: whiteView.bottomAnchor, constant: -32),
+            completeButton.heightAnchor.constraint(lessThanOrEqualTo: whiteView.heightAnchor, multiplier: 0.25),
+            completeButton.heightAnchor.constraint(greaterThanOrEqualTo: whiteView.heightAnchor, multiplier: 0.23, constant: -27),
             completeButton.leadingAnchor.constraint(equalTo: whiteView.leadingAnchor, constant: converterWidth(getWidth: 25)),
             completeButton.trailingAnchor.constraint(equalTo: whiteView.trailingAnchor, constant: -1*converterWidth(getWidth: 25)),
         ]
