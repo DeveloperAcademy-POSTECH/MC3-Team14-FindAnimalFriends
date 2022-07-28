@@ -143,3 +143,7 @@ class AVPlay {
          }
      }
 }
+
+class isSplash2 {
+    static var isSplash2 = true
+}

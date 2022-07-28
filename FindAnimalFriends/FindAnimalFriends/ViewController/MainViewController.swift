@@ -312,6 +312,7 @@ private extension MainViewController {
             UserDefaults.standard.set(self.isOnboarding, forKey: "isOnboarding")
             self.view.layer.opacity = 0
         } completion: { _ in
+            isSplash2.isSplash2 = false
             self.view.window?.rootViewController = UINavigationController(rootViewController: LaunchScreenController())
             // navigation Controller 추가
         }
