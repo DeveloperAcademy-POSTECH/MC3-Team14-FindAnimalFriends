@@ -204,7 +204,7 @@ class QuizViewController: UIViewController {
     // quizExplanationView 닫기
     @objc func addExplanationView() {
         AVPlay.shared.playSound(sound: "startGameSound2")
-        quizExplanationView = QuizExplanationView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), quizExplanation: quiz?.explanation ?? "내용 없음")
+        quizExplanationView = QuizExplanationView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), quizExplanation: quiz?.explanation ?? "내용 없음", isQuizFinished: (index == totalQuizCount - 1) ? true : false)
         quizExplanationView!.completeButton.addTarget(self, action: #selector(closeExplanationView), for: .touchUpInside)
         view.addSubview(quizExplanationView!)
     }
