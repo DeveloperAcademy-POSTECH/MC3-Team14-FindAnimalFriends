@@ -114,8 +114,9 @@ class QuizCompleteView: UIView {
         whiteView.addSubview(animalImageView)
         whiteView.addSubview(assistantImage)
         whiteView.addSubview(detectiveImage)
-        whiteView.addSubview(completeButton)
         whiteView.addSubview(lottieView)
+        whiteView.addSubview(completeButton)
+        
         lottieView.partyPopper.play()
         applyConstraints()
     }
