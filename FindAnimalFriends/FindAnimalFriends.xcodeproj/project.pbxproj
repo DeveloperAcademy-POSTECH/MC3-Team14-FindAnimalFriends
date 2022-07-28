@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		426461CF28926D8F001D23E7 /* PartyPopperLotieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426461CE28926D8F001D23E7 /* PartyPopperLotieView.swift */; };
+		426461D128926F1A001D23E7 /* party-popper.json in Resources */ = {isa = PBXBuildFile; fileRef = 426461D028926F1A001D23E7 /* party-popper.json */; };
 		42C01235288D63C300E0CADB /* QuizWrongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C01234288D63C300E0CADB /* QuizWrongView.swift */; };
 		42C01237288D63F300E0CADB /* QuizWrongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C01236288D63F300E0CADB /* QuizWrongViewController.swift */; };
 		42C0123C288FB2EA00E0CADB /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C0123B288FB2EA00E0CADB /* DataModel.swift */; };
@@ -48,6 +50,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		426461CE28926D8F001D23E7 /* PartyPopperLotieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyPopperLotieView.swift; sourceTree = "<group>"; };
+		426461D028926F1A001D23E7 /* party-popper.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "party-popper.json"; sourceTree = "<group>"; };
 		42C01234288D63C300E0CADB /* QuizWrongView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizWrongView.swift; sourceTree = "<group>"; };
 		42C01236288D63F300E0CADB /* QuizWrongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizWrongViewController.swift; sourceTree = "<group>"; };
 		42C0123B288FB2EA00E0CADB /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
@@ -117,6 +121,7 @@
 				964E45C9288DB69C004A43D4 /* EntranceView.swift */,
 				96D35B47288F12F9000FAC52 /* ReadyView.swift */,
 				9656BC4B28910AD500318D07 /* CheckmarkLottieView.swift */,
+				426461CE28926D8F001D23E7 /* PartyPopperLotieView.swift */,
 				42E8B23E288C0E210097D909 /* QuizCompleteView.swift */,
 				42C01234288D63C300E0CADB /* QuizWrongView.swift */,
 				831EDE9728915BA1002F9364 /* QuizExplanationView.swift */,
@@ -141,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				9656BC4928910A5A00318D07 /* checkmark.json */,
+				426461D028926F1A001D23E7 /* party-popper.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -306,6 +312,7 @@
 				BAA5DF51288C0594001931FE /* KOTRA HOPE.ttf in Resources */,
 				9656BC4A28910A5A00318D07 /* checkmark.json in Resources */,
 				BA356C6B28914FC300224A24 /* cheerSound2.wav in Resources */,
+				426461D128926F1A001D23E7 /* party-popper.json in Resources */,
 				BA356C5D2891062600224A24 /* textSound.wav in Resources */,
 				BA356C6528911CEA00224A24 /* pageFlipSound.wav in Resources */,
 				BA356C61289117F600224A24 /* startGameSound.wav in Resources */,
@@ -323,6 +330,7 @@
 				42E8B23F288C0E210097D909 /* QuizCompleteView.swift in Sources */,
 				42F30F23288C03A900F772C6 /* QuizCompleteViewController.swift in Sources */,
 				9656BC4C28910AD500318D07 /* CheckmarkLottieView.swift in Sources */,
+				426461CF28926D8F001D23E7 /* PartyPopperLotieView.swift in Sources */,
 				9678A715288AC3E600678BDF /* MainViewController.swift in Sources */,
 				96DBD9BB288BC9FF006B2767 /* ClearTestViewController.swift in Sources */,
 				42C0123C288FB2EA00E0CADB /* DataModel.swift in Sources */,
