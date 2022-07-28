@@ -14,7 +14,6 @@
 		42E8B23F288C0E210097D909 /* QuizCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E8B23E288C0E210097D909 /* QuizCompleteView.swift */; };
 		42F30F23288C03A900F772C6 /* QuizCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F30F22288C03A900F772C6 /* QuizCompleteViewController.swift */; };
 		831EDE9828915BA1002F9364 /* QuizExplanationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831EDE9728915BA1002F9364 /* QuizExplanationView.swift */; };
-		831EDE9A28915BBE002F9364 /* QuizExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831EDE9928915BBE002F9364 /* QuizExplanationViewController.swift */; };
 		964E45C8288D8F33004A43D4 /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964E45C7288D8F33004A43D4 /* Memo.swift */; };
 		964E45CA288DB69C004A43D4 /* EntranceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964E45C9288DB69C004A43D4 /* EntranceView.swift */; };
 		9656BC4A28910A5A00318D07 /* checkmark.json in Resources */ = {isa = PBXBuildFile; fileRef = 9656BC4928910A5A00318D07 /* checkmark.json */; };
@@ -56,7 +55,6 @@
 		42E8B23E288C0E210097D909 /* QuizCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCompleteView.swift; sourceTree = "<group>"; };
 		42F30F22288C03A900F772C6 /* QuizCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCompleteViewController.swift; sourceTree = "<group>"; };
 		831EDE9728915BA1002F9364 /* QuizExplanationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizExplanationView.swift; sourceTree = "<group>"; };
-		831EDE9928915BBE002F9364 /* QuizExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizExplanationViewController.swift; sourceTree = "<group>"; };
 		964E45C7288D8F33004A43D4 /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		964E45C9288DB69C004A43D4 /* EntranceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntranceView.swift; sourceTree = "<group>"; };
 		9656BC4928910A5A00318D07 /* checkmark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = checkmark.json; sourceTree = "<group>"; };
@@ -135,7 +133,6 @@
 				42C01236288D63F300E0CADB /* QuizWrongViewController.swift */,
 				42F30F22288C03A900F772C6 /* QuizCompleteViewController.swift */,
 				96DBD9BA288BC9FF006B2767 /* ClearTestViewController.swift */,
-				831EDE9928915BBE002F9364 /* QuizExplanationViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -325,7 +322,6 @@
 				42C01237288D63F300E0CADB /* QuizWrongViewController.swift in Sources */,
 				42E8B23F288C0E210097D909 /* QuizCompleteView.swift in Sources */,
 				42F30F23288C03A900F772C6 /* QuizCompleteViewController.swift in Sources */,
-				831EDE9A28915BBE002F9364 /* QuizExplanationViewController.swift in Sources */,
 				9656BC4C28910AD500318D07 /* CheckmarkLottieView.swift in Sources */,
 				9678A715288AC3E600678BDF /* MainViewController.swift in Sources */,
 				96DBD9BB288BC9FF006B2767 /* ClearTestViewController.swift in Sources */,

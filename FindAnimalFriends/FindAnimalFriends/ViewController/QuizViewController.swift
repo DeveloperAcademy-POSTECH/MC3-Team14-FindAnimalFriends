@@ -38,10 +38,12 @@ class QuizViewController: UIViewController {
     private let backImgView = UIImageView(image: UIImage(named: "memoSpring"))
     // 정답이 쓰여있는 버튼
     private var answerButtons: [UIButton] = []
-    // 종료 화면
+    // 오답 화면
     private var quizWrongView: QuizWrongView?
     // 종료 화면
     private var quizCompleteView: QuizCompleteView?
+    // 설명 화면
+    private var quizExplanationView: QuizExplanationView?
     
     required init(animalName: String, quiz: Quiz) {
         self.animalName = animalName
@@ -144,14 +146,10 @@ class QuizViewController: UIViewController {
     func updateButtonFunction() {
         for i in 0...(buttonCount-1) {
             answerButtons[i].setTitle("\(quizAnswers[i])", for: .normal)
-            if i != quiz?.rightAnswerIndex {
-                answerButtons[i].addTarget(self, action: #selector(addWrongView), for: .touchUpInside)
+            if i == quiz?.rightAnswerIndex {
+                answerButtons[i].addTarget(self, action: #selector(addExplanationView), for: .touchUpInside)
             } else {
-                if index == totalQuizCount - 1 {
-                    answerButtons[i].addTarget(self, action: #selector(addCompleteView), for: .touchUpInside)
-                } else {
-                    answerButtons[i].addTarget(self, action: #selector(sendNextPageNoti), for: .touchUpInside)
-                }
+                answerButtons[i].addTarget(self, action: #selector(addWrongView), for: .touchUpInside)
             }
         }
     }
@@ -168,7 +166,7 @@ class QuizViewController: UIViewController {
     
     // quizCompleteView 띄우기
     @objc func addCompleteView() {
-        AVPlay.shared.playSound(sound: "cheerSound")
+        AVPlay.shared.playSound(sound: "cheerSound2")
         quizCompleteView = QuizCompleteView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), animalName: animalName ?? "panda")
         quizCompleteView!.completeButton.addTarget(self, action: #selector(closeCompleteView), for: .touchUpInside)
         view.addSubview(quizCompleteView!)
@@ -182,15 +180,33 @@ class QuizViewController: UIViewController {
     }
     
     // quizWrongView 닫기
-    @objc func closeQuizWrongView() {
+    @objc func closeWrongView() {
         quizWrongView!.removeFromSuperview()
     }
     
     // quizWrongView 띄우기
     @objc func addWrongView() {
+        AVPlay.shared.playSound(sound: "failSound")
         quizWrongView = QuizWrongView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
-        quizWrongView!.completeButton.addTarget(self, action: #selector(closeQuizWrongView), for: .touchUpInside)
+        quizWrongView!.completeButton.addTarget(self, action: #selector(closeWrongView), for: .touchUpInside)
         view.addSubview(quizWrongView!)
+    }
+    
+    @objc func closeExplanationView() {
+        quizExplanationView!.removeFromSuperview()
+        if index == totalQuizCount - 1 {
+            addCompleteView()
+        } else {
+            sendNextPageNoti()
+        }
+    }
+    
+    // quizExplanationView 닫기
+    @objc func addExplanationView() {
+        AVPlay.shared.playSound(sound: "startGameSound2")
+        quizExplanationView = QuizExplanationView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), quizExplanation: quiz?.explanation ?? "내용 없음")
+        quizExplanationView!.completeButton.addTarget(self, action: #selector(closeExplanationView), for: .touchUpInside)
+        view.addSubview(quizExplanationView!)
     }
 
     override func didReceiveMemoryWarning() {
