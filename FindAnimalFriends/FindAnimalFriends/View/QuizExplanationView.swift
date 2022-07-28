@@ -9,8 +9,10 @@ import UIKit
 
 class QuizExplanationView: UIView {
     
+    // MARK: Properties
     var quizExplanation = "호랑이가 괜히 백수의 왕이라고 불리는게 아니지. 점프할때는 무려 3미터 이상도 뛸수 있고, 다른 고양잇과 동물들처럼 나무타기도 잘하지만, 물을 싫어하는 다른 고양잇과 동물들과는 달리 수영도 잘한단다."
     // quiz에서 던져주는 설명으로 받을 예정
+    var isQuizFinished = false
     
     //MARK: UIComponents
     private let detectiveImage: UIImageView = {
@@ -26,8 +28,8 @@ class QuizExplanationView: UIView {
         let label = UILabel()
         label.textColor = .black
         label.text = self.quizExplanation
-        label.font = UIFont(name: "KOTRA HOPE", size: converterFontSize(getFontSize: 24))
-        label.frame = CGRect(x: converterWidth(getWidth: 22), y: converterHeight(getHeight: 22), width: converterWidth(getWidth: 280), height: converterHeight(getHeight: .screenH/3.5))
+        label.font = UIFont(name: "KOTRA HOPE", size: converterFontSize(getFontSize: 22))
+        label.frame = CGRect(x: converterWidth(getWidth: 22), y: converterHeight(getHeight: 22), width: converterWidth(getWidth: 280), height: converterHeight(getHeight: .screenH/3.3))
         label.numberOfLines = 0
         return label
     }()
@@ -47,15 +49,33 @@ class QuizExplanationView: UIView {
         return view
     }()
     
-    let completeButton: UIButton = {
+    internal lazy var completeButton: UIButton = {
         let button = UIButton()
-        button.custom("다음 문제로", titleColor: .white, size: 24, backColor: UIColor(red: 231/255, green: 162/255, blue: 84/255, alpha: 100))
+        if (isQuizFinished) {
+            button.custom("동물 친구가 오고 있어요!", titleColor: .white, size: 24, backColor: UIColor(red: 231/255, green: 162/255, blue: 84/255, alpha: 100))
+        } else {
+            button.custom("다음 문제로", titleColor: .white, size: 24, backColor: UIColor(red: 231/255, green: 162/255, blue: 84/255, alpha: 100))
+        }
+        
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
         
     }()
 
     //MARK: Life Cycle Method
+    required init(frame: CGRect, quizExplanation: String, isQuizFinished: Bool) {
+        super.init(frame: frame)
+        self.quizExplanation = quizExplanation
+        self.isQuizFinished = isQuizFinished
+        addSubview(blackView)
+        blackView.addSubview(whiteView)
+        blackView.addSubview(detectiveImage)
+        whiteView.addSubview(explanationLabel)
+        whiteView.addSubview(completeButton)
+        applyConstraints()
+        blackView.sendSubviewToBack(detectiveImage)
+        // detectiveImage 가려지게 하기
+    }
     required init(frame: CGRect, quizExplanation: String) {
         super.init(frame: frame)
         self.quizExplanation = quizExplanation
@@ -66,7 +86,6 @@ class QuizExplanationView: UIView {
         whiteView.addSubview(completeButton)
         applyConstraints()
         blackView.sendSubviewToBack(detectiveImage)
-        // detectiveImage 가려지게 하기
     }
     
     required init?(coder: NSCoder) {
@@ -93,7 +112,7 @@ class QuizExplanationView: UIView {
             detectiveImage.trailingAnchor.constraint(equalTo: blackView.trailingAnchor, constant: -1*converterWidth(getWidth: 257))
         ]
         let completeButtonConstraints = [
-            completeButton.topAnchor.constraint(equalTo: whiteView.topAnchor, constant: converterHeight(getHeight: .hund*2.5)),
+            completeButton.topAnchor.constraint(equalTo: whiteView.topAnchor, constant: converterHeight(getHeight: .hund*2.7)),
             completeButton.bottomAnchor.constraint(equalTo: whiteView.bottomAnchor, constant:  -1*converterHeight(getHeight: 32)),
             completeButton.leadingAnchor.constraint(equalTo: whiteView.leadingAnchor, constant: converterWidth(getWidth: 25)),
             completeButton.trailingAnchor.constraint(equalTo: whiteView.trailingAnchor, constant: -1*converterWidth(getWidth: 25)),
