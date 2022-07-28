@@ -51,7 +51,7 @@ class QuizExplanationView: UIView {
     
     internal lazy var completeButton: UIButton = {
         let button = UIButton()
-        if(isQuizFinished){
+        if (isQuizFinished) {
             button.custom("동물 친구가 오고 있어요!", titleColor: .white, size: 24, backColor: UIColor(red: 231/255, green: 162/255, blue: 84/255, alpha: 100))
         } else {
             button.custom("다음 문제로", titleColor: .white, size: 24, backColor: UIColor(red: 231/255, green: 162/255, blue: 84/255, alpha: 100))
