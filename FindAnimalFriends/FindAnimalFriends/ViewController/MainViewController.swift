@@ -250,17 +250,26 @@ private extension MainViewController {
     }
     
     func maskLayerAnimation() {
-        let index = openIndex > 4 ? 4 : openIndex
+        
         let path = UIBezierPath()
-        if Zoom.status == .zoomIn {
-            for memo in memos[0...index] {
-                path.append(memo.inMaskLayer)
+        if openIndex < 5 {
+            if Zoom.status == .zoomIn {
+                for memo in memos[0...openIndex] {
+                    path.append(memo.inMaskLayer)
+                }
+            } else {
+                for memo in memos[0...openIndex] {
+                    path.append(memo.outMaskLayer)
+                }
             }
         } else {
-            for memo in memos[0...index] {
-                path.append(memo.outMaskLayer)
-            }
+            path.append(UIBezierPath(rect: CGRect(
+                origin: .zero,
+                size: CGSize(width: .screenW * 2, height: .screenH * 2))))
         }
+        maskLayer.path = path.cgPath
+        maskLayer.fillRule = .nonZero
+        backImageView.layer.mask = maskLayer
         
         let animation = CABasicAnimation(keyPath: "path")
         animation.fromValue = self.maskLayer.path

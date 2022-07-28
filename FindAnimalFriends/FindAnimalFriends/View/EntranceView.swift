@@ -69,7 +69,7 @@ class EntranceView: UIView {
         let openIndex = UserDefaults.standard.integer(forKey: "clear")
         if nowIndex < openIndex {
             pushButton.setTitle("다시 풀기", for: .normal)
-            animalDescription = animalDescription.replacingOccurrences(of: "실종날짜: yy.MM.dd", with: "동물친구가 돌아왔어요~")
+            animalDescription = animalDescription.replacingOccurrences(of: "실종날짜: yy.MM.dd", with: "동물친구가 무사히 돌아왔어요~")
         }
     }
     
