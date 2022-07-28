@@ -44,6 +44,9 @@ class QuizPageViewController: UIPageViewController {
             }
         }
         
+        // 뒤로 가기 버튼, Navigation bar 삭제
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        
         super.viewDidLoad()
         
         self.dataSource = self
