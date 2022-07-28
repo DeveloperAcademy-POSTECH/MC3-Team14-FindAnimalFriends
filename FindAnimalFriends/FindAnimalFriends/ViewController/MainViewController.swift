@@ -63,7 +63,7 @@ class MainViewController: UIViewController {
         button.setPreferredSymbolConfiguration(
             UIImage.SymbolConfiguration(pointSize: .hund/3, weight: .black), forImageIn: .normal
         )
-        button.tintColor = .appColor(.primaryOrange)
+        button.tintColor = .appColor(.primaryYellow)
         button.addTarget(self, action: #selector(goToOnboarding), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -267,9 +267,6 @@ private extension MainViewController {
                 origin: .zero,
                 size: CGSize(width: .screenW * 2, height: .screenH * 2))))
         }
-        maskLayer.path = path.cgPath
-        maskLayer.fillRule = .nonZero
-        backImageView.layer.mask = maskLayer
         
         let animation = CABasicAnimation(keyPath: "path")
         animation.fromValue = self.maskLayer.path
