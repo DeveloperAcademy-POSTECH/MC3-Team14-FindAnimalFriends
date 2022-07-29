@@ -314,7 +314,9 @@ private extension MainViewController {
             self.view.layer.opacity = 0
         } completion: { _ in
             isSplash2.isSplash2 = false
-            self.zoomAction(tag: 0, isSound: false)
+            if Zoom.status == .zoomIn {
+                self.zoomAction(tag: 0, isSound: false)
+            }
             self.view.window?.rootViewController = UINavigationController(rootViewController: LaunchScreenController())
             // navigation Controller 추가
         }
