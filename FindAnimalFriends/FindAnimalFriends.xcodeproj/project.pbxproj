@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		426461CF28926D8F001D23E7 /* PartyPopperLotieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426461CE28926D8F001D23E7 /* PartyPopperLotieView.swift */; };
 		426461D128926F1A001D23E7 /* party-popper.json in Resources */ = {isa = PBXBuildFile; fileRef = 426461D028926F1A001D23E7 /* party-popper.json */; };
+		426461D328928860001D23E7 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 426461D228928860001D23E7 /* Settings.bundle */; };
 		42C01235288D63C300E0CADB /* QuizWrongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C01234288D63C300E0CADB /* QuizWrongView.swift */; };
 		42C01237288D63F300E0CADB /* QuizWrongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C01236288D63F300E0CADB /* QuizWrongViewController.swift */; };
 		42C0123C288FB2EA00E0CADB /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C0123B288FB2EA00E0CADB /* DataModel.swift */; };
@@ -52,6 +53,7 @@
 /* Begin PBXFileReference section */
 		426461CE28926D8F001D23E7 /* PartyPopperLotieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyPopperLotieView.swift; sourceTree = "<group>"; };
 		426461D028926F1A001D23E7 /* party-popper.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "party-popper.json"; sourceTree = "<group>"; };
+		426461D228928860001D23E7 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		42C01234288D63C300E0CADB /* QuizWrongView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizWrongView.swift; sourceTree = "<group>"; };
 		42C01236288D63F300E0CADB /* QuizWrongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizWrongViewController.swift; sourceTree = "<group>"; };
 		42C0123B288FB2EA00E0CADB /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 		9678A704288AC3E600678BDF = {
 			isa = PBXGroup;
 			children = (
+				426461D228928860001D23E7 /* Settings.bundle */,
 				9678A70F288AC3E600678BDF /* FindAnimalFriends */,
 				9678A70E288AC3E600678BDF /* Products */,
 			);
@@ -309,6 +312,7 @@
 				BA356C6328911A0100224A24 /* typingSound2.wav in Resources */,
 				BAED9D8B28927AF50085F024 /* launchScreen.jpeg in Resources */,
 				FE5DCEF72891261100DBD272 /* cheerSound.wav in Resources */,
+				426461D328928860001D23E7 /* Settings.bundle in Resources */,
 				BAA5DF51288C0594001931FE /* KOTRA HOPE.ttf in Resources */,
 				9656BC4A28910A5A00318D07 /* checkmark.json in Resources */,
 				BA356C6B28914FC300224A24 /* cheerSound2.wav in Resources */,
