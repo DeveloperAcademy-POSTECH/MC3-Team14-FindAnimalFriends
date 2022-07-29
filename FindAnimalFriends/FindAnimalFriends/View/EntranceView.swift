@@ -91,15 +91,15 @@ class EntranceView: UIView {
     private func makeDescription() {
         switch animalName {
         case "tiger":
-            animalDescription = "코드네임: 호랭이\n실종날짜: yy.MM.dd"
+            animalDescription = "코드네임: 호랭이\n실종날짜: 2021년"
         case "elephant":
-            animalDescription = "코드네임: 코봉이\n실종날짜: yy.MM.dd"
+            animalDescription = "코드네임: 코봉이\n실종날짜: 2021년"
         case "panda":
-            animalDescription = "코드네임: 쿵푸팬더\n실종날짜: yy.MM.dd"
+            animalDescription = "코드네임: 쿵푸팬더\n실종날짜: 2016년"
         case "dolphin":
-            animalDescription = "코드네임: 돌고래\n실종날짜: yy.MM.dd"
+            animalDescription = "코드네임: 돌고래\n실종날짜: 2018년"
         case "polarbear":
-            animalDescription = "코드네임: 북극이\n실종날짜: yy.MM.dd"
+            animalDescription = "코드네임: 북극이\n실종날짜: 2015년"
         default:
             break
         }
