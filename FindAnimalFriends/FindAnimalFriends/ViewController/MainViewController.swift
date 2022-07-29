@@ -290,6 +290,7 @@ private extension MainViewController {
                 entranceView.animalName = self.currentAnimal
                 entranceView.setupComments()
                 self.view.addSubview(entranceView)
+                self.view.bringSubviewToFront(self.infoButton)
             }
         } else {
             guard let entranceView = entranceView else { return }
@@ -307,12 +308,13 @@ private extension MainViewController {
     }
     
     @objc func goToOnboarding() {
-        UIView.transition(with: dummyBlack, duration: 1, options: .transitionCurlDown) {
+        UIView.transition(with: dummyBlack, duration: 1, options: .transitionCrossDissolve) {
             self.isOnboarding = true
             UserDefaults.standard.set(self.isOnboarding, forKey: "isOnboarding")
             self.view.layer.opacity = 0
         } completion: { _ in
             isSplash2.isSplash2 = false
+            self.zoomAction(tag: 0, isSound: false)
             self.view.window?.rootViewController = UINavigationController(rootViewController: LaunchScreenController())
             // navigation Controller 추가
         }
