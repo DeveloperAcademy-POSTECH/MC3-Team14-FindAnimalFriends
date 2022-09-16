@@ -4,20 +4,29 @@
   <br>
 </h1>
 
-# MC3-Team14-FindAnimalFriends
+# 😍 MC3-Team14-FindAnimalFriends
 어린이들에게 다양한 생물들의 특징을 알려주는 퀴즈 앱
 
 <br>
 
-## Screenshots
+## Skills & Tech Stack
+<img src="https://img.shields.io/badge/Swift-F05138?style=for-the-badge&logo=Swift&logoColor=white"><br>
+1. 이슈 및 형상관리 : Github
+2. 커뮤니케이션 : Notion, Miro, Zoom
+3. 스킬 : UIKit, AVFoundation, Lottie, CAAnimation
+4. 상세 사용
+   - Application : UIKit
+   - Design : Sketch
+
+<br>
+
+## 🌅 Screenshots
 |<img src="https://user-images.githubusercontent.com/95853235/190582033-2b0857c0-99a7-4e4e-b30f-ebe60488aaec.PNG" width=300>|<img src="https://user-images.githubusercontent.com/95853235/190582049-8ebdc7d5-6f91-409e-9eea-c35762933264.PNG" width=300>|<img src="https://user-images.githubusercontent.com/95853235/190582080-1ca46aba-eec6-4f67-95af-f81c82bb1991.PNG" width=300>|
 |------|---|---|
 
 <br>
 
-## Members
-
-## 💬Contact
+## 🙋🏻‍♂️ Members
 
 | 이름                                                         | 역할                                 |
 | ------------------------------------------------------------ | ------------------------------------ |
