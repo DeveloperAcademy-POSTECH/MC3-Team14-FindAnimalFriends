@@ -9,6 +9,12 @@
 
 <br>
 
+## Screenshots
+|<img src="(https://user-images.githubusercontent.com/95853235/190582033-2b0857c0-99a7-4e4e-b30f-ebe60488aaec.PNG" width=300>|<img src="https://user-images.githubusercontent.com/95853235/190582049-8ebdc7d5-6f91-409e-9eea-c35762933264.PNG" width=300>|<img src="https://user-images.githubusercontent.com/95853235/190582080-1ca46aba-eec6-4f67-95af-f81c82bb1991.PNG" width=300>|
+|------|---|---|
+
+<br>
+
 ## Members
 <!-- |Tamna|Buckil|Badger|Vihaan|Mizz|
 |:---|:---|:---| -->
