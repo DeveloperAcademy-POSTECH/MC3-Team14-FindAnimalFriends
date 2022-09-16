@@ -16,9 +16,16 @@
 <br>
 
 ## Members
-<!-- |Tamna|Buckil|Badger|Vihaan|Mizz|
-|:---|:---|:---| -->
-| [Tamna](https://github.com/BrightHyeon) | [Buckil](https://github.com/Byeongsoo-Min) | [Badger](https://github.com/Byeonjinha) | [Vihaan](https://github.com/hotsunnyday) | [Mizz](https://github.com/mizz0224) |
+
+## 💬Contact
+
+| 이름                                                         | 역할                                 |
+| ------------------------------------------------------------ | ------------------------------------ |
+| [김현수](https://github.com/BrightHyeon) - swiftist9891@gmail.com | 메인 코르크보드뷰 구현. 줌 애니메이션 구현. |
+| [민병수](https://github.com/Byeongsoo-Min) - qaz9783@naver.com | 퀴즈 오답 페이지 및 퀴즈 페이지 설명 데이터 관리.     |
+| [전동진](https://github.com/hotsunnyday) - hotsunnyday@naver.com   | 동물 퀴즈 페이지 및 페이징 애니메이션 구현.      |
+| [허재녕](https://github.com/mizz0224) - wosud0224@naver.com | 데이터 관리 총괄. 퀴즈 정답 및 완료 시 페이지 구현.      |
+| [변진하](https://github.com/Byeonjinha) - jinhaday@gmail.com | 런치스크린 및 온보딩페이지 구현. 사운드 로직 총괄.      |
 
 <br>
 
