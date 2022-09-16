@@ -113,6 +113,4 @@
 
 예시) [추가 모달 뷰 연결] >> addModalView
 
-<br>
-### Duty
-## Mizz
+
