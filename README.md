@@ -1,8 +1,8 @@
 <h1 align="center">
   <br>
-  <img src="https://user-images.githubusercontent.com/95982751/187982607-9cd2977b-f246-48c3-bccf-5bc81fab5247.png" alt="How Old Am I" width="200">
+  <img src="https://user-images.githubusercontent.com/95853235/190580774-bd77acae-6a73-43c5-92e0-d7bcbdcda6d1.png" alt="How Old Am I" width="200">
   <br>
-  How Old Am I
+  FindAnimalFriends
   <br>
 </h1>
 
