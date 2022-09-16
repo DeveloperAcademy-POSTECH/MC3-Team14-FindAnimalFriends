@@ -1,3 +1,11 @@
+<h1 align="center">
+  <br>
+  <img src="https://user-images.githubusercontent.com/95982751/187982607-9cd2977b-f246-48c3-bccf-5bc81fab5247.png" alt="How Old Am I" width="200">
+  <br>
+  How Old Am I
+  <br>
+</h1>
+
 # MC3-Team14-FindAnimalFriends
 어린이들에게 다양한 생물들의 특징을 알려주는 퀴즈 앱
 
